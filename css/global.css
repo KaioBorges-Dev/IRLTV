@@ -1,0 +1,108 @@
+/* =========================================
+   IRLTV - IDENTIDADE VISUAL GLOBAL
+   Arquivo compartilhado por toda a equipe.
+   Use estas variáveis para manter as páginas
+   com as mesmas cores e fontes.
+   ========================================= */
+
+/* Importação das fontes utilizadas no projeto */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+/* =========================================
+   CORES E CONFIGURAÇÕES PRINCIPAIS
+   Para usar uma cor, escreva var(--nome-da-cor).
+   Exemplo: color: var(--text);
+   ========================================= */
+
+:root {
+  /* Verde neon: cor principal da identidade IRLTV */
+  --primary: #A3FF12;
+
+  /* Preto profundo: fundo principal das páginas */
+  --background: #0B0D12;
+
+  /* Preto azulado: menus e áreas de navegação */
+  --surface: #11141C;
+
+  /* Cinza escuro: fundo dos cards e blocos de conteúdo */
+  --card: #171B24;
+
+  /* Cinza grafite: bordas e linhas de separação */
+  --border: #252B36;
+
+  /* Branco: títulos e textos principais */
+  --text: #FFFFFF;
+
+  /* Cinza claro: textos secundários e descrições */
+  --text-secondary: #A1A1AA;
+
+  /* Vermelho rosado: indicador de transmissão ao vivo */
+  --live: #FF3B5C;
+
+  /* Fonte dos títulos */
+  --font-heading: 'Rajdhani', sans-serif;
+
+  /* Fonte dos textos comuns */
+  --font-body: 'Inter', sans-serif;
+}
+
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+   Aplicadas automaticamente em toda a página.
+   ========================================= */
+
+/* Remove margens e espaçamentos padrão do navegador */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Define a cor de fundo, a cor do texto e a fonte padrão */
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+/* Aplica a fonte Rajdhani aos títulos */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+
+/* Mostra o cursor de clique nos botões */
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+/* Remove o sublinhado e mantém a cor padrão dos links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Área central para organizar o conteúdo das páginas */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Estilo padrão dos cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+/* Botão principal, usando o verde neon da identidade */
+.btn-primary {
+  background: var(--primary);
+  color: var(--background);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 700;
+}
