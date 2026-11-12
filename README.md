@@ -1,6 +1,6 @@
 # LiveStream
 Live Stream platformDocumentação
-                                                                                Aplicação IRLTV: Plataforma de lives de jogos
+                                                                                        Aplicação IRLTV: Plataforma de lives de jogos
 
 Equipe:
 •	Kaio Araujo Borges
