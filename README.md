@@ -31,7 +31,7 @@ PERGUNTAS DO NEGÓCIO
 3.	Quais streamers possuem maior número de visualizações?
 4.	Quais transmissões apresentam maior engajamento dos espectadores?
 5.	Quais categorias de jogos conseguem manter os espectadores por mais tempo?
-.
+
 
 
 
