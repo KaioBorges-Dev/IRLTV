@@ -1,0 +1,170 @@
+/* Menu lateral: fica preso a esquerda da tela e ocupa toda a altura. */
+
+.sidebar {
+  position: fixed; /* Mantem o menu no mesmo lugar durante a rolagem. */
+  inset: 0 auto 0 0; /* Encosta o menu nos lados esquerdo, superior e inferior. */
+  z-index: 20; /* Mantem o menu acima do conteudo da pagina. */
+  display: flex; /* Ativa o Flexbox para organizar os itens internos. */
+  flex-direction: column; /* Empilha os itens um abaixo do outro. */
+  width: 248px; /* Define a largura do menu lateral. */
+  padding: 24px 16px; /* Cria espaco entre o conteudo e as bordas do menu. */
+  background: var(--surface); /* Usa a cor de superficie definida em global.css. */
+  border-right: 1px solid var(--border); /* Separa o menu do conteudo com uma linha. */
+}
+
+/* Nome ou logotipo exibido no inicio do menu lateral. */
+.sidebar__brand {
+  margin: 0 8px 32px;
+  color: var(--primary);
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Agrupa os links do menu e os organiza em uma coluna. */
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Aparencia e alinhamento de cada link lateral. */
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+/* Destaca o link quando o ponteiro do mouse esta sobre ele. */
+.sidebar__link:hover {
+  color: var(--text);
+  background: var(--card);
+}
+
+/* Identifica visualmente a pagina que esta selecionada. */
+.sidebar__link.is-active {
+  color: var(--primary);
+  background: rgb(163 255 18 / 10%);
+  font-weight: 600;
+}
+
+/* Mostra um contorno ao navegar pelos links usando o teclado. */
+.sidebar__link:focus-visible,
+.topbar__action:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Barra superior: fica no topo e comeca depois do menu lateral. */
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 248px; /* Topo, direita, base e distancia a partir da esquerda. */
+  z-index: 10;
+  display: flex; /* Coloca titulo e acoes na mesma linha. */
+  align-items: center; /* Alinha os itens verticalmente pelo centro. */
+  justify-content: space-between; /* Deixa titulo a esquerda e acoes a direita. */
+  min-height: 72px;
+  padding: 0 28px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Texto principal apresentado na barra superior. */
+.topbar__title {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+/* Agrupa botoes, perfil ou outros controles do topo. */
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Estilo comum para os botoes da barra superior. */
+.topbar__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+/* Realca os botoes do topo ao passar o mouse sobre eles. */
+.topbar__action:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Area principal: deixa espaco para nao ficar escondida atras dos menus fixos. */
+.page-content {
+  min-height: 100vh;
+  margin-left: 248px; /* Reserva a largura ocupada pelo menu lateral. */
+  padding: 96px 28px 28px; /* Reserva espaco para a barra superior e margens. */
+}
+
+/* Em telas estreitas, os menus passam a ocupar o fluxo normal da pagina. */
+@media (max-width: 700px) {
+  .sidebar {
+    position: static; /* Deixa de ficar fixo para caber na tela pequena. */
+    width: 100%; /* Faz o menu ocupar toda a largura disponivel. */
+    padding: 14px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Reduz o espaco do nome da plataforma no celular. */
+  .sidebar__brand {
+    margin: 0 4px 12px;
+    font-size: 1.5rem;
+  }
+
+  /* Exibe os links lado a lado; permite rolagem se nao couberem. */
+  .sidebar__nav {
+    flex-direction: row;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  /* Impede que os links encolham demais na navegacao horizontal. */
+  .sidebar__link {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 0.875rem;
+  }
+
+  /* A barra superior acompanha a rolagem em vez de ocupar posicao fixa. */
+  .topbar {
+    position: sticky;
+    inset: auto;
+    min-height: 60px;
+    padding: 0 16px;
+  }
+
+  /* Remove a margem lateral reservada para o menu e reduz os espacos. */
+  .page-content {
+    min-height: auto;
+    margin-left: 0;
+    padding: 24px 16px;
+  }
+}
