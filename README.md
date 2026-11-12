@@ -10,7 +10,6 @@ Aplicação IRLTV: plataforma de lives de jogos.
 - Natã Rigueira Pains Lemos
 - Bruno dos Santos Cardoso
 - Arthur Maracajás Carvalho
-- Pedro Henrike Morais Caetano Mendes
 
 ## Objetivo geral
 
