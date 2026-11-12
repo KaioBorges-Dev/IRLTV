@@ -1,7 +1,7 @@
 /* Menu lateral: fica preso a esquerda da tela e ocupa toda a altura. */
 
 .sidebar {
-  position: fixed; /* Mantem o menu no mesmo lugar durante a rolagem. *//
+  position: fixed; /* Mantem o menu no mesmo lugar durante a rolagem. */
   inset: 0 auto 0 0; /* Encosta o menu nos lados esquerdo, superior e inferior. */
   z-index: 20; /* Mantem o menu acima do conteudo da pagina. */
   display: flex; /* Ativa o Flexbox para organizar os itens internos. */
