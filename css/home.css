@@ -549,7 +549,7 @@
 /* Mantém os alvos de navegação visíveis abaixo das barras fixas. */
 #canais,
 #lista-lives,
-#games {
+#jogos {
   scroll-margin-top: 6rem; /* Evita que o cabeçalho cubra a seção vinculada. */
 }
 
@@ -602,5 +602,221 @@
     background-color: var(--surface); /* Reforça o fundo quando a transparência é reduzida. */
     -webkit-backdrop-filter: none; /* Desliga o desfoque em dispositivos com essa preferência. */
     backdrop-filter: none; /* Mantém o conteúdo legível sem vidro translúcido. */
+  }
+}
+
+/* Esconde visualmente os rótulos que continuam disponíveis para leitores de tela. */
+.visually-hidden {
+  position: absolute; /* Retira o rótulo do fluxo normal do formulário. */
+  width: 1px; /* Reduz o rótulo a um ponto visualmente imperceptível. */
+  height: 1px; /* Mantém a técnica de ocultação em uma área mínima. */
+  padding: 0; /* Remove espaço interno que poderia tornar o rótulo visível. */
+  overflow: hidden; /* Oculta o texto fora da área mínima. */
+  clip: rect(0, 0, 0, 0); /* Esconde o rótulo em navegadores que usam recorte clássico. */
+  white-space: nowrap; /* Impede que o texto ocupe mais de uma linha. */
+  border: 0; /* Remove qualquer borda da área de acessibilidade. */
+  clip-path: inset(50%); /* Oculta o rótulo em navegadores modernos. */
+}
+
+/* Organiza o campo e o botão de pesquisa dentro da barra superior. */
+.channel-search {
+  display: flex; /* Mantém o campo e a lupa na mesma linha. */
+  align-items: center; /* Centraliza os controles verticalmente. */
+  width: min(100%, 360px); /* Limita o tamanho da busca em telas largas. */
+  min-width: min(250px, 48vw); /* Mantém o campo utilizável em telas médias. */
+  padding: 0.25rem; /* Cria uma moldura interna para a busca de vidro. */
+  background: rgb(255 255 255 / 5%); /* Deixa a superfície da busca translúcida. */
+  border: 1px solid rgb(255 255 255 / 12%); /* Delimita o campo sem pesar visualmente. */
+  border-radius: 12px; /* Arredonda a moldura para combinar com o glassmorphism. */
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%); /* Adiciona reflexo sutil na parte superior. */
+  -webkit-backdrop-filter: blur(14px); /* Desfoca o fundo da busca em navegadores WebKit. */
+  backdrop-filter: blur(14px); /* Cria a superfície de vidro fosco da busca. */
+}
+
+/* Permite que o campo ocupe o espaço disponível ao lado do botão. */
+.channel-search__input {
+  flex: 1 1 auto; /* Expande o campo dentro do formulário. */
+  width: 100%; /* Preenche a largura restante do formulário. */
+  min-width: 0; /* Impede que o texto expanda a barra superior. */
+  padding: 0.65rem 0.8rem; /* Cria uma área confortável para digitar. */
+  color: var(--text); /* Mantém o texto digitado legível. */
+  background: transparent; /* Deixa aparecer o fundo translúcido do formulário. */
+  border: 0; /* Remove a borda padrão do navegador. */
+  outline: 0; /* Usa o contorno de foco customizado do formulário. */
+  font: inherit; /* Mantém a tipografia consistente com o site. */
+}
+
+/* Mantém o texto auxiliar do campo com contraste adequado. */
+.channel-search__input::placeholder {
+  color: var(--text-secondary); /* Diferencia a dica do texto pesquisado. */
+  opacity: 1; /* Evita que o navegador deixe a dica clara demais. */
+}
+
+/* Realça toda a busca quando o campo ou botão recebe foco. */
+.channel-search:focus-within {
+  border-color: rgb(163 255 18 / 70%); /* Indica que a busca está ativa. */
+  box-shadow: 0 0 0 3px rgb(163 255 18 / 12%); /* Destaca o foco sem esconder o campo. */
+}
+
+/* Define o botão da lupa como um alvo simples e acessível. */
+.channel-search__button {
+  display: inline-flex; /* Centraliza a lupa no botão. */
+  flex: 0 0 40px; /* Mantém um alvo de toque estável. */
+  align-items: center; /* Centraliza verticalmente a lupa. */
+  justify-content: center; /* Centraliza horizontalmente a lupa. */
+  width: 40px; /* Define a largura do botão de busca. */
+  height: 40px; /* Define a altura do botão de busca. */
+  color: var(--primary); /* Destaca a lupa com a cor da marca. */
+  background: rgb(163 255 18 / 10%); /* Aplica uma película verde translúcida. */
+  border: 1px solid rgb(163 255 18 / 18%); /* Delimita o botão sem interromper o visual de vidro. */
+  border-radius: 9px; /* Arredonda os cantos do botão. */
+  font: inherit; /* Mantém o botão integrado à tipografia existente. */
+  font-size: 1.65rem; /* Deixa o ícone reconhecível sem imagem externa. */
+  line-height: 1; /* Centraliza a lupa no botão. */
+  cursor: pointer; /* Indica que o botão executa a busca. */
+  transition: color 160ms ease, background-color 160ms ease; /* Suaviza o estado de interação. */
+}
+
+/* Realça a lupa quando o usuário aponta para o botão. */
+.channel-search__button:hover {
+  color: var(--background); /* Aumenta o contraste do ícone ativo. */
+  background: var(--primary); /* Preenche o botão com a cor principal. */
+}
+
+/* Mantém os links de autenticação alinhados com a busca na barra superior. */
+.topbar__auth-link {
+  flex: 0 0 auto; /* Evita que os botões sejam comprimidos junto ao campo. */
+  min-height: 42px; /* Alinha os links à altura do campo de pesquisa. */
+  padding: 0.65rem 1rem; /* Cria uma área confortável para clique ou toque. */
+  white-space: nowrap; /* Mantém cada rótulo em uma única linha. */
+}
+
+/* Dá mais destaque à ação principal de criar uma conta. */
+.topbar__auth-link--signup {
+  display: inline-flex; /* Centraliza o texto do botão verde. */
+  align-items: center; /* Centraliza verticalmente o rótulo. */
+  justify-content: center; /* Centraliza horizontalmente o rótulo. */
+  border: 1px solid var(--primary); /* Delimita o botão sem perder o destaque. */
+}
+
+/* Alinha o contador de resultados ao lado do título da seção de canais. */
+.channel-search__results {
+  min-height: 1.25rem; /* Evita que o cabeçalho mude de altura após pesquisar. */
+  color: var(--text-secondary); /* Apresenta a contagem como informação auxiliar. */
+  font-size: 0.82rem; /* Mantém a contagem menor que o título. */
+  text-align: right; /* Mantém o resultado alinhado ao canto do cabeçalho. */
+}
+
+/* Apresenta uma mensagem explícita quando a busca não encontra canais. */
+.channel-search__empty {
+  margin-top: 1rem; /* Separa a mensagem da grade de resultados. */
+  padding: 1rem; /* Cria respiro em torno da mensagem. */
+  color: var(--text-secondary); /* Mantém a mensagem informativa em nível secundário. */
+  background: rgb(255 255 255 / 4%); /* Mantém o estado vazio integrado ao vidro. */
+  border: 1px solid rgb(255 255 255 / 10%); /* Delimita a mensagem de estado vazio. */
+  border-radius: 12px; /* Arredonda a mensagem como os demais cards. */
+}
+
+/* Faz os perfis de canais parecerem uma coleção compacta e uniforme. */
+#canais .channel-card {
+  min-height: 142px; /* Evita áreas vazias exageradas dentro dos perfis. */
+  border-radius: 16px; /* Dá aos cartões um contorno mais refinado. */
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; /* Suaviza o destaque do perfil. */
+}
+
+/* Realça o perfil sem deslocá-lo demais da grade. */
+#canais .channel-card:hover {
+  transform: translateY(-3px); /* Dá profundidade sutil ao perfil em foco. */
+  border-color: rgb(163 255 18 / 35%); /* Marca o perfil ativo com o verde da marca. */
+  box-shadow: 0 18px 42px rgb(0 0 0 / 28%), 0 0 22px rgb(163 255 18 / 7%); /* Reforça a superfície de vidro ao interagir. */
+}
+
+/* Alinha a foto, o nome e os detalhes em duas colunas compactas. */
+#canais .channel-card .live-card__info {
+  display: grid; /* Organiza a foto ao lado das informações do streamer. */
+  grid-template-columns: 58px minmax(0, 1fr); /* Reserva uma coluna fixa para o avatar. */
+  align-content: center; /* Centraliza o conteúdo dentro do cartão. */
+  column-gap: 0.9rem; /* Separa a foto das informações textuais. */
+  min-height: 142px; /* Mantém o conteúdo centralizado em todos os perfis. */
+  padding: 1rem; /* Remove o espaço vazio antigo e organiza o cartão. */
+}
+
+/* Faz a foto de perfil ocupar as linhas de texto do cartão. */
+#canais .channel-card .live-card__info img {
+  grid-column: 1; /* Mantém o avatar na coluna esquerda. */
+  grid-row: 1 / span 3; /* Alinha o avatar com nome, resumo e categoria. */
+  align-self: center; /* Centraliza a foto verticalmente. */
+  width: 58px; /* Dá ao avatar um tamanho proporcional à grade refinada. */
+  height: 58px; /* Mantém o avatar perfeitamente circular. */
+  margin: 0; /* Remove o espaço inferior da regra geral de avatar. */
+  border: 2px solid rgb(255 255 255 / 18%); /* Separa a foto do fundo de vidro. */
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 4%); /* Cria um aro discreto ao redor da foto. */
+}
+
+/* Posiciona o nome do canal ao lado da foto e destaca seu link. */
+#canais .channel-card .live-card__info h3 {
+  grid-column: 2; /* Mantém o nome na coluna de texto. */
+  align-self: end; /* Alinha o título com a parte superior do avatar. */
+  margin: 0 0 0.2rem; /* Aproxima o nome da descrição. */
+  font-size: 1.1rem; /* Destaca o nome sem fazê-lo dominar o cartão. */
+}
+
+/* Posiciona a descrição do canal na segunda linha do cartão. */
+#canais .channel-card .live-card__info .live-card__streamer {
+  grid-column: 2; /* Alinha a descrição com o nome do canal. */
+  align-self: center; /* Centraliza a descrição entre título e categoria. */
+  font-size: 0.78rem; /* Mantém a descrição compacta. */
+}
+
+/* Apresenta o jogo como uma etiqueta logo abaixo da descrição. */
+#canais .channel-card .live-card__info .live-card__category {
+  grid-column: 2; /* Mantém o jogo alinhado com os outros textos. */
+  justify-self: start; /* Evita que a etiqueta ocupe toda a largura do perfil. */
+  margin-top: 0.35rem; /* Separa a etiqueta da descrição. */
+  padding: 0.2rem 0.55rem; /* Cria espaço interno de etiqueta. */
+  color: var(--primary); /* Associa o jogo ao destaque da marca. */
+  background: rgb(163 255 18 / 8%); /* Mantém a etiqueta translúcida. */
+  border: 1px solid rgb(163 255 18 / 14%); /* Delimita a etiqueta sem pesar no cartão. */
+  border-radius: 999px; /* Apresenta a categoria como um chip. */
+  font-size: 0.68rem; /* Ajusta o chip ao texto de categoria. */
+}
+
+/* Remove os cards de canais que não correspondem à busca ativa. */
+.channel-card[hidden] {
+  display: none; /* Garante que a grade não reserve espaço para resultados ocultos. */
+}
+
+/* Ajusta a busca e a grade de perfis em telas estreitas. */
+@media (max-width: 700px) {
+  .channel-search {
+    width: 100%; /* Aproveita a largura disponível na barra superior móvel. */
+    min-width: 0; /* Evita ultrapassar a largura do cabeçalho. */
+  }
+
+  .topbar__actions {
+    display: grid; /* Reserva espaços separados para a busca e ações da conta. */
+    flex: 1 1 100%; /* Move a busca para a linha abaixo do título no celular. */
+    grid-template-columns: minmax(0, 1fr) auto auto; /* Dá à busca o espaço restante e mantém os dois botões visíveis. */
+    gap: 0.4rem; /* Separa os controles sem desperdiçar largura. */
+    min-width: 0; /* Permite encolher o formulário em telas menores. */
+  }
+
+  .channel-search {
+    grid-column: 1; /* Mantém a busca na primeira coluna da barra móvel. */
+  }
+
+  .topbar__auth-link {
+    min-width: 0; /* Permite que os botões caibam em telas pequenas. */
+    padding-inline: 0.65rem; /* Reduz o espaço lateral nos botões móveis. */
+    font-size: 0.78rem; /* Mantém os rótulos legíveis sem tomar a barra toda. */
+  }
+
+  .section-heading {
+    flex-wrap: wrap; /* Permite que a contagem passe para a linha seguinte. */
+  }
+
+  .channel-search__results {
+    width: 100%; /* Dá uma linha própria à contagem em telas estreitas. */
+    text-align: left; /* Alinha a contagem com o título da seção. */
   }
 }

@@ -107,3 +107,75 @@ document.querySelectorAll(".carousel-track").forEach((track) => {
     button.click();
   });
 });
+
+// Pesquisa os canais pelos nomes digitados no campo da barra superior.
+const channelSearchForm = document.querySelector(".channel-search");
+const channelSearchInput = document.querySelector("#channel-search-input");
+const channelCards = [...document.querySelectorAll("#canais .channel-card")];
+const sidebarChannelItems = [
+  ...document.querySelectorAll(".sidebar__live-list li"),
+];
+const channelSearchResults = document.querySelector("#channel-search-results");
+const channelSearchEmpty = document.querySelector("#channel-search-empty");
+const channelsHeading = document.querySelector("#streamers-title");
+
+// Remove acentos e ignora maiúsculas para tornar a busca mais flexível.
+const normalizeChannelName = (value) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .trim();
+
+// Filtra os perfis e a lista do menu conforme o nome informado.
+const filterChannels = () => {
+  const query = normalizeChannelName(channelSearchInput.value);
+  let visibleChannels = 0;
+
+  // Mantém visíveis apenas os perfis cujo nome contém o texto pesquisado.
+  channelCards.forEach((card) => {
+    const channelName = normalizeChannelName(
+      card.dataset.channelName || card.querySelector("h3").textContent,
+    );
+    const matches = channelName.includes(query);
+
+    card.hidden = !matches;
+    visibleChannels += Number(matches);
+  });
+
+  // Aplica a mesma busca aos canais que aparecem na barra lateral.
+  sidebarChannelItems.forEach((item) => {
+    const channelLink = item.querySelector(".sidebar__channel-link");
+    const channelName = normalizeChannelName(
+      channelLink.dataset.channelName ||
+        channelLink.querySelector("strong").textContent,
+    );
+
+    item.hidden = !channelName.includes(query);
+  });
+
+  // Atualiza a contagem acessível e mostra o estado sem resultados.
+  channelSearchResults.textContent = query
+    ? `${visibleChannels} ${visibleChannels === 1 ? "canal encontrado" : "canais encontrados"}`
+    : "";
+  channelSearchEmpty.hidden = visibleChannels > 0;
+  channelSearchEmpty.textContent = query
+    ? `Nenhum canal encontrado com o nome "${channelSearchInput.value.trim()}".`
+    : "Nenhum canal cadastrado.";
+};
+
+// Atualiza os resultados imediatamente enquanto a pessoa digita.
+channelSearchInput.addEventListener("input", filterChannels);
+
+// Leva a busca ao resultado e destaca o título da seção de canais.
+channelSearchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  filterChannels();
+  document.querySelector("#canais").scrollIntoView({
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth",
+    block: "start",
+  });
+  channelsHeading.focus({ preventScroll: true });
+});

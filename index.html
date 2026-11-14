@@ -16,6 +16,7 @@
     <nav class="sidebar__nav" aria-label="Navegação principal">
       <a class="sidebar__link is-active" href="#inicio" aria-current="page">Início</a>
       <a class="sidebar__link" href="#lista-lives">Explorar lives</a>
+      <a class="sidebar__link" href="#jogos">Games</a>
       <a class="sidebar__link" href="#categorias">Categorias</a>
     </nav>
 
@@ -23,28 +24,28 @@
       <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
       <ul class="sidebar__live-list">
         <li>
-          <a class="sidebar__channel-link" href="#canais">
+          <a class="sidebar__channel-link" href="#canais" data-channel-name="LunaCraft">
             <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
             <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
             <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
           </a>
         </li>
         <li>
-          <a class="sidebar__channel-link" href="#canais">
+          <a class="sidebar__channel-link" href="#canais" data-channel-name="ByteNinja">
             <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
             <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
             <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
           </a>
         </li>
         <li>
-          <a class="sidebar__channel-link" href="#canais">
+          <a class="sidebar__channel-link" href="#canais" data-channel-name="PixelMila">
             <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
             <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
             <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
           </a>
         </li>
         <li>
-          <a class="sidebar__channel-link" href="#canais">
+          <a class="sidebar__channel-link" href="#canais" data-channel-name="NekoRush">
             <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
             <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
             <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
@@ -58,7 +59,23 @@
   <header class="topbar">
     <h1 class="topbar__title">Início</h1>
     <div class="topbar__actions">
-      <a class="topbar__action" href="#lista-lives">Encontrar uma live</a>
+      <form class="channel-search" role="search">
+        <label class="visually-hidden" for="channel-search-input">Buscar canais por nome</label>
+        <input
+          class="channel-search__input"
+          id="channel-search-input"
+          name="channel"
+          type="search"
+          placeholder="Buscar canais..."
+          autocomplete="off"
+          aria-controls="canais"
+        >
+        <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+          <span aria-hidden="true">⌕</span>
+        </button>
+      </form>
+      <a class="topbar__action topbar__auth-link" href="#entrar">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="#cadastro">Cadastrar</a>
     </div>
   </header>
 
@@ -281,11 +298,12 @@
       <div class="section-heading">
         <div>
           <p class="section-heading__eyebrow">CONHEÇA A COMUNIDADE</p>
-          <h2 id="streamers-title">Streamers em destaque</h2>
+          <h2 id="streamers-title" tabindex="-1">Canais ao vivo</h2>
         </div>
+        <p class="channel-search__results" id="channel-search-results" aria-live="polite"></p>
       </div>
       <div class="lives-grid">
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="LunaCraft">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=12" alt="Foto de perfil de LunaCraft" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">LunaCraft</a></h3>
@@ -293,7 +311,7 @@
             <p class="live-card__category">Minecraft</p>
           </div>
         </article>
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="ByteNinja">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=32" alt="Foto de perfil de ByteNinja" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">ByteNinja</a></h3>
@@ -301,7 +319,7 @@
             <p class="live-card__category">League of Legends</p>
           </div>
         </article>
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="PixelMila">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=47" alt="Foto de perfil de PixelMila" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">PixelMila</a></h3>
@@ -309,7 +327,7 @@
             <p class="live-card__category">The Sims 4</p>
           </div>
         </article>
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="NekoRush">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=5" alt="Foto de perfil de NekoRush" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">NekoRush</a></h3>
@@ -317,7 +335,7 @@
             <p class="live-card__category">Fortnite</p>
           </div>
         </article>
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="RafaArcano">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=7" alt="Foto de perfil de RafaArcano" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">RafaArcano</a></h3>
@@ -325,7 +343,7 @@
             <p class="live-card__category">Genshin Impact</p>
           </div>
         </article>
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="DudaPlay">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=11" alt="Foto de perfil de DudaPlay" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">DudaPlay</a></h3>
@@ -333,7 +351,7 @@
             <p class="live-card__category">Só na conversa</p>
           </div>
         </article>
-        <article class="card live-card">
+        <article class="card live-card channel-card" data-channel-name="TicoTactics">
           <div class="live-card__info">
             <img src="https://i.pravatar.cc/160?img=20" alt="Foto de perfil de TicoTactics" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
             <h3><a href="#canais">TicoTactics</a></h3>
@@ -342,9 +360,10 @@
           </div>
         </article>
       </div>
+      <p class="channel-search__empty" id="channel-search-empty" hidden>Nenhum canal encontrado com esse nome.</p>
     </section>
 
-    <section class="home-section" id="games" aria-labelledby="games-title">
+    <section class="home-section" id="jogos" aria-labelledby="games-title">
       <div class="section-heading">
         <div>
           <p class="section-heading__eyebrow">O QUE ESTÁ EM ALTA</p>
@@ -355,7 +374,7 @@
         <article class="card live-card" id="game-league-of-legends">
           <img class="live-card__image game-cover" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" alt="Arte oficial de League of Legends com a campeã Ahri" width="1215" height="717" loading="lazy">
           <div class="live-card__info">
-            <h3>League of Legends</h3>
+            <h3><a href="#jogos">League of Legends</a></h3>
             <p class="live-card__category">MOBA <span>•</span> Estratégia em equipe</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -366,7 +385,7 @@
         <article class="card live-card" id="game-the-sims-4">
           <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/1222670/header.jpg" alt="Capa oficial de The Sims 4" width="460" height="215" loading="lazy">
           <div class="live-card__info">
-            <h3>The Sims 4</h3>
+            <h3><a href="#jogos">The Sims 4</a></h3>
             <p class="live-card__category">Simulação <span>•</span> Criatividade</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -377,7 +396,7 @@
         <article class="card live-card" id="game-fortnite">
           <img class="live-card__image game-cover" src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmvpko1451jk407ogh9sqvg8k" alt="Arte oficial de Fortnite publicada no site do jogo" width="1920" height="1080" loading="lazy">
           <div class="live-card__info">
-            <h3>Fortnite</h3>
+            <h3><a href="#jogos">Fortnite</a></h3>
             <p class="live-card__category">Battle Royale <span>•</span> Ação</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -388,7 +407,7 @@
         <article class="card live-card" id="game-genshin-impact">
           <img class="live-card__image game-cover" src="https://act-webstatic.hoyoverse.com/puzzle/hk4e/pz_c6XZYm0GKS/resource/puzzle/2026/10/19/d138d1ad3bf6f5240eb726ed2ac3d4b0_1292059728731863742.mp4?x-oss-process=video/snapshot,t_1,f_jpg,m_fast" alt="Arte oficial de Genshin Impact com personagens do jogo" width="2500" height="1080" loading="lazy">
           <div class="live-card__info">
-            <h3>Genshin Impact</h3>
+            <h3><a href="#jogos">Genshin Impact</a></h3>
             <p class="live-card__category">RPG <span>•</span> Aventura</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -399,7 +418,7 @@
         <article class="card live-card" id="game-counter-strike-2">
           <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg" alt="Capa oficial de Counter-Strike 2" width="460" height="215" loading="lazy">
           <div class="live-card__info">
-            <h3>Counter-Strike 2</h3>
+            <h3><a href="#jogos">Counter-Strike 2</a></h3>
             <p class="live-card__category">FPS <span>•</span> Competitivo</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -410,7 +429,7 @@
         <article class="card live-card" id="game-rocket-league">
           <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg" alt="Capa oficial de Rocket League" width="460" height="215" loading="lazy">
           <div class="live-card__info">
-            <h3>Rocket League</h3>
+            <h3><a href="#jogos">Rocket League</a></h3>
             <p class="live-card__category">Esportes <span>•</span> Corrida e futebol</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -421,7 +440,7 @@
         <article class="card live-card" id="game-apex-legends">
           <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Capa oficial de Apex Legends" width="460" height="215" loading="lazy">
           <div class="live-card__info">
-            <h3>Apex Legends</h3>
+            <h3><a href="#jogos">Apex Legends</a></h3>
             <p class="live-card__category">Battle Royale <span>•</span> FPS</p>
           </div>
           <nav class="carousel-arrows" aria-label="Navegação dos games">
@@ -443,13 +462,13 @@
         <a class="card category-card" href="#live-valorant">Valorant</a>
         <a class="card category-card" href="#live-minecraft">Minecraft</a>
         <a class="card category-card" href="#live-just-chatting">Só na conversa</a>
-        <a class="card category-card" href="#game-league-of-legends">MOBA</a>
-        <a class="card category-card" href="#game-the-sims-4">Simulação</a>
-        <a class="card category-card" href="#game-fortnite">Battle Royale</a>
-        <a class="card category-card" href="#game-genshin-impact">RPG e aventura</a>
-        <a class="card category-card" href="#game-counter-strike-2">FPS competitivo</a>
-        <a class="card category-card" href="#game-rocket-league">Esportes</a>
-        <a class="card category-card" href="#game-apex-legends">Ação</a>
+        <a class="card category-card" href="#jogos">MOBA</a>
+        <a class="card category-card" href="#jogos">Simulação</a>
+        <a class="card category-card" href="#jogos">Battle Royale</a>
+        <a class="card category-card" href="#jogos">RPG e aventura</a>
+        <a class="card category-card" href="#jogos">FPS competitivo</a>
+        <a class="card category-card" href="#jogos">Esportes</a>
+        <a class="card category-card" href="#jogos">Ação</a>
         <a class="card category-card" href="#live-minecraft">Sandbox</a>
       </div>
     </section>
