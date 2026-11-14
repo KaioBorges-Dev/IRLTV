@@ -1,0 +1,323 @@
+/* =========================================================
+   ESTILOS EXCLUSIVOS DA PÁGINA INICIAL DA IRLTV
+   ========================================================= */
+
+/* Cria espaço vertical entre os blocos da página inicial. */
+.home-section {
+  margin: 2rem 0 3rem; /* Separa visualmente as seções. */
+}
+
+/* Dá destaque visual ao banner principal da página. */
+.hero {
+  display: flex; /* Organiza o conteúdo do banner. */
+  align-items: center; /* Centraliza o conteúdo na altura do banner. */
+  min-height: 280px; /* Mantém uma altura confortável para a chamada. */
+  padding: clamp(1.5rem, 5vw, 3.5rem); /* Adapta o espaço interno à tela. */
+  background: linear-gradient(115deg, #171b24 5%, #202c1c 100%); /* Destaca o hero usando a paleta do projeto. */
+}
+
+/* Limita a largura do texto do banner para facilitar a leitura. */
+.hero__content {
+  max-width: 620px; /* Evita linhas de texto muito extensas. */
+}
+
+/* Apresenta a chamada curta acima do título do banner. */
+.hero__eyebrow,
+.section-heading__eyebrow {
+  margin-bottom: 0.4rem; /* Separa o rótulo do título. */
+  color: var(--primary); /* Usa o verde da identidade da IRLTV. */
+  font-size: 0.75rem; /* Mantém o rótulo discreto. */
+  font-weight: 700; /* Reforça a hierarquia do rótulo. */
+  letter-spacing: 0.12em; /* Diferencia visualmente o texto auxiliar. */
+}
+
+/* Define o tamanho do título principal do banner. */
+.hero h2 {
+  margin-bottom: 0.75rem; /* Cria espaço antes da descrição. */
+  font-size: clamp(2rem, 4vw, 3rem); /* Ajusta o título ao espaço disponível. */
+  line-height: 1.05; /* Mantém o título compacto. */
+}
+
+/* Organiza o texto e a ação dentro do banner. */
+.hero__content > p:not(.hero__eyebrow) {
+  max-width: 540px; /* Controla o comprimento das linhas da descrição. */
+  margin-bottom: 1.25rem; /* Separa a descrição do botão. */
+  color: var(--text-secondary); /* Diferencia a descrição do título. */
+  line-height: 1.65; /* Melhora a leitura do parágrafo. */
+}
+
+/* Realça o botão principal quando o ponteiro passa sobre ele. */
+.btn-primary:hover {
+  filter: brightness(1.08); /* Dá retorno visual sem precisar de JavaScript. */
+}
+
+/* Alinha o título e o link de ação de cada seção. */
+.section-heading {
+  display: flex; /* Coloca os elementos do cabeçalho na mesma linha. */
+  align-items: end; /* Alinha os links à base dos títulos. */
+  justify-content: space-between; /* Mantém o link de ação no lado oposto. */
+  gap: 1rem; /* Evita que os elementos encostem em telas estreitas. */
+  margin-bottom: 1rem; /* Separa o cabeçalho dos cards. */
+}
+
+/* Define o tamanho e o espaçamento dos títulos das seções. */
+.section-heading h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem); /* Ajusta o título para telas diferentes. */
+  line-height: 1.1; /* Evita espaço excessivo entre linhas. */
+}
+
+/* Destaca os links de ação dos cabeçalhos. */
+.section-heading > a {
+  flex: 0 0 auto; /* Evita que o link seja comprimido. */
+  color: var(--primary); /* Usa a cor principal nos links. */
+  font-size: 0.9rem; /* Mantém o link secundário ao título. */
+}
+
+/* Transforma as faixas de lives e games em carrosséis horizontais. */
+.carousel-track {
+  display: flex; /* Coloca cada card lado a lado. */
+  gap: 1rem; /* Mantém espaço uniforme entre os cards. */
+  overflow-x: auto; /* Permite avançar pelos cards horizontalmente. */
+  overflow-y: hidden; /* Evita uma segunda barra de rolagem na vertical. */
+  padding: 0.25rem 0.25rem 1rem; /* Reserva espaço para foco e barra de rolagem. */
+  scroll-behavior: smooth; /* Anima o movimento dos links de navegação. */
+  scroll-padding-inline: 0.25rem; /* Mantém o card alinhado com o início da faixa. */
+  scroll-snap-type: x mandatory; /* Faz cada card parar alinhado após a rolagem. */
+  scrollbar-color: var(--primary) var(--surface); /* Personaliza a barra em navegadores compatíveis. */
+  scrollbar-width: thin; /* Deixa a barra de rolagem menos intrusiva. */
+  overscroll-behavior-x: contain; /* Mantém a rolagem dentro do carrossel. */
+}
+
+/* Personaliza a barra horizontal nos navegadores baseados em WebKit. */
+.carousel-track::-webkit-scrollbar {
+  height: 8px; /* Define a espessura da barra. */
+}
+
+/* Define a parte móvel da barra horizontal nos navegadores WebKit. */
+.carousel-track::-webkit-scrollbar-thumb {
+  background: var(--primary); /* Usa o verde principal na barra. */
+  border: 2px solid var(--surface); /* Separa a barra visualmente do trilho. */
+  border-radius: 999px; /* Arredonda as extremidades da barra. */
+}
+
+/* Estiliza o trilho da barra horizontal nos navegadores WebKit. */
+.carousel-track::-webkit-scrollbar-track {
+  background: var(--surface); /* Mantém o trilho no tom dos menus. */
+  border-radius: 999px; /* Arredonda o trilho da barra. */
+}
+
+/* Mantém cada card como um slide individual do carrossel. */
+.carousel-track .live-card {
+  position: relative; /* Serve de referência para os controles do slide. */
+  display: flex; /* Permite posicionar a informação e os controles no card. */
+  flex: 0 0 min(82%, 340px); /* Exibe o próximo card parcialmente como indicação de rolagem. */
+  flex-direction: column; /* Empilha capa e informações. */
+  min-width: 0; /* Impede que o texto force a largura do card. */
+  overflow: hidden; /* Mantém capas e conteúdo dentro das bordas arredondadas. */
+  scroll-snap-align: start; /* Alinha o slide ao início do carrossel. */
+  scroll-margin-inline: 0.25rem; /* Evita que o alvo da seta encoste na borda. */
+  scroll-margin-block: 6rem; /* Evita que o cabeçalho fixo cubra o slide. */
+}
+
+/* Cria uma grade própria para os cards de streamers, sem misturá-los aos carrosséis. */
+#streamers .lives-grid:not(.carousel-track) {
+  display: grid; /* Organiza os perfis em colunas independentes. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); /* Adapta a quantidade de colunas à largura disponível. */
+  gap: 1rem; /* Mantém espaço entre os perfis. */
+}
+
+/* Define o enquadramento comum das capas de lives e games. */
+.live-card__link,
+.live-card > .live-card__image {
+  position: relative; /* Cria referência para o selo de transmissão. */
+  display: block; /* Faz a imagem ocupar a largura do card. */
+  overflow: hidden; /* Recorta a imagem nos limites definidos. */
+}
+
+/* Define dimensões consistentes para as miniaturas dos cards. */
+.live-card__image {
+  width: 100%; /* Faz a capa acompanhar a largura do card. */
+  height: 190px; /* Mantém a mesma área visual para cada miniatura. */
+  object-fit: cover; /* Recorta imagens em formatos diferentes sem distorcê-las. */
+  background: var(--surface); /* Preenche a área enquanto a imagem carrega. */
+}
+
+/* Apresenta o selo de transmissão sobre a capa da live. */
+.live-card__status {
+  position: absolute; /* Sobrepõe o selo à miniatura. */
+  top: 0.75rem; /* Afasta o selo do topo da capa. */
+  left: 0.75rem; /* Afasta o selo da borda esquerda da capa. */
+  z-index: 1; /* Mantém o selo visível acima da imagem. */
+  padding: 0.35rem 0.6rem; /* Cria uma área de leitura confortável. */
+  color: #fff; /* Mantém o texto do selo legível. */
+  background: var(--live); /* Usa a cor de transmissão ao vivo da identidade. */
+  border-radius: 5px; /* Arredonda os cantos do selo. */
+  font-size: 0.72rem; /* Mantém o selo compacto. */
+  font-weight: 800; /* Reforça a leitura do estado ao vivo. */
+  letter-spacing: 0.04em; /* Separa as letras do selo. */
+  animation: live-pulse 1.25s ease-in-out infinite; /* Faz os selos AO VIVO pulsarem. */
+}
+
+/* Organiza título, canal e categoria dentro de cada card. */
+.live-card__info {
+  flex: 1 1 auto; /* Mantém o espaço de texto flexível. */
+  padding: 1rem 1rem 4rem; /* Reserva uma área inferior para as setas. */
+}
+
+/* Define a hierarquia dos títulos nos cards. */
+.live-card__info h3 {
+  margin-bottom: 0.35rem; /* Separa o título dos detalhes do canal. */
+  font-size: 1.2rem; /* Destaca o nome da live ou do game. */
+  line-height: 1.2; /* Mantém títulos em várias linhas compactos. */
+}
+
+/* Apresenta as informações secundárias dos cards. */
+.live-card__streamer,
+.live-card__category {
+  color: var(--text-secondary); /* Diferencia os detalhes dos títulos. */
+  font-size: 0.85rem; /* Mantém os detalhes em nível secundário. */
+  line-height: 1.5; /* Facilita a leitura das informações. */
+}
+
+/* Separa a categoria dos dados de audiência. */
+.live-card__category span {
+  padding-inline: 0.25rem; /* Dá respiro ao separador entre informações. */
+}
+
+/* Posiciona as setas de cada carrossel dentro do card correspondente. */
+.carousel-arrows {
+  position: absolute; /* Mantém as setas presas ao próprio slide. */
+  right: 0.75rem; /* Alinha os controles à direita do card. */
+  bottom: 0.75rem; /* Alinha os controles à base do card. */
+  z-index: 2; /* Mantém as setas acima do conteúdo do card. */
+  display: flex; /* Agrupa as setas lado a lado. */
+  gap: 0.5rem; /* Separa os alvos clicáveis. */
+}
+
+/* Cria botões de navegação grandes e acessíveis para cada faixa. */
+.carousel-arrow {
+  display: inline-flex; /* Centraliza o símbolo dentro do alvo clicável. */
+  align-items: center; /* Centraliza verticalmente o símbolo. */
+  justify-content: center; /* Centraliza horizontalmente o símbolo. */
+  width: 2.5rem; /* Oferece uma área clicável confortável. */
+  height: 2.5rem; /* Mantém o botão quadrado. */
+  color: var(--text); /* Mantém o símbolo legível. */
+  background: var(--surface); /* Destaca o controle sobre o card. */
+  border: 1px solid var(--border); /* Delimita o botão no fundo escuro. */
+  border-radius: 50%; /* Dá aparência de seta circular. */
+  font-size: 1.6rem; /* Torna os símbolos fáceis de reconhecer. */
+  line-height: 1; /* Evita deslocamento vertical do símbolo. */
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease; /* Suaviza o estado de interação. */
+}
+
+/* Realça as setas quando o ponteiro passa sobre elas. */
+.carousel-arrow:hover {
+  color: var(--background); /* Aumenta o contraste do símbolo no estado ativo. */
+  background: var(--primary); /* Usa o verde para indicar interação. */
+  border-color: var(--primary); /* Mantém a borda alinhada ao fundo ativo. */
+}
+
+/* Mostra um contorno visível ao navegar pelos controles usando o teclado. */
+.carousel-arrow:focus-visible,
+.section-heading a:focus-visible,
+.category-card:focus-visible {
+  outline: 2px solid var(--primary); /* Indica qual link está focado. */
+  outline-offset: 3px; /* Mantém o contorno separado do controle. */
+}
+
+/* Aplica espaçamento e alinhamento aos perfis de streamer. */
+#streamers .live-card__info {
+  min-height: 190px; /* Mantém consistência visual entre os perfis. */
+}
+
+/* Define o recorte das fotos de perfil dos streamers. */
+#streamers .live-card__info img {
+  display: block; /* Coloca a foto em sua própria linha. */
+  width: 72px; /* Mantém o tamanho compacto do avatar. */
+  height: 72px; /* Mantém o avatar quadrado. */
+  margin-bottom: 0.75rem; /* Separa o avatar do nome do streamer. */
+  border-radius: 50%; /* Recorta a foto como um círculo. */
+  object-fit: cover; /* Preenche o círculo sem distorcer a foto. */
+}
+
+/* Organiza as categorias populares em uma grade adaptável. */
+.category-list {
+  display: grid; /* Coloca as categorias em colunas. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); /* Adapta as categorias ao espaço disponível. */
+  gap: 0.75rem; /* Mantém espaço uniforme entre as categorias. */
+}
+
+/* Estiliza cada atalho de categoria. */
+.category-card {
+  display: flex; /* Facilita o alinhamento do texto. */
+  align-items: center; /* Centraliza o texto verticalmente. */
+  min-height: 64px; /* Cria um alvo confortável para clique ou toque. */
+  padding: 1rem; /* Separa o texto das bordas do card. */
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease; /* Suaviza os estados de interação. */
+}
+
+/* Destaca uma categoria quando o usuário interage com ela. */
+.category-card:hover {
+  color: var(--primary); /* Realça o texto da categoria. */
+  border-color: var(--primary); /* Realça a borda da categoria. */
+  background: var(--surface); /* Diferencia o card do fundo da página. */
+}
+
+/* Define o ritmo da animação dos selos AO VIVO. */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1; /* Mantém o selo totalmente visível nos extremos. */
+    box-shadow: 0 0 0 0 rgb(255 59 92 / 45%); /* Inicia e termina sem halo externo. */
+  }
+
+  50% {
+    opacity: 0.72; /* Suaviza a luminosidade no meio do pulso. */
+    box-shadow: 0 0 0 7px rgb(255 59 92 / 0%); /* Expande o halo até desaparecer. */
+  }
+}
+
+/* Reduz movimentos para quem indicou preferência por menos animações. */
+@media (prefers-reduced-motion: reduce) {
+  .live-card__status {
+    animation: none; /* Respeita a preferência de movimento reduzido do sistema. */
+  }
+
+  .carousel-track {
+    scroll-behavior: auto; /* Remove a animação de rolagem suave. */
+  }
+}
+
+/* Ajusta os carrosséis e cabeçalhos em telas pequenas. */
+@media (max-width: 700px) {
+  .home-section {
+    margin: 1.5rem 0 2.25rem; /* Reduz o espaço vertical em celulares. */
+  }
+
+  .hero {
+    min-height: 240px; /* Mantém o banner adequado à altura do celular. */
+  }
+
+  .carousel-track .live-card {
+    flex-basis: min(84%, 320px); /* Deixa parte do próximo slide à vista. */
+  }
+
+  .live-card__image {
+    height: 175px; /* Reduz a altura das capas em telas estreitas. */
+  }
+
+  .section-heading {
+    align-items: start; /* Evita desalinhamento com títulos em várias linhas. */
+  }
+
+  .section-heading > a {
+    font-size: 0.8rem; /* Mantém o link de ação dentro do cabeçalho. */
+  }
+}
+
+/* Exibe três slides por vez em telas largas, mantendo a rolagem lateral. */
+@media (min-width: 1100px) {
+  .carousel-track .live-card {
+    flex-basis: calc((100% - 2rem) / 3); /* Divide o espaço entre três cards e dois intervalos. */
+  }
+}
