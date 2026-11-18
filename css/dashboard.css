@@ -1,0 +1,207 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Barra superior */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.logo small {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.status-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Etiquetas de status (Offline / Ao Vivo) */
+.badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge.offline {
+  background: var(--border);
+  color: var(--text-secondary);
+}
+
+.badge.live {
+  background: var(--live);
+  color: var(--text);
+}
+
+/* Estrutura principal: Menu na esquerda e Conteúdo na direita */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Menu lateral */
+.sidebar {
+  padding: 16px;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: var(--surface);
+  color: var(--primary);
+}
+
+/* Área direita */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Grid dos 3 cards de números */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-box {
+  padding: 20px;
+}
+
+.stat-box .label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.stat-box h2 {
+  font-size: 32px;
+  margin-top: 8px;
+  color: var(--primary);
+}
+
+/* Grid de Preview e Chat */
+.stream-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.panel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Caixa preta simulando o player de vídeo */
+.video-preview {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+/* Formulários e Inputs */
+.stream-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stream-form label {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+input, select {
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Área do Chat */
+.chat-panel {
+  height: 100%;
+}
+
+.chat-messages {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-area input {
+  flex: 1;
+}
+
+/* Responsividade básica para telas menores (celulares/tablets) */
+@media (max-width: 900px) {
+  .dashboard-layout,
+  .stream-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
