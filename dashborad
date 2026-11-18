@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRLTV - Dashboard do Criador</title>
 
+  <link rel="stylesheet" href="global.css">
+
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">IRL<span>TV</span> <small>| Creator Studio</small></div>
+    <div class="status-area">
+      <span id="status-badge" class="badge offline">OFFLINE</span>
+      <button id="btn-toggle-live" class="btn-primary" onclick="alternarLive()">Iniciar Transmissão</button>
+    </div>
+  </header>
+
+  <main class="container dashboard-layout">
+    
+    <aside class="sidebar card">
+      <nav>
+        <ul>
+          <li><a href="#" class="active">📊 Painel da Live</a></li>
+          <li><a href="#">💬 Chat & Moderação</a></li>
+          <li><a href="#">📈 Estatísticas</a></li>
+          <li><a href="#">⚙️ Configurações</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section class="main-content">
+      
+      <div class="stats-grid">
+        <div class="card stat-box">
+          <span class="label">Espectadores</span>
+          <h2 id="viewers-count">0</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Seguidores</span>
+          <h2>1.240</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Tempo de Live</span>
+          <h2 id="stream-time">00:00:00</h2>
+        </div>
+      </div>
+
+      <div class="stream-grid">
+        
+        <div class="card panel">
+          <h3>Pré-visualização da Transmissão</h3>
+          <div class="video-preview" id="video-box">
+            <p id="video-text">A transmissão está offline no momento.</p>
+          </div>
+
+          <form class="stream-form" onsubmit="salvarInfo(event)">
+            <label for="stream-title">Título da Live</label>
+            <input type="text" id="stream-title" value="Conversando com o chat e programando!" required>
+
+            <label for="stream-category">Categoria</label>
+            <select id="stream-category">
+              <option value="Just Chatting">Just Chatting (Só na Conversa)</option>
+              <option value="IRL">IRL (Vida Real)</option>
+              <option value="Games">Games</option>
+              <option value="Tecnologia">Tecnologia</option>
+            </select>
+
+            <button type="submit" class="btn-primary">Atualizar Informações</button>
+          </form>
+        </div>
+
+        <div class="card panel chat-panel">
+          <h3>Chat da Transmissão</h3>
+          <div class="chat-messages" id="chat-box">
+            <p><strong style="color: var(--primary);">Sistema:</strong> Bem-vindo ao seu painel de controle!</p>
+          </div>
+          <form class="chat-input-area" onsubmit="enviarMensagem(event)">
+            <input type="text" id="chat-input" placeholder="Enviar mensagem como streamer...">
+            <button type="submit" class="btn-primary">Enviar</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let aoVivo = false;
+
+    function alternarLive() {
+      aoVivo = !aoVivo;
+      const badge = document.getElementById('status-badge');
+      const btn = document.getElementById('btn-toggle-live');
+      const videoText = document.getElementById('video-text');
+      const viewers = document.getElementById('viewers-count');
+      const time = document.getElementById('stream-time');
+
+      if (aoVivo) {
+        badge.textContent = 'AO VIVO';
+        badge.className = 'badge live';
+        btn.textContent = 'Encerrar Transmissão';
+        btn.style.background = 'var(--live)';
+        btn.style.color = 'var(--text)';
+        videoText.textContent = '🔴 Sinal de vídeo conectado (1080p 60fps)';
+        viewers.textContent = '48';
+        time.textContent = '00:01:15';
+      } else {
+        badge.textContent = 'OFFLINE';
+        badge.className = 'badge offline';
+        btn.textContent = 'Iniciar Transmissão';
+        btn.style.background = 'var(--primary)';
+        btn.style.color = 'var(--background)';
+        videoText.textContent = 'A transmissão está offline no momento.';
+        viewers.textContent = '0';
+        time.textContent = '00:00:00';
+      }
+    }
+    function salvarInfo(event) {
+      event.preventDefault(); 
+      const titulo = document.getElementById('stream-title').value;
+      const categoria = document.getElementById('stream-category').value;
+      alert(`Informações atualizadas!\nTítulo: ${titulo}\nCategoria: ${categoria}`);
+    }
+    function enviarMensagem(event) {
+      event.preventDefault();
+      const input = document.getElementById('chat-input');
+      const chatBox = document.getElementById('chat-box');
+
+      if (input.value.trim() !== '') {
+        const novaMsg = document.createElement('p');
+        novaMsg.innerHTML = `<strong style="color: var(--primary);">Você:</strong> ${input.value}`;
+        chatBox.appendChild(novaMsg);
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight; 
+      }
+    }
+  </script>
+
+</body>
+</html>
