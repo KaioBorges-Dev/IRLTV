@@ -123,6 +123,11 @@
   scroll-margin-block: 6rem; /* Evita que o cabeçalho fixo cubra o slide. */
 }
 
+/* Indica que toda a área dos cards pode ser usada para abrir seu destino. */
+.live-card {
+  cursor: pointer;
+}
+
 /* Cria uma grade própria para os cards de streamers, sem misturá-los aos carrosséis. */
 #canais .lives-grid:not(.carousel-track) {
   display: grid; /* Organiza os perfis em colunas independentes. */

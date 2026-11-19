@@ -108,6 +108,36 @@ document.querySelectorAll(".carousel-track").forEach((track) => {
   });
 });
 
+// Faz todo o card responder ao mesmo destino do link principal.
+document.querySelectorAll(".live-card").forEach((card) => {
+  const primaryLink =
+    card.querySelector(".live-card__link") ||
+    card.querySelector(".live-card__info h3 a");
+
+  if (!primaryLink) {
+    return;
+  }
+
+  card.setAttribute("tabindex", "0");
+
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a, button")) {
+      return;
+    }
+
+    primaryLink.click();
+  });
+
+  card.addEventListener("keydown", (event) => {
+    if (event.target !== card || (event.key !== "Enter" && event.key !== " ")) {
+      return;
+    }
+
+    event.preventDefault();
+    primaryLink.click();
+  });
+});
+
 // Pesquisa os canais pelos nomes digitados no campo da barra superior.
 const channelSearchForm = document.querySelector(".channel-search");
 const channelSearchInput = document.querySelector("#channel-search-input");
