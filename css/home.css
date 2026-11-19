@@ -13,7 +13,11 @@
   align-items: center; /* Centraliza o conteúdo na altura do banner. */
   min-height: 280px; /* Mantém uma altura confortável para a chamada. */
   padding: clamp(1.5rem, 5vw, 3.5rem); /* Adapta o espaço interno à tela. */
-  background: linear-gradient(115deg, #171b24 5%, #202c1c 100%); /* Destaca o hero usando a paleta do projeto. */
+  background-color: #171b24; /* Mantém uma cor de fallback enquanto a arte carrega. */
+  background-image: linear-gradient(90deg, rgb(17 21 29 / 94%) 0%, rgb(17 21 29 / 76%) 42%, rgb(17 21 29 / 18%) 100%), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg"); /* Mistura o degradê translúcido com a arte oficial de League of Legends. */
+  background-position: center, right 20% center; /* Mantém o texto à esquerda e a arte visível à direita. */
+  background-size: cover, cover; /* Preenche o banner com o degradê e a imagem. */
+  background-repeat: no-repeat; /* Evita repetição da arte dentro do banner. */
 }
 
 /* Limita a largura do texto do banner para facilitar a leitura. */
@@ -295,7 +299,9 @@
   }
 
   .hero {
-    min-height: 240px; /* Mantém o banner adequado à altura do celular. */
+    min-height: 280px; /* Reserva espaço para a chamada e a arte no celular. */
+    background-position: center, 64% center; /* Reenquadra a arte ao estreitar o banner. */
+    background-image: linear-gradient(90deg, rgb(17 21 29 / 92%) 0%, rgb(17 21 29 / 66%) 55%, rgb(17 21 29 / 30%) 100%), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg"); /* Preserva contraste no texto e deixa a arte aparecer no celular. */
   }
 
   .carousel-track .live-card {
@@ -340,6 +346,13 @@
   box-shadow: 0 16px 38px rgb(0 0 0 / 18%); /* Dá profundidade sem esconder o conteúdo. */
   -webkit-backdrop-filter: blur(16px); /* Mantém o efeito compatível com navegadores WebKit. */
   backdrop-filter: blur(16px); /* Suaviza o fundo visível através do card. */
+}
+
+/* Evita uma camada opaca sobre a arte para integrar a imagem ao próprio hero. */
+.hero {
+  background-color: rgb(17 21 29 / 18%); /* Deixa a imagem aparecer sob o degradê translúcido. */
+  -webkit-backdrop-filter: none; /* Evita desfocar a arte dentro do banner. */
+  backdrop-filter: none; /* Mantém a imagem nítida e integrada ao card. */
 }
 
 /* Define o contêiner usado para posicionar as setas nas extremidades do carrossel. */
@@ -633,6 +646,73 @@
   backdrop-filter: blur(14px); /* Cria a superfície de vidro fosco da busca. */
 }
 
+/* Divide o topo em áreas simétricas para centralizar a busca no desktop. */
+.topbar {
+  display: grid; /* Reserva colunas equilibradas ao título, busca e ações. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(360px, 34vw)) minmax(0, 1fr); /* Centraliza a busca sem deslocá-la pelos controles laterais. */
+  column-gap: 1rem; /* Evita que a busca encoste no título ou nos botões. */
+}
+
+/* Mantém a busca preenchendo a coluna central do cabeçalho. */
+.topbar > .channel-search {
+  width: 100%; /* Usa toda a largura reservada à busca central. */
+  min-width: 0; /* Permite que a busca se adapte a telas intermediárias. */
+  justify-self: center; /* Alinha o formulário exatamente ao centro da barra. */
+}
+
+/* Alinha o título e os botões às extremidades do cabeçalho em grade. */
+.topbar > .topbar__title {
+  grid-column: 1; /* Mantém o título na coluna esquerda. */
+}
+
+.topbar > .topbar__actions {
+  grid-column: 3; /* Mantém as ações na coluna direita. */
+  justify-self: end; /* Encosta as ações no limite direito do cabeçalho. */
+}
+
+/* Oculta a marca compacta fora do cabeçalho móvel. */
+.topbar__mobile-brand {
+  display: none; /* Evita exibir uma segunda marca no desktop. */
+}
+
+/* Compacta os controles para manter a busca central sem sobreposição em notebooks estreitos. */
+@media (min-width: 701px) and (max-width: 900px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 150px) minmax(0, 1fr); /* Reserva centro fixo e áreas laterais simétricas. */
+    column-gap: 8px; /* Reduz o intervalo entre a busca e os controles laterais. */
+    padding-inline: 16px; /* Libera espaço útil no cabeçalho estreito. */
+  }
+
+  .topbar > .topbar__actions {
+    gap: 4px; /* Diminui o espaço entre entrar e cadastrar. */
+  }
+
+  .topbar .topbar__auth-link {
+    min-height: 38px; /* Mantém uma área de toque adequada em telas menores. */
+    padding: 0.25rem 0.25rem; /* Reduz a largura dos botões do cabeçalho. */
+    font-size: 0.7rem; /* Ajusta os rótulos sem escondê-los. */
+  }
+}
+
+/* Equilibra busca e ações em desktops compactos, mantendo a busca no centro exato. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 200px) minmax(0, 1fr); /* Evita que a busca encoste nos botões laterais. */
+    column-gap: 12px; /* Reserva espaço entre o campo e as outras áreas. */
+    padding-inline: 20px; /* Aproveita melhor a largura da barra. */
+  }
+
+  .topbar > .topbar__actions {
+    gap: 6px; /* Compacta a distância entre as ações da conta. */
+  }
+
+  .topbar .topbar__auth-link {
+    min-height: 38px; /* Preserva um alvo de interação adequado. */
+    padding: 0.35rem 0.45rem; /* Ajusta a largura dos botões a telas menores. */
+    font-size: 0.75rem; /* Mantém os dois rótulos legíveis. */
+  }
+}
+
 /* Permite que o campo ocupe o espaço disponível ao lado do botão. */
 .channel-search__input {
   flex: 1 1 auto; /* Expande o campo dentro do formulário. */
@@ -789,26 +869,22 @@
 /* Ajusta a busca e a grade de perfis em telas estreitas. */
 @media (max-width: 700px) {
   .channel-search {
-    width: 100%; /* Aproveita a largura disponível na barra superior móvel. */
+    width: min(100%, 560px); /* Centraliza a busca e limita sua largura em telas grandes. */
     min-width: 0; /* Evita ultrapassar a largura do cabeçalho. */
+    margin-inline: auto; /* Mantém a caixa de busca alinhada ao centro. */
   }
 
   .topbar__actions {
-    display: grid; /* Reserva espaços separados para a busca e ações da conta. */
-    flex: 1 1 100%; /* Move a busca para a linha abaixo do título no celular. */
-    grid-template-columns: minmax(0, 1fr) auto auto; /* Dá à busca o espaço restante e mantém os dois botões visíveis. */
-    gap: 0.4rem; /* Separa os controles sem desperdiçar largura. */
-    min-width: 0; /* Permite encolher o formulário em telas menores. */
+    display: none; /* Oculta o contêiner de ações de desktop no cabeçalho móvel. */
   }
 
   .channel-search {
-    grid-column: 1; /* Mantém a busca na primeira coluna da barra móvel. */
+    grid-column: 1 / -1; /* Usa toda a linha abaixo do título e do hambúrguer. */
+    grid-row: 2; /* Mantém a busca na segunda linha do topo móvel. */
   }
 
   .topbar__auth-link {
-    min-width: 0; /* Permite que os botões caibam em telas pequenas. */
-    padding-inline: 0.65rem; /* Reduz o espaço lateral nos botões móveis. */
-    font-size: 0.78rem; /* Mantém os rótulos legíveis sem tomar a barra toda. */
+    display: none; /* Move as ações de conta para dentro do menu hambúrguer no celular. */
   }
 
   .section-heading {
@@ -818,5 +894,255 @@
   .channel-search__results {
     width: 100%; /* Dá uma linha própria à contagem em telas estreitas. */
     text-align: left; /* Alinha a contagem com o título da seção. */
+  }
+}
+
+/* Esconde o controle de menu em telas que já exibem a navegação lateral. */
+.menu-toggle,
+.sidebar__close {
+  display: none; /* Mantém os controles móveis fora do layout desktop. */
+}
+
+/* Mantém os atalhos de conta apenas no painel móvel da navegação. */
+.sidebar__account-actions {
+  display: none; /* Evita duplicar os botões que já aparecem no cabeçalho desktop. */
+}
+
+/* Prepara a camada escura que acompanha a abertura do menu lateral. */
+.menu-backdrop {
+  position: fixed; /* Mantém o fundo cobrindo a tela durante a rolagem. */
+  inset: 0; /* Estende o fundo por toda a janela. */
+  z-index: 30; /* Posiciona o fundo entre o conteúdo e o menu. */
+  display: block; /* Permite que o botão ocupe toda a tela ao ser exibido. */
+  padding: 0; /* Evita espaços internos no fundo clicável. */
+  background: rgb(4 6 10 / 68%); /* Escurece o conteúdo atrás do menu. */
+  border: 0; /* Remove a borda padrão do botão. */
+  cursor: pointer; /* Indica que tocar fora do painel fecha o menu. */
+  opacity: 1; /* Deixa o fundo totalmente visível quando aberto. */
+  backdrop-filter: blur(5px); /* Suaviza o conteúdo sob a camada translúcida. */
+  transition: opacity 220ms ease; /* Suaviza a entrada e saída do fundo. */
+}
+
+/* Impede que o atributo hidden seja sobrescrito pelo display do backdrop. */
+.menu-backdrop[hidden] {
+  display: none; /* Retira a camada do layout e da interação quando fechada. */
+}
+
+/* Converte o menu e a barra superior em um painel deslizante no celular. */
+@media (max-width: 700px) {
+  .sidebar {
+    position: fixed; /* Retira o menu do fluxo e fixa o painel na janela. */
+    inset: 0 auto 0 0; /* Ancora o painel nas bordas esquerda, superior e inferior. */
+    z-index: 40; /* Mantém o painel acima do fundo escurecido. */
+    width: min(84vw, 320px); /* Limita a largura e preserva espaço para o fundo. */
+    height: 100vh; /* Oferece fallback para navegadores sem unidades dinâmicas. */
+    height: 100dvh; /* Acompanha a altura visível em celulares com barras móveis. */
+    padding: 24px 16px; /* Mantém espaço para os links e os canais no painel. */
+    overflow-y: auto; /* Permite acessar todos os canais em telas baixas. */
+    background: rgb(17 21 29 / 94%); /* Aplica uma superfície escura translúcida. */
+    border-right: 1px solid rgb(255 255 255 / 12%); /* Define o limite do painel. */
+    border-bottom: 0; /* Remove a borda da antiga navegação em linha. */
+    box-shadow: 20px 0 60px rgb(0 0 0 / 35%); /* Separa visualmente o painel do fundo. */
+    backdrop-filter: blur(18px); /* Completa o efeito de vidro fosco do menu. */
+    transform: translateX(-105%); /* Mantém o painel fora da tela quando fechado. */
+    visibility: hidden; /* Retira links ocultos da navegação por teclado e leitores de tela. */
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 260ms; /* Anima o painel e oculta sua acessibilidade ao terminar. */
+    will-change: transform; /* Prepara o navegador para animar o painel. */
+  }
+
+  /* Desliza o menu para dentro da tela quando o script ativa o estado aberto. */
+  body.menu-open .sidebar {
+    transform: translateX(0); /* Mostra o painel sem alterar sua posição fixa. */
+    visibility: visible; /* Permite acessar os links assim que o painel começa a abrir. */
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s; /* Torna os links visíveis durante a animação de entrada. */
+  }
+
+  /* Mantém o nome da plataforma com espaçamento apropriado no painel móvel. */
+  .sidebar__brand {
+    margin: 0 44px 24px 8px; /* Reserva espaço para o botão de fechar. */
+  }
+
+  /* Oferece um controle visível para fechar o painel além do botão hambúrguer. */
+  .sidebar__close {
+    position: absolute; /* Fixa o controle no canto superior do painel. */
+    top: 20px; /* Afasta o controle da borda superior. */
+    right: 16px; /* Afasta o controle da borda direita. */
+    display: inline-flex; /* Centraliza o símbolo dentro do botão. */
+    align-items: center; /* Centraliza verticalmente o símbolo. */
+    justify-content: center; /* Centraliza horizontalmente o símbolo. */
+    width: 40px; /* Define uma área de toque confortável. */
+    height: 40px; /* Mantém o botão quadrado. */
+    color: var(--text); /* Mantém o símbolo legível no painel escuro. */
+    background: rgb(255 255 255 / 7%); /* Integra o botão à superfície de vidro. */
+    border: 1px solid rgb(255 255 255 / 12%); /* Delimita o botão sem alto contraste. */
+    border-radius: 12px; /* Harmoniza o botão com os cartões da página. */
+    font: inherit; /* Mantém a tipografia consistente com o projeto. */
+    font-size: 1.6rem; /* Deixa o símbolo de fechar fácil de identificar. */
+    cursor: pointer; /* Indica que o botão é interativo. */
+  }
+
+  /* Empilha os links para facilitar a navegação por toque. */
+  .sidebar__nav {
+    flex-direction: column; /* Restaura a lista vertical no painel móvel. */
+    gap: 6px; /* Mantém separação entre as opções do menu. */
+    overflow: visible; /* Evita uma segunda rolagem dentro do painel. */
+  }
+
+  /* Exibe entrar e cadastrar no menu lateral apenas em telas móveis. */
+  .sidebar__account-actions {
+    display: grid; /* Organiza as ações da conta lado a lado no painel. */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Divide a largura igualmente entre as ações. */
+    gap: 0.55rem; /* Separa os botões sem ocupar espaço excessivo. */
+    margin: 0.85rem 0 0.25rem; /* Afasta as ações da navegação principal. */
+  }
+
+  /* Mantém as duas ações com alvos de toque confortáveis. */
+  .sidebar__account-link {
+    display: inline-flex; /* Centraliza o rótulo dentro do botão. */
+    align-items: center; /* Centraliza o texto verticalmente. */
+    justify-content: center; /* Centraliza o texto horizontalmente. */
+    min-width: 0; /* Permite que os botões se ajustem a painéis estreitos. */
+    min-height: 44px; /* Mantém uma área de toque acessível. */
+    padding: 0.55rem 0.4rem; /* Deixa respiro ao redor do texto. */
+    font-size: 0.82rem; /* Ajusta o texto ao espaço do menu móvel. */
+    text-align: center; /* Centraliza rótulos que eventualmente quebrem linha. */
+  }
+
+  /* Realça a ação de cadastro como botão principal dentro do menu. */
+  .sidebar__account-link--signup {
+    border: 1px solid var(--primary); /* Mantém o destaque verde da ação principal. */
+  }
+
+  /* Permite que cada link ocupe a largura útil do painel lateral. */
+  .sidebar__link {
+    flex: 0 0 auto; /* Evita comprimir o texto dos links. */
+    min-height: 46px; /* Amplia a área de toque no celular. */
+    padding: 10px 12px; /* Mantém o texto afastado das bordas. */
+    font-size: 0.95rem; /* Restaura o tamanho confortável de leitura. */
+  }
+
+  /* Posiciona o fundo escurecido acima da página e abaixo do painel. */
+  .menu-backdrop {
+    z-index: 30; /* Mantém a camada atrás da navegação deslizante. */
+  }
+
+  /* Organiza o botão de menu e o título na primeira linha do cabeçalho móvel. */
+  .topbar {
+    position: sticky; /* Mantém os controles acessíveis durante a rolagem. */
+    top: 0; /* Define explicitamente o limite superior da barra fixa. */
+    inset-inline: 0; /* Remove o deslocamento lateral reservado ao menu desktop. */
+    display: grid; /* Cria linhas próprias para título e ações. */
+    grid-template-columns: 42px minmax(0, 1fr) 48px; /* Reserva o menu à esquerda, busca no meio e marca à direita. */
+    gap: 8px; /* Separa a busca dos controles laterais. */
+    min-height: 0; /* Permite que a barra cresça conforme suas linhas. */
+    padding: 10px 16px 12px; /* Mantém os controles dentro da área segura. */
+    transform: translateY(0); /* Mantém o cabeçalho visível no início da página. */
+    transition: transform 220ms ease; /* Anima a saída e o retorno ao rolar. */
+    will-change: transform; /* Prepara a animação do cabeçalho durante a rolagem. */
+  }
+
+  /* Esconde o cabeçalho ao rolar para baixo e revela-o ao rolar para cima. */
+  .topbar.is-hidden {
+    transform: translateY(calc(-100% - 2px)); /* Move menu e busca para fora da área visível. */
+  }
+
+  /* Exibe o botão hambúrguer como acionador do painel móvel. */
+  .menu-toggle {
+    display: inline-flex; /* Mostra o botão apenas dentro deste breakpoint. */
+    grid-column: 1; /* Mantém o botão do menu à esquerda da busca. */
+    grid-row: 1; /* Alinha o botão com a busca e a marca. */
+    flex-direction: column; /* Empilha as três linhas do ícone. */
+    align-items: center; /* Centraliza as linhas horizontalmente. */
+    justify-content: center; /* Centraliza as linhas verticalmente. */
+    gap: 5px; /* Separa as linhas para formar o ícone hambúrguer. */
+    width: 42px; /* Define uma área de toque acessível. */
+    height: 42px; /* Mantém o botão quadrado. */
+    padding: 0; /* Evita deslocar o ícone dentro do botão. */
+    color: var(--text); /* Herda o tom claro usado no cabeçalho. */
+    background: rgb(255 255 255 / 6%); /* Integra o botão ao visual de vidro. */
+    border: 1px solid var(--border); /* Delimita o acionador no fundo escuro. */
+    border-radius: 12px; /* Harmoniza o botão com os cartões da página. */
+    cursor: pointer; /* Indica que o acionador pode ser clicado. */
+  }
+
+  /* Desenha cada linha do símbolo do menu com dimensões consistentes. */
+  .menu-toggle span {
+    display: block; /* Faz cada linha ocupar sua própria faixa. */
+    width: 18px; /* Mantém o ícone compacto e centralizado. */
+    height: 2px; /* Define a espessura das linhas do ícone. */
+    background: currentColor; /* Usa a cor de texto definida no botão. */
+    border-radius: 999px; /* Arredonda as extremidades do ícone. */
+  }
+
+  /* Destaca o controle acionado para quem navega com teclado. */
+  .menu-toggle:focus-visible,
+  .sidebar__close:focus-visible {
+    outline: 2px solid var(--primary); /* Exibe um indicador de foco bem visível. */
+    outline-offset: 3px; /* Afasta o foco da borda do botão. */
+  }
+
+  /* Coloca o título ao lado do acionador de menu. */
+  .topbar__title {
+    display: none; /* Remove o título redundante para dar espaço à busca no celular. */
+  }
+
+  /* Centraliza o campo entre o menu e a marca sem causar rolagem horizontal. */
+  .channel-search {
+    width: min(100%, 560px); /* Deixa a busca larga no celular e limitada em tablets. */
+    min-width: 0; /* Impede o formulário de ultrapassar a janela estreita. */
+    margin: 0; /* Mantém a busca alinhada à primeira coluna. */
+    grid-column: 2; /* Ocupa o espaço flexível entre menu e marca. */
+    grid-row: 1; /* Alinha busca e botão hambúrguer na mesma linha. */
+  }
+
+  /* Exibe a marca IRLTV à direita da busca no cabeçalho móvel. */
+  .topbar__mobile-brand {
+    display: inline-flex; /* Alinha os segmentos do logotipo dentro do espaço compacto. */
+    grid-column: 3; /* Posiciona a marca à direita do campo de pesquisa. */
+    grid-row: 1; /* Mantém marca, busca e menu na mesma linha. */
+    align-items: center; /* Centraliza verticalmente os caracteres da marca. */
+    justify-content: center; /* Centraliza a marca na coluna reservada. */
+    min-width: 0; /* Evita que a marca force a largura do cabeçalho. */
+    color: var(--text); /* Mantém a parte principal da marca legível. */
+    font-family: var(--font-heading); /* Reaproveita a tipografia visual da marca. */
+    font-size: 0.9rem; /* Ajusta o logotipo ao tamanho do cabeçalho móvel. */
+    font-weight: 800; /* Dá à marca o peso de um ícone de identidade. */
+    letter-spacing: -0.06em; /* Mantém o conjunto compacto junto à busca. */
+    white-space: nowrap; /* Impede que o logotipo quebre em duas linhas. */
+  }
+
+  /* Destaca a sigla TV com a cor principal da plataforma. */
+  .topbar__mobile-brand strong {
+    color: var(--primary); /* Reutiliza o verde da identidade IRLTV. */
+    font-weight: 900; /* Dá ênfase à parte final do logotipo. */
+  }
+
+  /* Indica foco de teclado na marca usada como atalho para o início. */
+  .topbar__mobile-brand:focus-visible {
+    outline: 2px solid var(--primary); /* Mantém visível o foco de navegação. */
+    outline-offset: 3px; /* Afasta o foco da marca. */
+    border-radius: 4px; /* Arredonda o contorno sem alterar o layout. */
+  }
+}
+
+/* Remove os controles móveis da acessibilidade visual em telas desktop. */
+@media (min-width: 701px) {
+  .menu-backdrop[hidden] {
+    display: none; /* Garante que o fundo não interfira na navegação desktop. */
+  }
+}
+
+/* Evita animações do painel para pessoas que preferem movimento reduzido. */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar {
+    transition: none; /* Abre e fecha o painel sem movimento animado. */
+  }
+
+  .topbar {
+    transition: none; /* Esconde e revela o cabeçalho sem animação. */
+  }
+
+  .menu-backdrop {
+    transition: none; /* Remove a transição visual do fundo escurecido. */
   }
 }

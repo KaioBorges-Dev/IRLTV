@@ -10,15 +10,22 @@
   <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-  <aside class="sidebar" aria-label="Menu principal">
+  <aside class="sidebar" id="mobile-menu" aria-label="Menu principal">
     <a class="sidebar__brand" href="#inicio" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
 
     <nav class="sidebar__nav" aria-label="Navegação principal">
       <a class="sidebar__link is-active" href="#inicio" aria-current="page">Início</a>
       <a class="sidebar__link" href="#lista-lives">Explorar lives</a>
+      <a class="sidebar__link" href="#canais">Canais</a>
       <a class="sidebar__link" href="#jogos">Games</a>
       <a class="sidebar__link" href="#categorias">Categorias</a>
     </nav>
+
+    <div class="sidebar__account-actions" aria-label="Acesso à conta">
+      <a class="topbar__action sidebar__account-link" href="#entrar">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="#cadastro">Cadastrar</a>
+    </div>
 
     <section class="sidebar__live" aria-labelledby="sidebar-live-title">
       <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
@@ -56,24 +63,40 @@
     </section>
   </aside>
 
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
+
   <header class="topbar">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <h1 class="topbar__title">Início</h1>
+    <form class="channel-search" role="search">
+      <label class="visually-hidden" for="channel-search-input">Buscar canais por nome</label>
+      <input
+        class="channel-search__input"
+        id="channel-search-input"
+        name="channel"
+        type="search"
+        placeholder="Buscar canais..."
+        autocomplete="off"
+        aria-controls="canais"
+      >
+      <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+    <a class="topbar__mobile-brand" href="#inicio" aria-label="IRLTV - página inicial">
+      <span aria-hidden="true">IRL</span><strong aria-hidden="true">TV</strong>
+    </a>
     <div class="topbar__actions">
-      <form class="channel-search" role="search">
-        <label class="visually-hidden" for="channel-search-input">Buscar canais por nome</label>
-        <input
-          class="channel-search__input"
-          id="channel-search-input"
-          name="channel"
-          type="search"
-          placeholder="Buscar canais..."
-          autocomplete="off"
-          aria-controls="canais"
-        >
-        <button class="channel-search__button" type="submit" aria-label="Buscar canais">
-          <span aria-hidden="true">⌕</span>
-        </button>
-      </form>
       <a class="topbar__action topbar__auth-link" href="#entrar">Entrar</a>
       <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="#cadastro">Cadastrar</a>
     </div>
@@ -474,5 +497,7 @@
     </section>
   </main>
   <script src="js/home.js" defer></script>
+  <script src="js/menu.js" defer></script>
+  <script src="js/global.js" defer></script>
 </body>
 </html>
