@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Assista ao canal NekoRush ao vivo na IRLTV.">
+  <title>IRLTV | NekoRush ao vivo</title>
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/live.css">
+</head>
+<body>
+  <aside class="sidebar" id="mobile-menu" aria-label="Menu principal">
+    <a class="sidebar__brand" href="index.html" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
+
+    <nav class="sidebar__nav" aria-label="Navegação principal">
+      <a class="sidebar__link" href="index.html">Início</a>
+      <a class="sidebar__link" href="index.html#lista-lives">Explorar lives</a>
+      <a class="sidebar__link" href="index.html#canais">Canais</a>
+      <a class="sidebar__link" href="index.html#jogos">Games</a>
+      <a class="sidebar__link" href="index.html#categorias">Categorias</a>
+    </nav>
+
+    <div class="sidebar__account-actions" aria-label="Acesso à conta">
+      <a class="topbar__action sidebar__account-link" href="#entrar">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="#cadastro">Cadastrar</a>
+    </div>
+
+    <section class="sidebar__live" aria-labelledby="sidebar-live-title">
+      <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
+      <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="NekoRush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>GTA V</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="LunaCraft">
+            <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="ByteNinja">
+            <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+          </a>
+        </li>
+      </ul>
+      <a class="sidebar__all-channels" href="index.html#canais">Ver todos os canais</a>
+    </section>
+  </aside>
+
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
+
+  <header class="topbar">
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h1 class="topbar__title">Ao vivo</h1>
+    <div class="topbar__actions">
+      <a class="topbar__action topbar__auth-link" href="#entrar">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="#cadastro">Cadastrar</a>
+    </div>
+  </header>
+
+  <main class="page-content live-page" id="inicio">
+    <section class="live-layout" aria-label="Transmissão ao vivo">
+      <div class="live-main">
+        <article class="live-player card" aria-label="Player da transmissão">
+          <div class="live-player__stage" id="live-player-stage">
+            <iframe
+              id="live-video"
+              title="Live de GTA V com NekoRush"
+              src="https://www.youtube-nocookie.com/embed/BG_y4qpQA-g?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=BG_y4qpQA-g&amp;controls=1&amp;rel=0&amp;modestbranding=1&amp;enablejsapi=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+
+            <span class="live-player__badge"><span aria-hidden="true"></span> AO VIVO</span>
+            <span class="live-player__viewers" id="live-viewers">1.284 espectadores</span>
+
+            <div class="live-player__controls" aria-label="Controles da transmissão">
+              <button class="live-control" id="mute-control" type="button" aria-label="Ativar som" aria-pressed="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12a9 9 0 0 0-7-8.77ZM3 9v6h4l5 5V4L7 9H3Z"/></svg>
+                <span>Som</span>
+              </button>
+              <button class="live-control" id="fullscreen-control" type="button" aria-label="Ativar tela cheia">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3Zm-2-4h2V7h3V5H5v5Zm12 7h-3v2h5v-5h-2v3ZM14 5v2h3v3h2V5h-5Z"/></svg>
+                <span>Tela cheia</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <section class="live-details" aria-labelledby="live-title">
+          <div class="live-details__channel">
+            <img class="live-details__avatar" src="https://i.pravatar.cc/160?img=5" alt="Foto de perfil de NekoRush" width="64" height="64">
+            <div>
+              <h2 id="live-title">Correndo sem limites em Los Santos</h2>
+              <a class="live-details__channel-name" href="index.html#canais">NekoRush <span aria-label="Canal verificado">✓</span></a>
+              <p>Grand Theft Auto V <span>•</span> Roleplay</p>
+            </div>
+          </div>
+          <button class="follow-button" id="follow-button" type="button" aria-pressed="false">Seguir</button>
+        </section>
+
+        <section class="live-about card" aria-labelledby="live-about-title">
+          <h3 id="live-about-title">Sobre esta live</h3>
+          <p>Domingo de GTA V na IRLTV: missões, corridas e muita confusão pelas ruas de Los Santos com a comunidade.</p>
+          <div class="live-tags" aria-label="Tags da live">
+            <span>GTA V</span>
+            <span>Roleplay</span>
+            <span>PT-BR</span>
+          </div>
+        </section>
+      </div>
+
+      <aside class="live-chat card" aria-label="Chat ao vivo">
+        <header class="live-chat__header">
+          <h2>Chat ao vivo</h2>
+          <span class="live-chat__status"><span aria-hidden="true"></span> Conectado</span>
+        </header>
+
+        <div class="live-chat__messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+        <form class="live-chat__form" id="chat-form">
+          <label class="visually-hidden" for="chat-input">Enviar mensagem no chat</label>
+          <input id="chat-input" name="message" type="text" maxlength="120" placeholder="Envie uma mensagem..." autocomplete="off">
+          <button type="submit" aria-label="Enviar mensagem">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 21 21-9L2 3v7l15 2-15 2v7Z"/></svg>
+          </button>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <script src="js/menu.js" defer></script>
+  <script src="js/live.js" defer></script>
+</body>
+</html>

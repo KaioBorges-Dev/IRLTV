@@ -1,0 +1,469 @@
+/* =========================================================
+   ESTILOS EXCLUSIVOS DA PÁGINA DE LIVE DA IRLTV
+   ========================================================= */
+
+/* Mantém o conteúdo da live largo sem sair da área da página. */
+.live-page {
+  max-width: 1700px;
+}
+
+/* Divide o player e o chat em duas colunas em telas grandes. */
+.live-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Permite que o conteúdo principal encolha corretamente dentro da grade. */
+.live-main {
+  min-width: 0;
+}
+
+/* Cria uma moldura escura ao redor do player incorporado. */
+.live-player {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #050608;
+}
+
+/* Mantém o vídeo em proporção panorâmica e reserva área para controles próprios. */
+.live-player__stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #050608;
+}
+
+/* Faz o player do YouTube preencher toda a área da moldura. */
+.live-player__stage iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Apresenta o selo AO VIVO sobre o vídeo com efeito pulsante. */
+.live-player__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  color: #fff;
+  background: var(--live);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgb(255 59 92 / 25%);
+  animation: live-pulse 1.25s ease-in-out infinite;
+}
+
+/* Cria o ponto que pisca dentro do selo AO VIVO. */
+.live-player__badge > span {
+  width: 7px;
+  height: 7px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* Exibe a audiência atual no canto superior direito do player. */
+.live-player__viewers {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  padding: 0.45rem 0.65rem;
+  color: #fff;
+  background: rgb(5 6 8 / 78%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+
+/* Agrupa os controles personalizados no canto inferior direito. */
+.live-player__controls {
+  position: absolute;
+  right: 1rem;
+  bottom: 3.1rem;
+  z-index: 3;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Define o visual dos controles personalizados do player. */
+.live-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 36px;
+  padding: 8px 10px;
+  color: #fff;
+  background: rgb(5 6 8 / 82%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 7px;
+  font-size: 0.75rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Destaca os controles ao receber foco ou quando o mouse passa sobre eles. */
+.live-control:hover,
+.live-control:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+  outline: none;
+}
+
+/* Mantém os ícones dos controles com tamanho uniforme. */
+.live-control svg,
+.live-chat__form button svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+/* Organiza o canal, o título e a ação de seguir abaixo do vídeo. */
+.live-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+}
+
+/* Alinha o avatar e as informações textuais do canal. */
+.live-details__channel {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 0.85rem;
+}
+
+/* Padroniza a foto do canal exibida abaixo da live. */
+.live-details__avatar {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+}
+
+/* Permite que o título seja ajustado em telas menores. */
+.live-details__channel h2 {
+  margin-bottom: 0.25rem;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.15;
+}
+
+/* Realça o nome do canal na área de informações. */
+.live-details__channel-name {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Representa a confirmação do canal em verde. */
+.live-details__channel-name span {
+  display: inline-grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  color: var(--background);
+  background: var(--primary);
+  border-radius: 50%;
+  font-size: 0.65rem;
+  vertical-align: 1px;
+}
+
+/* Mostra a categoria e o tipo da transmissão em tom secundário. */
+.live-details__channel p {
+  margin-top: 0.2rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+/* Dá destaque ao separador entre categoria e modo. */
+.live-details__channel p span {
+  padding: 0 0.25rem;
+}
+
+/* Define o visual inicial do botão de seguir. */
+.follow-button {
+  flex: 0 0 auto;
+  min-width: 96px;
+  min-height: 42px;
+  color: var(--background);
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  font-weight: 800;
+  transition: 180ms ease;
+}
+
+/* Aplica a aparência ativa quando o canal já está sendo seguido. */
+.follow-button[aria-pressed="true"] {
+  color: var(--primary);
+  background: rgb(163 255 18 / 8%);
+}
+
+/* Organiza a descrição da live e suas tags. */
+.live-about {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+}
+
+/* Define o tamanho do título da descrição. */
+.live-about h3 {
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+}
+
+/* Melhora a leitura da descrição da transmissão. */
+.live-about p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Mantém as tags juntas e permite quebra em telas pequenas. */
+.live-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Cria etiquetas compactas usando as superfícies da identidade. */
+.live-tags span {
+  padding: 0.35rem 0.55rem;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Mantém o chat fixado visualmente ao lado do player em telas altas. */
+.live-chat {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  grid-template-rows: auto minmax(280px, 1fr) auto;
+  height: calc(100vh - 124px);
+  min-height: 480px;
+  max-height: 760px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Alinha o título e o estado de conexão no cabeçalho do chat. */
+.live-chat__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Ajusta o título do chat. */
+.live-chat__header h2 {
+  font-size: 1.05rem;
+}
+
+/* Identifica visualmente o estado conectado. */
+.live-chat__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+}
+
+/* Cria o pequeno indicador verde da conexão. */
+.live-chat__status span {
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgb(163 255 18 / 55%);
+}
+
+/* Permite rolar mensagens sem alterar o cabeçalho ou formulário. */
+.live-chat__messages {
+  overflow-y: auto;
+  padding: 0.75rem 1rem;
+  scrollbar-color: var(--primary) var(--surface);
+  scrollbar-width: thin;
+}
+
+/* Formata cada mensagem em uma pequena linha de conversa. */
+.chat-message {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.35;
+}
+
+/* Padroniza o avatar das pessoas simuladas no chat. */
+.chat-message__avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+/* Mantém o conteúdo da mensagem dentro da largura disponível. */
+.chat-message__content {
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+/* Destaca o nome do usuário que enviou a mensagem. */
+.chat-message__name {
+  margin-right: 0.35rem;
+  color: var(--text);
+  font-weight: 800;
+}
+
+/* Nome do usuário da própria pessoa é destacado com o verde da marca. */
+.chat-message__name.is-user {
+  color: var(--primary);
+}
+
+/* Organiza o campo de texto e o botão de envio na parte inferior. */
+.live-chat__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Estiliza o campo onde o visitante escreve a mensagem. */
+.live-chat__form input {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 0 0.75rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  outline: none;
+}
+
+/* Indica claramente quando o campo do chat está em foco. */
+.live-chat__form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgb(163 255 18 / 8%);
+}
+
+/* Usa o verde da plataforma para destacar o botão de envio. */
+.live-chat__form button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: var(--background);
+  background: var(--primary);
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Esconde o texto auxiliar utilizado por leitores de tela. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Anima suavemente o selo AO VIVO sem afetar o player. */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
+/* Empilha player e chat antes da largura de notebooks médios. */
+@media (max-width: 1100px) {
+  .live-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .live-chat {
+    position: relative;
+    top: 0;
+    height: 520px;
+  }
+}
+
+/* Ajusta o cabeçalho da live e reduz os controles em telas pequenas. */
+@media (max-width: 700px) {
+  .live-player {
+    border-radius: 10px;
+  }
+
+  .live-player__badge,
+  .live-player__viewers {
+    top: 0.65rem;
+  }
+
+  .live-player__badge {
+    left: 0.65rem;
+  }
+
+  .live-player__viewers {
+    right: 0.65rem;
+  }
+
+  .live-player__controls {
+    right: 0.65rem;
+    bottom: 2.9rem;
+  }
+
+  .live-control span {
+    display: none;
+  }
+
+  .live-details {
+    align-items: flex-start;
+  }
+
+  .live-details__avatar {
+    width: 52px;
+    height: 52px;
+  }
+
+  .follow-button {
+    min-width: 82px;
+  }
+
+  .live-chat {
+    height: 480px;
+  }
+}
+
+/* Remove animações para quem configurou redução de movimento. */
+@media (prefers-reduced-motion: reduce) {
+  .live-player__badge {
+    animation: none;
+  }
+}
