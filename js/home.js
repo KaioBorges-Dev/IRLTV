@@ -197,6 +197,19 @@ const filterChannels = () => {
 // Atualiza os resultados imediatamente enquanto a pessoa digita.
 channelSearchInput.addEventListener("input", filterChannels);
 
+// Reaplica uma busca iniciada em outra página da plataforma.
+const searchParam = new URLSearchParams(window.location.search).get("channel");
+if (searchParam) {
+  channelSearchInput.value = searchParam;
+  filterChannels();
+  requestAnimationFrame(() => {
+    document.querySelector("#canais")?.scrollIntoView({
+      behavior: "auto",
+      block: "start",
+    });
+  });
+}
+
 // Leva a busca ao resultado e destaca o título da seção de canais.
 channelSearchForm.addEventListener("submit", (event) => {
   event.preventDefault();

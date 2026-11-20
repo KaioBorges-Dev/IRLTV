@@ -9,6 +9,10 @@
 
   let isMuted = true;
 
+  // Impede cliques internos, clique duplo e menu do vídeo da plataforma externa.
+  playerStage?.addEventListener("dblclick", (event) => event.preventDefault());
+  playerStage?.addEventListener("contextmenu", (event) => event.preventDefault());
+
   // Envia comandos para o player oficial do YouTube sem redirecionar o visitante.
   function sendPlayerCommand(command, args = []) {
     iframe?.contentWindow?.postMessage(
@@ -16,6 +20,11 @@
       "*",
     );
   }
+
+  // Reinicia a reprodução assim que o player termina de carregar.
+  iframe?.addEventListener("load", () => {
+    sendPlayerCommand("playVideo");
+  });
 
   // Alterna o áudio do player e atualiza seu estado acessível.
   muteControl?.addEventListener("click", () => {
@@ -74,6 +83,8 @@
   const messages = document.querySelector("#chat-messages");
   const chatForm = document.querySelector("#chat-form");
   const chatInput = document.querySelector("#chat-input");
+  const channelSearchForm = document.querySelector(".channel-search");
+  const channelSearchInput = document.querySelector("#channel-search-input");
 
   // Lista de nomes e frases usada para representar mensagens reais da comunidade.
   const simulatedUsers = [
@@ -87,7 +98,7 @@
 
   const simulatedMessages = [
     "Essa correria ficou muito boa!",
-    "Vamo NekoRush 🔥",
+    "Vamo BRKsEDU 🔥",
     "Perdeu o carro ali, cuidado!",
     "Primeira vez assistindo e já virei fã",
     "Essa missão está impossível 😂",
@@ -131,7 +142,7 @@
   [
     ["MilaGames", "Essa abertura já começou muito boa!"],
     ["TicoTactics", "Alguém perdeu o carro logo no início 😂"],
-    ["LunaCraft", "Salve, Neko! GTA V é outro nível"],
+    ["LunaCraft", "Salve, BRKsEDU! GTA V é outro nível"],
     ["DudaPlay", "Esse roleplay está ficando insano"],
     ["ByteNinja", "Vamo pra mais uma missão!"],
   ].forEach(([name, text]) => addMessage(name, text));
@@ -159,5 +170,15 @@
     addMessage("Você", text, true);
     chatInput.value = "";
     chatInput.focus();
+  });
+
+  // Leva uma busca feita na página da live diretamente para os canais da página inicial.
+  channelSearchForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const query = channelSearchInput?.value.trim();
+    const searchUrl = query
+      ? `index.html?channel=${encodeURIComponent(query)}#canais`
+      : "index.html#canais";
+    window.location.href = searchUrl;
   });
 })();

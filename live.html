@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Assista ao canal NekoRush ao vivo na IRLTV.">
-  <title>IRLTV | NekoRush ao vivo</title>
+  <meta name="description" content="Assista ao canal BRKsEDU ao vivo na IRLTV.">
+  <title>IRLTV | BRKsEDU ao vivo</title>
 
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/live.css">
 </head>
 <body>
@@ -32,9 +33,9 @@
       <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
       <ul class="sidebar__live-list">
         <li>
-          <a class="sidebar__channel-link" href="live.html" data-channel-name="NekoRush">
-            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
-            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>GTA V</small></span>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="BRKsEDU">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>BRKsEDU</strong><small>GTA V</small></span>
             <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
           </a>
         </li>
@@ -42,12 +43,28 @@
           <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="LunaCraft">
             <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
             <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
           </a>
         </li>
         <li>
           <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="ByteNinja">
             <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
             <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="PixelMila">
+            <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="NekoRush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
           </a>
         </li>
       </ul>
@@ -58,12 +75,35 @@
   <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
 
   <header class="topbar">
-    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
     <h1 class="topbar__title">Ao vivo</h1>
+    <form class="channel-search" role="search" action="index.html" method="get">
+      <label class="visually-hidden" for="channel-search-input">Buscar canais por nome</label>
+      <input
+        class="channel-search__input"
+        id="channel-search-input"
+        name="channel"
+        type="search"
+        placeholder="Buscar canais..."
+        autocomplete="off"
+      >
+      <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+    <a class="topbar__mobile-brand" href="index.html" aria-label="IRLTV - página inicial">
+      <span aria-hidden="true">IRL</span><strong aria-hidden="true">TV</strong>
+    </a>
     <div class="topbar__actions">
       <a class="topbar__action topbar__auth-link" href="#entrar">Entrar</a>
       <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="#cadastro">Cadastrar</a>
@@ -77,8 +117,8 @@
           <div class="live-player__stage" id="live-player-stage">
             <iframe
               id="live-video"
-              title="Live de GTA V com NekoRush"
-              src="https://www.youtube-nocookie.com/embed/BG_y4qpQA-g?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=BG_y4qpQA-g&amp;controls=1&amp;rel=0&amp;modestbranding=1&amp;enablejsapi=1"
+              title="Live de GTA V com BRKsEDU"
+              src="https://www.youtube-nocookie.com/embed/BG_y4qpQA-g?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=BG_y4qpQA-g&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;rel=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;enablejsapi=1"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
             ></iframe>
@@ -101,10 +141,10 @@
 
         <section class="live-details" aria-labelledby="live-title">
           <div class="live-details__channel">
-            <img class="live-details__avatar" src="https://i.pravatar.cc/160?img=5" alt="Foto de perfil de NekoRush" width="64" height="64">
+            <img class="live-details__avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="Foto de perfil de BRKsEDU" width="64" height="64">
             <div>
               <h2 id="live-title">Correndo sem limites em Los Santos</h2>
-              <a class="live-details__channel-name" href="index.html#canais">NekoRush <span aria-label="Canal verificado">✓</span></a>
+              <a class="live-details__channel-name" href="https://www.youtube.com/@BRKsEDU" target="_blank" rel="noopener noreferrer">BRKsEDU <span aria-label="Canal verificado">✓</span></a>
               <p>Grand Theft Auto V <span>•</span> Roleplay</p>
             </div>
           </div>
@@ -142,6 +182,7 @@
   </main>
 
   <script src="js/menu.js" defer></script>
+  <script src="js/global.js" defer></script>
   <script src="js/live.js" defer></script>
 </body>
 </html>
