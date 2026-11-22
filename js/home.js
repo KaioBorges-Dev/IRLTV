@@ -16,7 +16,7 @@ document.querySelectorAll(".carousel-track").forEach((track) => {
     const link = document.createElement("a");
 
     link.className = cover.className;
-    link.href = "#live";
+    link.href = "live.html";
     link.setAttribute("aria-label", `Abrir live: ${title.textContent.trim()}`);
 
     while (cover.firstChild) {
