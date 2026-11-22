@@ -12,10 +12,11 @@
   const viewerCount = document.querySelector("#live-viewers");
 
   const isMobileViewport = window.matchMedia("(max-width: 700px), (hover: none)");
-  let isMuted = isMobileViewport.matches;
+  let isMuted = true;
+  let youtubePlayer = null;
 
-  // Celulares exigem mute inicial para permitir autoplay automático.
-  if (isMobileViewport.matches && iframe) {
+  // Autoplay confiável começa silenciado; o usuário pode ativar o som depois.
+  if (iframe) {
     iframe.src = iframe.src
       .replace("mute=0", "mute=1")
       .replace("playsinline=0", "playsinline=1");
@@ -94,6 +95,21 @@
 
   // Envia comandos para o player oficial do YouTube sem redirecionar o visitante.
   function sendPlayerCommand(command, args = []) {
+    if (youtubePlayer) {
+      if (command === "seekTo" && typeof youtubePlayer.seekTo === "function") {
+        youtubePlayer.seekTo(args[0] ?? 1380, args[1] ?? true);
+      } else if (command === "setVolume" && typeof youtubePlayer.setVolume === "function") {
+        youtubePlayer.setVolume(args[0] ?? 100);
+      } else if (command === "mute" && typeof youtubePlayer.mute === "function") {
+        youtubePlayer.mute();
+      } else if (command === "unMute" && typeof youtubePlayer.unMute === "function") {
+        youtubePlayer.unMute();
+      } else if (command === "playVideo" && typeof youtubePlayer.playVideo === "function") {
+        youtubePlayer.playVideo();
+      }
+      return;
+    }
+
     iframe?.contentWindow?.postMessage(
       JSON.stringify({ event: "command", func: command, args }),
       "*",
@@ -102,13 +118,52 @@
 
   // Busca o início aos 23 minutos e libera o vídeo assim que estiver pronto.
   function startLivePlayer() {
+    if (youtubePlayer?.playVideo) {
+      if (typeof youtubePlayer.seekTo === "function") {
+        youtubePlayer.seekTo(1380, true);
+      }
+      if (isMuted) {
+        youtubePlayer.mute();
+        youtubePlayer.setVolume(0);
+      } else {
+        youtubePlayer.unMute();
+        youtubePlayer.setVolume(100);
+      }
+      youtubePlayer.playVideo();
+      return;
+    }
+
     sendPlayerCommand("seekTo", [1380, true]);
-    sendPlayerCommand("setVolume", [100]);
     sendPlayerCommand(isMuted ? "mute" : "unMute");
+    sendPlayerCommand("setVolume", [isMuted ? 0 : 100]);
     sendPlayerCommand("playVideo");
   }
 
-  // Reinicia a reprodução assim que o player termina de carregar.
+  window.onYouTubeIframeAPIReady = () => {
+    if (!window.YT?.Player || !iframe) {
+      return;
+    }
+
+    youtubePlayer = new window.YT.Player("live-video", {
+      events: {
+        onReady: () => {
+          startLivePlayer();
+          window.setTimeout(startLivePlayer, 800);
+        },
+        onStateChange: (event) => {
+          if (event.data === window.YT.PlayerState.ENDED) {
+            youtubePlayer.seekTo(1380, true);
+            youtubePlayer.playVideo();
+          }
+        },
+      },
+    });
+  };
+
+  // Inicializa no carregamento da API e mantém um fallback para redes lentas.
+  if (window.YT?.Player) {
+    window.onYouTubeIframeAPIReady();
+  }
   iframe?.addEventListener("load", () => {
     window.setTimeout(startLivePlayer, 700);
   });
@@ -408,7 +463,7 @@
   [
     ["MilaGames", "Essa abertura já começou muito boa!"],
     ["TicoTactics", "Alguém perdeu o carro logo no início 😂"],
-    ["LunaCraft", "Salve, BRKsEDU! GTA V é outro nível"],
+    ["LunaCraft", "Salve, BRKsEDU! GTA VI é outro nível"],
     ["DudaPlay", "Esse roleplay está ficando insano"],
     ["ByteNinja", "Vamo pra mais uma missão!"],
   ].forEach(([name, text]) => addMessage(name, text));
