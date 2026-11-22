@@ -44,9 +44,10 @@
 .live-player__stage::before {
   content: "";
   position: absolute;
-  inset: 42% 0 0;
+  inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, transparent 0%, rgb(5 6 8 / 72%) 100%);
+  background:
+    linear-gradient(180deg, rgb(5 6 8 / 72%) 0%, transparent 18%, transparent 62%, rgb(5 6 8 / 78%) 100%);
   pointer-events: none;
 }
 
@@ -115,27 +116,208 @@
 
 /* Agrupa os controles personalizados no canto inferior direito. */
 .live-player__controls {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.5rem;
+}
+
+/* Mantem o seletor de volume preso ao botão correspondente. */
+.live-volume-control {
+  position: relative;
+  display: flex;
+}
+
+/* Apresenta volume e mute em uma barra compacta acima dos controles. */
+.live-volume-popover {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.65rem);
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 38px minmax(110px, 1fr) 44px;
+  align-items: center;
+  gap: 0.55rem;
+  width: 220px;
+  padding: 0.55rem;
+  color: var(--text);
+  background: rgb(5 6 8 / 94%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 12px;
+  box-shadow: 0 18px 38px rgb(0 0 0 / 38%);
+  backdrop-filter: blur(16px);
+}
+
+.live-volume-popover[hidden] {
+  display: none;
+}
+
+/* Cria o botão circular de mute dentro da barra de volume. */
+.live-volume-mute {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: var(--text);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 50%;
+}
+
+.live-volume-mute:hover,
+.live-volume-mute[aria-pressed="true"] {
+  color: var(--primary);
+  border-color: rgb(163 255 18 / 55%);
+}
+
+.live-volume-mute svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Personaliza o controle range com o verde e o vermelho da identidade. */
+.live-volume-popover input[type="range"] {
+  width: 100%;
+  height: 4px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Mostra o percentual atual ao lado do controle. */
+.live-volume-popover output {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Une a linha do tempo e os controles em uma única faixa inferior. */
+.live-player__bottom {
   position: absolute;
   right: 1.1rem;
   bottom: 1.1rem;
+  left: 1.1rem;
   z-index: 5;
-  display: flex;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  padding: 6px;
+  background: rgb(5 6 8 / 70%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 12px;
+  box-shadow: 0 14px 36px rgb(0 0 0 / 32%);
+  backdrop-filter: blur(14px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.live-player__bottom .live-control {
+  pointer-events: auto;
+}
+
+/* Exibe a linha do tempo e os controles somente enquanto o player recebe interação. */
+.live-player__stage.is-controls-visible .live-player__bottom {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Cria uma linha do tempo elegante que identifica claramente a transmissão ao vivo. */
+.live-timeline {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 58px;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 38px;
+  padding: 0.45rem 0.65rem;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* Mostra o tempo simulado da live em tipografia forte e compacta. */
+.live-timeline__time {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Representa visualmente o avanço contínuo da transmissão. */
+.live-timeline__track {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 18%);
+  border-radius: 999px;
+}
+
+/* Preenche a barra com a cor vermelha do estado ao vivo. */
+.live-timeline__progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--live), #ff7189);
+  border-radius: inherit;
+  box-shadow: 0 0 12px rgb(255 59 92 / 48%);
+  transition: width 1s linear;
+}
+
+/* Destaca o marcador LIVE no lado direito da linha do tempo. */
+.live-timeline__live {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.35rem;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* Mantém o ponto pulsante sincronizado com o indicador AO VIVO. */
+.live-timeline__live > span {
+  width: 7px;
+  height: 7px;
+  background: var(--live);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgb(255 59 92 / 75%);
+  animation: live-pulse 1.25s ease-in-out infinite;
 }
 
 /* Define o visual dos controles personalizados do player. */
 .live-control {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  min-height: 36px;
-  padding: 8px 10px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
   color: #fff;
-  background: rgb(5 6 8 / 82%);
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 7px;
+  background: rgb(5 6 8 / 88%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 50%;
   font-size: 0.75rem;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 22%);
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.live-control span {
+  display: none;
 }
 
 /* Destaca os controles ao receber foco ou quando o mouse passa sobre eles. */
@@ -143,7 +325,9 @@
 .live-control:focus-visible {
   color: var(--primary);
   border-color: var(--primary);
+  background: rgb(17 20 28 / 96%);
   outline: none;
+  transform: translateY(-2px);
 }
 
 /* Mantém os ícones dos controles com tamanho uniforme. */
@@ -244,6 +428,128 @@
   border-radius: 12px;
 }
 
+/* Organiza o painel de apoio logo abaixo das informações da live. */
+.live-support {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.7fr) minmax(260px, 1.3fr);
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1.15rem;
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgb(163 255 18 / 7%), transparent 44%),
+    var(--card);
+  border-color: rgb(163 255 18 / 18%);
+  box-shadow: 0 18px 44px rgb(0 0 0 / 18%);
+}
+
+.live-support__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.live-support__icon {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  color: var(--background);
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 24px rgb(163 255 18 / 24%);
+  font-size: 1.1rem;
+}
+
+.live-support__eyebrow {
+  margin-bottom: 0.25rem;
+  color: var(--primary);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.live-support__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.55rem;
+}
+
+.live-support__form label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.live-support__form input[type="text"] {
+  min-width: 0;
+  height: 42px;
+  padding: 0 0.75rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.live-support__form input[type="text"]:focus {
+  border-color: var(--primary);
+}
+
+.live-support__amounts {
+  display: flex;
+  grid-column: 1;
+  gap: 0.35rem;
+}
+
+.live-support__amounts button {
+  display: grid;
+  min-width: 64px;
+  min-height: 46px;
+  place-content: center;
+  gap: 0.05rem;
+  padding: 0.35rem 0.55rem;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  transition: 160ms ease;
+}
+
+.live-support__amounts button strong {
+  color: var(--text);
+  font-size: 0.78rem;
+}
+
+.live-support__amounts button.is-selected {
+  color: var(--background);
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px rgb(163 255 18 / 18%);
+  transform: translateY(-1px);
+}
+
+.live-support__amounts button.is-selected strong {
+  color: var(--background);
+}
+
+.live-support__submit {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  min-width: 118px;
+  color: var(--background);
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 9px;
+  font-weight: 800;
+}
+
 /* Define o tamanho do título da descrição. */
 .live-about h3 {
   margin-bottom: 0.45rem;
@@ -273,6 +579,106 @@
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+/* Apresenta os superchats em destaque sobre o canto do player. */
+.live-superchats {
+  position: absolute;
+  top: 4.8rem;
+  right: 1rem;
+  z-index: 7;
+  display: flex;
+  width: min(330px, calc(100% - 2rem));
+  flex-direction: column;
+  gap: 0.55rem;
+  pointer-events: none;
+}
+
+/* Define a aparência dos apoios enviados pela comunidade. */
+.live-superchat {
+  overflow: hidden;
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgb(163 255 18 / 20%), transparent 42%),
+    rgb(18 21 28 / 96%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 14px;
+  box-shadow: 0 18px 42px rgb(0 0 0 / 42%);
+  animation: superchat-in 220ms ease-out;
+  backdrop-filter: blur(14px);
+}
+
+.live-superchat.is-premium {
+  background:
+    linear-gradient(90deg, rgb(255 200 87 / 28%), transparent 48%),
+    rgb(18 21 28 / 96%);
+  border-color: rgb(255 200 87 / 42%);
+}
+
+.live-superchat.is-legendary {
+  background:
+    linear-gradient(135deg, rgb(255 200 87 / 32%), transparent 42%),
+    linear-gradient(315deg, rgb(163 255 18 / 18%), transparent 46%),
+    rgb(18 21 28 / 97%);
+  border-color: rgb(255 200 87 / 68%);
+  box-shadow: 0 18px 48px rgb(255 200 87 / 16%), 0 18px 42px rgb(0 0 0 / 42%);
+}
+
+/* Organiza nome, valor e mensagem dentro do apoio. */
+.live-superchat__header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 0.75rem 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.live-superchat__tier {
+  margin-left: auto;
+  padding: 0.22rem 0.42rem;
+  color: var(--primary);
+  background: rgb(163 255 18 / 10%);
+  border: 1px solid rgb(163 255 18 / 20%);
+  border-radius: 999px;
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.live-superchat.is-premium .live-superchat__tier,
+.live-superchat.is-legendary .live-superchat__tier {
+  color: #ffc857;
+  background: rgb(255 200 87 / 10%);
+  border-color: rgb(255 200 87 / 24%);
+}
+
+.live-superchat__amount {
+  color: var(--primary);
+}
+
+.live-superchat.is-premium .live-superchat__amount {
+  color: #ffc857;
+}
+
+.live-superchat p {
+  padding: 0 0.75rem 0.75rem;
+  color: var(--text);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* Anima a entrada do superchat no player. */
+@keyframes superchat-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 /* Mantém o chat fixado visualmente ao lado do player em telas altas. */
@@ -460,8 +866,26 @@
   }
 
   .live-player__controls {
+    justify-content: flex-end;
+  }
+
+  .live-player__bottom {
     right: 0.65rem;
     bottom: 0.65rem;
+    left: 0.65rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .live-timeline {
+    grid-template-columns: 46px minmax(0, 1fr) 52px;
+  }
+
+  .live-control {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    justify-content: center;
+    padding: 0;
   }
 
   .live-control span {
@@ -483,6 +907,126 @@
 
   .live-chat {
     height: 480px;
+  }
+
+  .live-support {
+    grid-template-columns: 1fr;
+  }
+
+  .live-support__form {
+    grid-template-columns: 1fr;
+  }
+
+  .live-support__amounts,
+  .live-support__submit {
+    grid-column: 1;
+  }
+
+  .live-support__submit {
+    grid-row: auto;
+    min-height: 42px;
+  }
+
+  .live-superchats {
+    top: 3.8rem;
+  }
+}
+
+/* Ajusta toda a faixa inferior quando o player entra em tela cheia. */
+.live-css-fullscreen {
+  overflow: hidden;
+}
+
+.live-player__stage.is-css-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  width: 100vw;
+  height: 100dvh;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: #050608;
+}
+
+.live-player__stage.is-css-fullscreen iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.live-player__stage.is-css-fullscreen .live-player__bottom {
+  position: fixed;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 12px;
+  z-index: 2147483647;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.live-player__stage.is-css-fullscreen .live-superchats {
+  position: fixed;
+  top: max(62px, env(safe-area-inset-top));
+  right: 12px;
+  z-index: 2147483647;
+  width: min(360px, calc(100vw - 24px));
+}
+
+.live-player__stage:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: #050608;
+}
+
+.live-player__stage:fullscreen iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.live-player__stage:fullscreen .live-player__bottom {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  z-index: 2147483647;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  justify-content: stretch;
+  padding: 8px;
+}
+
+.live-player__stage:fullscreen .live-timeline {
+  min-height: 44px;
+  grid-template-columns: 58px minmax(0, 1fr) 64px;
+  background: transparent;
+}
+
+.live-player__stage:fullscreen .live-superchats {
+  position: fixed;
+  top: 88px;
+  right: 32px;
+  width: min(420px, calc(100vw - 64px));
+}
+
+.live-player__stage:fullscreen .live-control {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* Mantém os controles compactos no modo tela cheia. */
+.live-player__stage:fullscreen .live-control span {
+  display: none;
+}
+
+/* Mantém os controles acessíveis em celulares e tablets sem dispositivo apontador. */
+@media (hover: none), (pointer: coarse) {
+  .live-player__bottom {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 }
 

@@ -1,0 +1,9 @@
+{
+  "name": "IRLTV",
+  "short_name": "IRLTV",
+  "start_url": "live.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0B0D12",
+  "theme_color": "#0B0D12"
+}

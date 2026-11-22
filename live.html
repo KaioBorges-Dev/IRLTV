@@ -2,7 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0D12">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
   <meta name="description" content="Assista ao canal BRKsEDU ao vivo na IRLTV.">
   <title>IRLTV | BRKsEDU ao vivo</title>
 
@@ -118,23 +123,43 @@
             <iframe
               id="live-video"
               title="Live de GTA V com BRKsEDU"
-              src="https://www.youtube-nocookie.com/embed/BG_y4qpQA-g?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=BG_y4qpQA-g&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;rel=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;enablejsapi=1"
+              src="https://www.youtube-nocookie.com/embed/BG_y4qpQA-g?autoplay=1&amp;mute=0&amp;start=1380&amp;loop=1&amp;playlist=BG_y4qpQA-g&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;rel=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;playsinline=1&amp;enablejsapi=1"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
             ></iframe>
 
             <span class="live-player__badge"><span aria-hidden="true"></span> AO VIVO</span>
             <span class="live-player__viewers" id="live-viewers">1.284 espectadores</span>
+            <div class="live-superchats" id="live-superchats" aria-live="polite"></div>
 
-            <div class="live-player__controls" aria-label="Controles da transmissão">
-              <button class="live-control" id="mute-control" type="button" aria-label="Ativar som" aria-pressed="true">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12a9 9 0 0 0-7-8.77ZM3 9v6h4l5 5V4L7 9H3Z"/></svg>
-                <span>Som</span>
-              </button>
-              <button class="live-control" id="fullscreen-control" type="button" aria-label="Ativar tela cheia">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3Zm-2-4h2V7h3V5H5v5Zm12 7h-3v2h5v-5h-2v3ZM14 5v2h3v3h2V5h-5Z"/></svg>
-                <span>Tela cheia</span>
-              </button>
+            <div class="live-player__bottom">
+              <div class="live-timeline" aria-label="Linha do tempo da transmissão">
+                <span class="live-timeline__time" id="live-time">23:00</span>
+                <div class="live-timeline__track" aria-hidden="true">
+                  <span class="live-timeline__progress" id="live-progress"></span>
+                </div>
+                <span class="live-timeline__live"><span aria-hidden="true"></span> LIVE</span>
+              </div>
+
+              <div class="live-player__controls" aria-label="Controles da transmissão">
+                <div class="live-volume-control">
+                  <button class="live-control" id="volume-control" type="button" aria-label="Ajustar volume" aria-expanded="false" aria-controls="volume-popover">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12a9 9 0 0 0-7-8.77ZM3 9v6h4l5 5V4L7 9H3Z"/></svg>
+                    <span>Volume</span>
+                  </button>
+                  <div class="live-volume-popover" id="volume-popover" hidden>
+                    <button class="live-volume-mute" id="mute-popover-control" type="button" aria-label="Silenciar" aria-pressed="false">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12a9 9 0 0 0-7-8.77ZM3 9v6h4l5 5V4L7 9H3Z"/></svg>
+                    </button>
+                    <input id="volume-range" type="range" min="0" max="100" value="100" aria-label="Volume da transmissão">
+                    <output id="volume-output" for="volume-range">100%</output>
+                  </div>
+                </div>
+                <button class="live-control" id="fullscreen-control" type="button" aria-label="Ativar tela cheia">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3Zm-2-4h2V7h3V5H5v5Zm12 7h-3v2h5v-5h-2v3ZM14 5v2h3v3h2V5h-5Z"/></svg>
+                  <span>Tela cheia</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
@@ -148,7 +173,7 @@
               <p>Grand Theft Auto V <span>•</span> Roleplay</p>
             </div>
           </div>
-          <button class="follow-button" id="follow-button" type="button" aria-pressed="false">Seguir</button>
+          <button class="follow-button" id="follow-button" type="button" aria-pressed="false">Assinar canal</button>
         </section>
 
         <section class="live-about card" aria-labelledby="live-about-title">
@@ -159,6 +184,37 @@
             <span>Roleplay</span>
             <span>PT-BR</span>
           </div>
+        </section>
+
+        <section class="live-support card" aria-labelledby="live-support-title">
+          <div class="live-support__heading">
+            <span class="live-support__icon" aria-hidden="true">★</span>
+            <div>
+              <p class="live-support__eyebrow">APOIE A LIVE</p>
+              <h3 id="live-support-title">Envie um superchat</h3>
+            </div>
+          </div>
+          <form class="live-support__form" id="support-form">
+            <label for="support-message">Sua mensagem</label>
+            <input id="support-message" name="support-message" type="text" maxlength="100" placeholder="Escreva uma mensagem..." required>
+            <div class="live-support__amounts" aria-label="Escolha o valor">
+              <button type="button" class="is-selected" data-support-amount="5" data-support-tier="Apoiador">
+                <span>Apoiador</span><strong>R$ 5</strong>
+              </button>
+              <button type="button" data-support-amount="10" data-support-tier="Premium">
+                <span>Premium</span><strong>R$ 10</strong>
+              </button>
+              <button type="button" data-support-amount="25" data-support-tier="Super fã">
+                <span>Super fã</span><strong>R$ 25</strong>
+              </button>
+              <button type="button" data-support-amount="50" data-support-tier="Lenda">
+                <span>Lenda</span><strong>R$ 50</strong>
+              </button>
+            </div>
+            <input id="support-amount" name="support-amount" type="hidden" value="5">
+            <input id="support-tier" name="support-tier" type="hidden" value="Apoiador">
+            <button class="live-support__submit" type="submit">Enviar apoio</button>
+          </form>
         </section>
       </div>
 
