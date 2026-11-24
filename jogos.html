@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore games populares e descubra transmissões na IRLTV.">
+  <title>IRLTV | Games</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/jogos.css">
+</head>
+<body>
+  <aside class="sidebar" id="main-sidebar" aria-label="Menu principal">
+    <a class="sidebar__brand" href="index.html#inicio" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
+
+    <nav class="sidebar__nav" aria-label="Navegação principal">
+      <a class="sidebar__link" href="index.html#inicio">Início</a>
+      <a class="sidebar__link" href="index.html#lista-lives">Explorar lives</a>
+      <a class="sidebar__link is-active" href="#jogos" aria-current="page">Games</a>
+      <a class="sidebar__link" href="index.html#categorias">Categorias</a>
+    </nav>
+
+    <section class="sidebar__live" aria-labelledby="sidebar-live-title">
+      <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
+      <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="LunaCraft">
+            <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="ByteNinja">
+            <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="PixelMila">
+            <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="NekoRush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="sidebar__all-channels" href="index.html#canais">Ver todos os canais</a>
+    </section>
+    <div class="sidebar__account-actions">
+      <a class="topbar__action sidebar__account-link" href="index.html#entrar">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="index.html#cadastro">Cadastrar</a>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-controls="main-sidebar"
+      aria-expanded="false"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <h1 class="topbar__title">Games</h1>
+    <form class="channel-search" role="search">
+      <label class="visually-hidden" for="game-search">Buscar games por nome ou gênero</label>
+      <input
+        class="channel-search__input"
+        id="game-search"
+        name="game"
+        type="search"
+        placeholder="Buscar games..."
+        autocomplete="off"
+        aria-controls="games-grid"
+      >
+      <button class="channel-search__button" type="submit" aria-label="Buscar games">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+    <a class="topbar__mobile-brand" href="index.html#inicio" aria-label="IRLTV - página inicial">
+      IRL<strong>TV</strong>
+    </a>
+    <div class="topbar__actions">
+      <a class="topbar__action topbar__auth-link" href="index.html#entrar">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="index.html#cadastro">Cadastrar</a>
+    </div>
+  </header>
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" hidden></button>
+
+  <main class="page-content" id="jogos">
+    <section class="games-hero card" aria-labelledby="games-title">
+      <div class="games-hero__content">
+        <p class="hero__eyebrow">DESCUBRA SEU PRÓXIMO JOGO</p>
+        <h2 id="games-title">Encontre jogos e acompanhe quem está jogando.</h2>
+        <p>Explore títulos populares da comunidade IRLTV e escolha o que assistir.</p>
+        <a class="btn-primary" href="#lista-jogos">Ver todos os jogos</a>
+      </div>
+    </section>
+
+    <section class="games-section" id="lista-jogos" aria-labelledby="games-list-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-heading__eyebrow">O QUE ESTÁ EM ALTA</p>
+          <h2 id="games-list-title">Games populares</h2>
+        </div>
+        <p class="games-total">10 games</p>
+      </div>
+
+      <div class="games-toolbar">
+        <p class="games-results" id="game-results" aria-live="polite">10 jogos encontrados</p>
+      </div>
+
+      <div class="games-grid" id="games-grid">
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg"
+            alt="Arte oficial de League of Legends com a campeã Ahri"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>League of Legends</h3>
+            <p>MOBA <span>•</span> Estratégia em equipe</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222670/library_600x900.jpg"
+            alt="Capa oficial de The Sims 4"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>The Sims 4</h3>
+            <p>Simulação <span>•</span> Criatividade</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmvpko1451jk407ogh9sqvg8k"
+            alt="Arte oficial de Fortnite publicada no site do jogo"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Fortnite</h3>
+            <p>Battle Royale <span>•</span> Ação</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://act-webstatic.hoyoverse.com/puzzle/hk4e/pz_c6XZYm0GKS/resource/puzzle/2026/10/19/d138d1ad3bf6f5240eb726ed2ac3d4b0_1292059728731863742.mp4?x-oss-process=video/snapshot,t_1,f_jpg,m_fast"
+            alt="Arte oficial de Genshin Impact com personagens do jogo"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Genshin Impact</h3>
+            <p>RPG <span>•</span> Aventura</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/library_600x900.jpg"
+            alt="Capa oficial de Counter-Strike 2"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Counter-Strike 2</h3>
+            <p>FPS <span>•</span> Competitivo</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/library_600x900.jpg"
+            alt="Capa oficial de Rocket League"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Rocket League</h3>
+            <p>Esportes <span>•</span> Corrida e futebol</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/library_600x900.jpg"
+            alt="Capa oficial de Apex Legends"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Apex Legends</h3>
+            <p>Battle Royale <span>•</span> FPS</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570/library_600x900.jpg"
+            alt="Capa oficial de Dota 2"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Dota 2</h3>
+            <p>MOBA <span>•</span> Estratégia</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/library_600x900.jpg"
+            alt="Capa oficial de Elden Ring"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Elden Ring</h3>
+            <p>RPG <span>•</span> Ação</p>
+          </div>
+        </article>
+
+        <article class="card game-card">
+          <img
+            class="game-card__image"
+            src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/library_600x900.jpg"
+            alt="Capa oficial de Hollow Knight"
+            loading="lazy"
+          >
+          <div class="game-card__info">
+            <h3>Hollow Knight</h3>
+            <p>Ação <span>•</span> Metroidvania</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="games-empty" id="games-empty" hidden>Nenhum jogo encontrado. Tente outro nome ou gênero.</p>
+    </section>
+  </main>
+
+  <script src="js/global.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/jogos.js"></script>
+</body>
+</html>
