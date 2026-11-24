@@ -1,0 +1,1153 @@
+/* =========================================================
+   ESTILOS EXCLUSIVOS DA PÁGINA INICIAL DA IRLTV
+   ========================================================= */
+
+/* Cria espaço vertical entre os blocos da página inicial. */
+.home-section {
+  margin: 2rem 0 3rem; /* Separa visualmente as seções. */
+}
+
+/* Dá destaque visual ao banner principal da página. */
+.hero {
+  display: flex; /* Organiza o conteúdo do banner. */
+  align-items: center; /* Centraliza o conteúdo na altura do banner. */
+  min-height: 280px; /* Mantém uma altura confortável para a chamada. */
+  padding: clamp(1.5rem, 5vw, 3.5rem); /* Adapta o espaço interno à tela. */
+  background-color: #171b24; /* Mantém uma cor de fallback enquanto a arte carrega. */
+  background-image: linear-gradient(90deg, rgb(17 21 29 / 94%) 0%, rgb(17 21 29 / 76%) 42%, rgb(17 21 29 / 18%) 100%), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg"); /* Mistura o degradê translúcido com a arte oficial de League of Legends. */
+  background-position: center, right 20% center; /* Mantém o texto à esquerda e a arte visível à direita. */
+  background-size: cover, cover; /* Preenche o banner com o degradê e a imagem. */
+  background-repeat: no-repeat; /* Evita repetição da arte dentro do banner. */
+}
+
+/* Limita a largura do texto do banner para facilitar a leitura. */
+.hero__content {
+  max-width: 620px; /* Evita linhas de texto muito extensas. */
+}
+
+/* Apresenta a chamada curta acima do título do banner. */
+.hero__eyebrow,
+.section-heading__eyebrow {
+  margin-bottom: 0.4rem; /* Separa o rótulo do título. */
+  color: var(--primary); /* Usa o verde da identidade da IRLTV. */
+  font-size: 0.75rem; /* Mantém o rótulo discreto. */
+  font-weight: 700; /* Reforça a hierarquia do rótulo. */
+  letter-spacing: 0.12em; /* Diferencia visualmente o texto auxiliar. */
+}
+
+/* Define o tamanho do título principal do banner. */
+.hero h2 {
+  margin-bottom: 0.75rem; /* Cria espaço antes da descrição. */
+  font-size: clamp(2rem, 4vw, 3rem); /* Ajusta o título ao espaço disponível. */
+  line-height: 1.05; /* Mantém o título compacto. */
+}
+
+/* Organiza o texto e a ação dentro do banner. */
+.hero__content > p:not(.hero__eyebrow) {
+  max-width: 540px; /* Controla o comprimento das linhas da descrição. */
+  margin-bottom: 1.25rem; /* Separa a descrição do botão. */
+  color: var(--text-secondary); /* Diferencia a descrição do título. */
+  line-height: 1.65; /* Melhora a leitura do parágrafo. */
+}
+
+/* Realça o botão principal quando o ponteiro passa sobre ele. */
+.btn-primary:hover {
+  filter: brightness(1.08); /* Dá retorno visual sem precisar de JavaScript. */
+}
+
+/* Alinha o título e o link de ação de cada seção. */
+.section-heading {
+  display: flex; /* Coloca os elementos do cabeçalho na mesma linha. */
+  align-items: end; /* Alinha os links à base dos títulos. */
+  justify-content: space-between; /* Mantém o link de ação no lado oposto. */
+  gap: 1rem; /* Evita que os elementos encostem em telas estreitas. */
+  margin-bottom: 1rem; /* Separa o cabeçalho dos cards. */
+}
+
+/* Define o tamanho e o espaçamento dos títulos das seções. */
+.section-heading h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem); /* Ajusta o título para telas diferentes. */
+  line-height: 1.1; /* Evita espaço excessivo entre linhas. */
+}
+
+/* Destaca os links de ação dos cabeçalhos. */
+.section-heading > a {
+  flex: 0 0 auto; /* Evita que o link seja comprimido. */
+  color: var(--primary); /* Usa a cor principal nos links. */
+  font-size: 0.9rem; /* Mantém o link secundário ao título. */
+}
+
+/* Transforma as faixas de lives e games em carrosséis horizontais. */
+.carousel-track {
+  display: flex; /* Coloca cada card lado a lado. */
+  gap: 1rem; /* Mantém espaço uniforme entre os cards. */
+  overflow-x: auto; /* Permite avançar pelos cards horizontalmente. */
+  overflow-y: hidden; /* Evita uma segunda barra de rolagem na vertical. */
+  padding: 0.25rem 0.25rem 1rem; /* Reserva espaço para foco e barra de rolagem. */
+  scroll-behavior: smooth; /* Anima o movimento dos links de navegação. */
+  scroll-padding-inline: 0.25rem; /* Mantém o card alinhado com o início da faixa. */
+  scroll-snap-type: x mandatory; /* Faz cada card parar alinhado após a rolagem. */
+  scrollbar-color: var(--primary) var(--surface); /* Personaliza a barra em navegadores compatíveis. */
+  scrollbar-width: thin; /* Deixa a barra de rolagem menos intrusiva. */
+  overscroll-behavior-x: contain; /* Mantém a rolagem dentro do carrossel. */
+}
+
+/* Personaliza a barra horizontal nos navegadores baseados em WebKit. */
+.carousel-track::-webkit-scrollbar {
+  height: 8px; /* Define a espessura da barra. */
+}
+
+/* Define a parte móvel da barra horizontal nos navegadores WebKit. */
+.carousel-track::-webkit-scrollbar-thumb {
+  background: var(--primary); /* Usa o verde principal na barra. */
+  border: 2px solid var(--surface); /* Separa a barra visualmente do trilho. */
+  border-radius: 999px; /* Arredonda as extremidades da barra. */
+}
+
+/* Estiliza o trilho da barra horizontal nos navegadores WebKit. */
+.carousel-track::-webkit-scrollbar-track {
+  background: var(--surface); /* Mantém o trilho no tom dos menus. */
+  border-radius: 999px; /* Arredonda o trilho da barra. */
+}
+
+/* Mantém cada card como um slide individual do carrossel. */
+.carousel-track .live-card {
+  position: relative; /* Serve de referência para os controles do slide. */
+  display: flex; /* Permite posicionar a informação e os controles no card. */
+  flex: 0 0 min(82%, 340px); /* Exibe o próximo card parcialmente como indicação de rolagem. */
+  flex-direction: column; /* Empilha capa e informações. */
+  min-width: 0; /* Impede que o texto force a largura do card. */
+  overflow: hidden; /* Mantém capas e conteúdo dentro das bordas arredondadas. */
+  scroll-snap-align: start; /* Alinha o slide ao início do carrossel. */
+  scroll-margin-inline: 0.25rem; /* Evita que o alvo da seta encoste na borda. */
+  scroll-margin-block: 6rem; /* Evita que o cabeçalho fixo cubra o slide. */
+}
+
+/* Indica que toda a área dos cards pode ser usada para abrir seu destino. */
+.live-card {
+  cursor: pointer;
+}
+
+/* Cria uma grade própria para os cards de streamers, sem misturá-los aos carrosséis. */
+#canais .lives-grid:not(.carousel-track) {
+  display: grid; /* Organiza os perfis em colunas independentes. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); /* Adapta a quantidade de colunas à largura disponível. */
+  gap: 1rem; /* Mantém espaço entre os perfis. */
+}
+
+/* Define o enquadramento comum das capas de lives e games. */
+.live-card__link,
+.live-card > .live-card__image {
+  position: relative; /* Cria referência para o selo de transmissão. */
+  display: block; /* Faz a imagem ocupar a largura do card. */
+  overflow: hidden; /* Recorta a imagem nos limites definidos. */
+}
+
+/* Define dimensões consistentes para as miniaturas dos cards. */
+.live-card__image {
+  width: 100%; /* Faz a capa acompanhar a largura do card. */
+  height: 190px; /* Mantém a mesma área visual para cada miniatura. */
+  object-fit: cover; /* Recorta imagens em formatos diferentes sem distorcê-las. */
+  background: var(--surface); /* Preenche a área enquanto a imagem carrega. */
+}
+
+/* Apresenta o selo de transmissão sobre a capa da live. */
+.live-card__status {
+  position: absolute; /* Sobrepõe o selo à miniatura. */
+  top: 0.75rem; /* Afasta o selo do topo da capa. */
+  left: 0.75rem; /* Afasta o selo da borda esquerda da capa. */
+  z-index: 1; /* Mantém o selo visível acima da imagem. */
+  padding: 0.35rem 0.6rem; /* Cria uma área de leitura confortável. */
+  color: #fff; /* Mantém o texto do selo legível. */
+  background: var(--live); /* Usa a cor de transmissão ao vivo da identidade. */
+  border-radius: 5px; /* Arredonda os cantos do selo. */
+  font-size: 0.72rem; /* Mantém o selo compacto. */
+  font-weight: 800; /* Reforça a leitura do estado ao vivo. */
+  letter-spacing: 0.04em; /* Separa as letras do selo. */
+  animation: live-pulse 1.25s ease-in-out infinite; /* Faz os selos AO VIVO pulsarem. */
+}
+
+/* Organiza título, canal e categoria dentro de cada card. */
+.live-card__info {
+  flex: 1 1 auto; /* Mantém o espaço de texto flexível. */
+  padding: 1rem 1rem 4rem; /* Reserva uma área inferior para as setas. */
+}
+
+/* Define a hierarquia dos títulos nos cards. */
+.live-card__info h3 {
+  margin-bottom: 0.35rem; /* Separa o título dos detalhes do canal. */
+  font-size: 1.2rem; /* Destaca o nome da live ou do game. */
+  line-height: 1.2; /* Mantém títulos em várias linhas compactos. */
+}
+
+/* Apresenta as informações secundárias dos cards. */
+.live-card__streamer,
+.live-card__category {
+  color: var(--text-secondary); /* Diferencia os detalhes dos títulos. */
+  font-size: 0.85rem; /* Mantém os detalhes em nível secundário. */
+  line-height: 1.5; /* Facilita a leitura das informações. */
+}
+
+/* Separa a categoria dos dados de audiência. */
+.live-card__category span {
+  padding-inline: 0.25rem; /* Dá respiro ao separador entre informações. */
+}
+
+/* Posiciona as setas de cada carrossel dentro do card correspondente. */
+.carousel-arrows {
+  position: absolute; /* Mantém as setas presas ao próprio slide. */
+  right: 0.75rem; /* Alinha os controles à direita do card. */
+  bottom: 0.75rem; /* Alinha os controles à base do card. */
+  z-index: 2; /* Mantém as setas acima do conteúdo do card. */
+  display: flex; /* Agrupa as setas lado a lado. */
+  gap: 0.5rem; /* Separa os alvos clicáveis. */
+}
+
+/* Cria botões de navegação grandes e acessíveis para cada faixa. */
+.carousel-arrow {
+  display: inline-flex; /* Centraliza o símbolo dentro do alvo clicável. */
+  align-items: center; /* Centraliza verticalmente o símbolo. */
+  justify-content: center; /* Centraliza horizontalmente o símbolo. */
+  width: 2.5rem; /* Oferece uma área clicável confortável. */
+  height: 2.5rem; /* Mantém o botão quadrado. */
+  color: var(--text); /* Mantém o símbolo legível. */
+  background: var(--surface); /* Destaca o controle sobre o card. */
+  border: 1px solid var(--border); /* Delimita o botão no fundo escuro. */
+  border-radius: 50%; /* Dá aparência de seta circular. */
+  font-size: 1.6rem; /* Torna os símbolos fáceis de reconhecer. */
+  line-height: 1; /* Evita deslocamento vertical do símbolo. */
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease; /* Suaviza o estado de interação. */
+}
+
+/* Realça as setas quando o ponteiro passa sobre elas. */
+.carousel-arrow:hover {
+  color: var(--background); /* Aumenta o contraste do símbolo no estado ativo. */
+  background: var(--primary); /* Usa o verde para indicar interação. */
+  border-color: var(--primary); /* Mantém a borda alinhada ao fundo ativo. */
+}
+
+/* Mostra um contorno visível ao navegar pelos controles usando o teclado. */
+.carousel-arrow:focus-visible,
+.section-heading a:focus-visible,
+.category-card:focus-visible {
+  outline: 2px solid var(--primary); /* Indica qual link está focado. */
+  outline-offset: 3px; /* Mantém o contorno separado do controle. */
+}
+
+/* Aplica espaçamento e alinhamento aos perfis de streamer. */
+#canais .live-card__info {
+  min-height: 190px; /* Mantém consistência visual entre os perfis. */
+}
+
+/* Define o recorte das fotos de perfil dos streamers. */
+#canais .live-card__info img {
+  display: block; /* Coloca a foto em sua própria linha. */
+  width: 72px; /* Mantém o tamanho compacto do avatar. */
+  height: 72px; /* Mantém o avatar quadrado. */
+  margin-bottom: 0.75rem; /* Separa o avatar do nome do streamer. */
+  border-radius: 50%; /* Recorta a foto como um círculo. */
+  object-fit: cover; /* Preenche o círculo sem distorcer a foto. */
+}
+
+/* Organiza as categorias populares em uma grade adaptável. */
+.category-list {
+  display: grid; /* Coloca as categorias em colunas. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); /* Adapta as categorias ao espaço disponível. */
+  gap: 0.75rem; /* Mantém espaço uniforme entre as categorias. */
+}
+
+/* Estiliza cada atalho de categoria. */
+.category-card {
+  display: flex; /* Facilita o alinhamento do texto. */
+  align-items: center; /* Centraliza o texto verticalmente. */
+  min-height: 64px; /* Cria um alvo confortável para clique ou toque. */
+  padding: 1rem; /* Separa o texto das bordas do card. */
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease; /* Suaviza os estados de interação. */
+}
+
+/* Destaca uma categoria quando o usuário interage com ela. */
+.category-card:hover {
+  color: var(--primary); /* Realça o texto da categoria. */
+  border-color: var(--primary); /* Realça a borda da categoria. */
+  background: var(--surface); /* Diferencia o card do fundo da página. */
+}
+
+/* Define o ritmo da animação dos selos AO VIVO. */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1; /* Mantém o selo totalmente visível nos extremos. */
+    box-shadow: 0 0 0 0 rgb(255 59 92 / 45%); /* Inicia e termina sem halo externo. */
+  }
+
+  50% {
+    opacity: 0.72; /* Suaviza a luminosidade no meio do pulso. */
+    box-shadow: 0 0 0 7px rgb(255 59 92 / 0%); /* Expande o halo até desaparecer. */
+  }
+}
+
+/* Reduz movimentos para quem indicou preferência por menos animações. */
+@media (prefers-reduced-motion: reduce) {
+  .live-card__status {
+    animation: none; /* Respeita a preferência de movimento reduzido do sistema. */
+  }
+
+  .carousel-track {
+    scroll-behavior: auto; /* Remove a animação de rolagem suave. */
+  }
+}
+
+/* Ajusta os carrosséis e cabeçalhos em telas pequenas. */
+@media (max-width: 700px) {
+  .home-section {
+    margin: 1.5rem 0 2.25rem; /* Reduz o espaço vertical em celulares. */
+  }
+
+  .hero {
+    min-height: 280px; /* Reserva espaço para a chamada e a arte no celular. */
+    background-position: center, 64% center; /* Reenquadra a arte ao estreitar o banner. */
+    background-image: linear-gradient(90deg, rgb(17 21 29 / 92%) 0%, rgb(17 21 29 / 66%) 55%, rgb(17 21 29 / 30%) 100%), url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg"); /* Preserva contraste no texto e deixa a arte aparecer no celular. */
+  }
+
+  .carousel-track .live-card {
+    flex-basis: min(84%, 320px); /* Deixa parte do próximo slide à vista. */
+  }
+
+  .live-card__image {
+    height: 175px; /* Reduz a altura das capas em telas estreitas. */
+  }
+
+  .section-heading {
+    align-items: start; /* Evita desalinhamento com títulos em várias linhas. */
+  }
+
+  .section-heading > a {
+    font-size: 0.8rem; /* Mantém o link de ação dentro do cabeçalho. */
+  }
+}
+
+/* Exibe três slides por vez em telas largas, mantendo a rolagem lateral. */
+@media (min-width: 1100px) {
+  .carousel-track .live-card {
+    flex-basis: calc((100% - 2rem) / 3); /* Divide o espaço entre três cards e dois intervalos. */
+  }
+}
+
+/* Acrescenta transparência e desfoque ao menu e à barra superior. */
+.sidebar,
+.topbar {
+  background: rgb(17 20 28 / 76%); /* Deixa as camadas de fundo parcialmente visíveis. */
+  border-color: rgb(255 255 255 / 10%); /* Suaviza as divisórias da interface. */
+  -webkit-backdrop-filter: blur(18px); /* Ativa o desfoque de vidro em navegadores WebKit. */
+  backdrop-filter: blur(18px); /* Desfoca o conteúdo que passa por trás das barras. */
+}
+
+/* Aplica o mesmo efeito translúcido aos cards da página inicial. */
+.hero,
+.live-card,
+.category-card {
+  background-color: rgb(23 27 36 / 72%); /* Usa uma superfície translúcida para o glassmorphism. */
+  border-color: rgb(255 255 255 / 12%); /* Cria a borda clara típica das superfícies de vidro. */
+  box-shadow: 0 16px 38px rgb(0 0 0 / 18%); /* Dá profundidade sem esconder o conteúdo. */
+  -webkit-backdrop-filter: blur(16px); /* Mantém o efeito compatível com navegadores WebKit. */
+  backdrop-filter: blur(16px); /* Suaviza o fundo visível através do card. */
+}
+
+/* Evita uma camada opaca sobre a arte para integrar a imagem ao próprio hero. */
+.hero {
+  background-color: rgb(17 21 29 / 18%); /* Deixa a imagem aparecer sob o degradê translúcido. */
+  -webkit-backdrop-filter: none; /* Evita desfocar a arte dentro do banner. */
+  backdrop-filter: none; /* Mantém a imagem nítida e integrada ao card. */
+}
+
+/* Define o contêiner usado para posicionar as setas nas extremidades do carrossel. */
+.carousel-shell {
+  position: relative; /* Torna o carrossel a referência das setas laterais. */
+  isolation: isolate; /* Mantém o desfoque dos controles dentro da própria faixa. */
+}
+
+/* Deixa a faixa navegável por botões e gesto, sem exibir a barra de rolagem. */
+.carousel-track {
+  position: relative; /* Mantém os cards como referência previsível para a navegação. */
+  overflow-x: auto; /* Permite que os controles movam os cards horizontalmente. */
+  padding: 0.5rem 3rem 1rem; /* Reserva espaço nas laterais para os botões. */
+  scroll-padding-inline: 3rem; /* Alinha cada card longe das setas. */
+  scroll-snap-type: none; /* Deixa as setas posicionarem cada slide sem interferência do encaixe nativo. */
+  scrollbar-width: none; /* Esconde a barra no Firefox. */
+  -ms-overflow-style: none; /* Esconde a barra nas versões antigas do Edge. */
+}
+
+/* Esconde a barra de rolagem no Chrome, Safari e navegadores derivados. */
+.carousel-track::-webkit-scrollbar {
+  display: none; /* Mantém a faixa limpa, sem trilho visível. */
+}
+
+/* Deixa a imagem da live e o título com aparência consistente como links. */
+.live-card__link,
+.live-card__info h3 a,
+.live-card__streamer a,
+#canais .live-card__info h3 a {
+  color: inherit; /* Mantém as cores definidas pelo card. */
+  text-decoration: none; /* Evita sublinhados que destoam do design dos cards. */
+}
+
+/* Mostra que o título e o nome do streamer são links interativos. */
+.live-card__info h3 a:hover,
+.live-card__streamer a:hover,
+#canais .live-card__info h3 a:hover {
+  color: var(--primary); /* Realça o link com a cor da marca. */
+}
+
+/* Coloca um contorno acessível nos links do card ao usar o teclado. */
+.live-card__link:focus-visible,
+.live-card__info a:focus-visible,
+.sidebar__channel-link:focus-visible,
+.sidebar__all-channels:focus-visible {
+  outline: 2px solid var(--primary); /* Indica claramente o elemento em foco. */
+  outline-offset: 3px; /* Mantém o contorno afastado do conteúdo. */
+}
+
+/* Posiciona os botões de navegação nas extremidades da faixa de cards. */
+.carousel-control {
+  position: absolute; /* Sobrepõe a seta ao limite lateral do carrossel. */
+  top: 50%; /* Centraliza o botão na altura dos cards. */
+  z-index: 4; /* Mantém o botão acima das imagens e do conteúdo. */
+  display: inline-flex; /* Centraliza o símbolo no alvo clicável. */
+  align-items: center; /* Centraliza verticalmente o símbolo. */
+  justify-content: center; /* Centraliza horizontalmente o símbolo. */
+  width: 3rem; /* Garante uma área confortável para clique ou toque. */
+  height: 3rem; /* Mantém o botão circular. */
+  padding: 0; /* Evita que o estilo nativo desalinhe o símbolo. */
+  color: var(--text); /* Mantém a seta com contraste sobre o vidro. */
+  background: rgb(17 20 28 / 68%); /* Deixa o fundo da seta translúcido. */
+  border: 1px solid rgb(255 255 255 / 20%); /* Delimita o controle com uma linha suave. */
+  border-radius: 50%; /* Dá forma circular aos controles laterais. */
+  box-shadow: 0 8px 24px rgb(0 0 0 / 28%); /* Faz o botão sobressair da capa. */
+  -webkit-backdrop-filter: blur(14px); /* Desfoca a imagem atrás do controle em WebKit. */
+  backdrop-filter: blur(14px); /* Cria o acabamento de vidro fosco no botão. */
+  font: inherit; /* Mantém a tipografia consistente com a página. */
+  font-size: 2rem; /* Deixa a seta fácil de identificar. */
+  line-height: 1; /* Evita deslocamento vertical do caractere. */
+  cursor: pointer; /* Indica que o botão pode ser acionado. */
+  transform: translateY(-50%); /* Centraliza o botão no ponto definido pelo topo. */
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease; /* Suaviza o retorno visual ao interagir. */
+}
+
+/* Posiciona a seta anterior na extremidade esquerda da faixa. */
+.carousel-control--previous {
+  left: 0.25rem; /* Alinha o botão ao lado esquerdo do contêiner. */
+}
+
+/* Posiciona a seta seguinte na extremidade direita da faixa. */
+.carousel-control--next {
+  right: 0.25rem; /* Alinha o botão ao lado direito do contêiner. */
+}
+
+/* Realça o botão lateral quando ele recebe o ponteiro. */
+.carousel-control:hover {
+  color: var(--background); /* Aumenta o contraste da seta ao interagir. */
+  background: rgb(163 255 18 / 88%); /* Usa o verde da marca com transparência. */
+  border-color: var(--primary); /* Reforça a borda no estado ativo. */
+  box-shadow: 0 0 24px rgb(163 255 18 / 28%); /* Acrescenta brilho sutil ao botão ativo. */
+}
+
+/* Mostra um contorno evidente ao navegar pelas setas com o teclado. */
+.carousel-control:focus-visible {
+  outline: 3px solid var(--primary); /* Deixa visível o foco do teclado. */
+  outline-offset: 4px; /* Separa o contorno do botão de vidro. */
+}
+
+/* Ajusta a largura dos cards para exibir três por vez em telas grandes. */
+@media (min-width: 1100px) {
+  .carousel-track .live-card {
+    flex-basis: calc((100% - 3rem) / 3); /* Reserva espaço para três slides e os intervalos entre eles. */
+  }
+}
+
+/* Estiliza o bloco de canais exibido abaixo da navegação lateral. */
+.sidebar__live {
+  margin-top: 2rem; /* Separa a lista de canais dos links principais. */
+  padding-top: 1.25rem; /* Cria espaço acima do título dos canais. */
+  border-top: 1px solid rgb(255 255 255 / 12%); /* Separa visualmente as duas áreas do menu. */
+}
+
+/* Destaca o título da lista de canais ao vivo. */
+.sidebar__live-title {
+  margin: 0 8px 0.75rem; /* Alinha o título com os links do menu. */
+  color: var(--text-secondary); /* Mantém o título secundário à marca. */
+  font-size: 0.75rem; /* Ajusta o título ao espaço compacto do menu. */
+  font-weight: 700; /* Reforça a leitura do rótulo. */
+  letter-spacing: 0.1em; /* Diferencia o título dos nomes de canal. */
+  text-transform: uppercase; /* Apresenta o título como rótulo de seção. */
+}
+
+/* Remove os marcadores e organiza os canais em uma lista vertical. */
+.sidebar__live-list {
+  display: grid; /* Empilha os canais com espaçamento regular. */
+  gap: 0.35rem; /* Evita que os itens encostem uns nos outros. */
+  margin: 0; /* Remove a margem padrão da lista. */
+  padding: 0; /* Remove o recuo padrão da lista. */
+  list-style: none; /* Oculta os marcadores da lista. */
+}
+
+/* Alinha avatar, nome, jogo e indicador de transmissão de cada canal. */
+.sidebar__channel-link {
+  display: flex; /* Organiza todos os elementos em uma linha. */
+  align-items: center; /* Centraliza o conteúdo na altura do avatar. */
+  gap: 0.65rem; /* Separa o avatar das informações do canal. */
+  min-width: 0; /* Permite truncar textos maiores que o menu. */
+  padding: 0.45rem 0.5rem; /* Cria uma área confortável para clicar. */
+  color: var(--text-secondary); /* Diferencia detalhes secundários dos títulos. */
+  border: 1px solid transparent; /* Reserva espaço para a borda de interação. */
+  border-radius: 12px; /* Arredonda o item como um card de vidro. */
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease; /* Suaviza o estado de interação. */
+}
+
+/* Realça o canal lateral quando o usuário aponta ou seleciona o link. */
+.sidebar__channel-link:hover {
+  color: var(--text); /* Aumenta o contraste do canal ativo. */
+  background: rgb(255 255 255 / 7%); /* Aplica uma película de vidro no item. */
+  border-color: rgb(255 255 255 / 12%); /* Delimita o item ao passar o ponteiro. */
+}
+
+/* Define o recorte circular dos avatares no menu lateral. */
+.sidebar__channel-link > img {
+  flex: 0 0 40px; /* Mantém a foto com tamanho estável. */
+  width: 40px; /* Define a largura do avatar. */
+  height: 40px; /* Define a altura do avatar. */
+  border: 1px solid rgb(255 255 255 / 18%); /* Separa a foto do fundo translúcido. */
+  border-radius: 50%; /* Recorta o avatar em círculo. */
+  object-fit: cover; /* Preenche o avatar sem deformar a imagem. */
+}
+
+/* Empilha o nome e a categoria de cada canal. */
+.sidebar__channel-copy {
+  display: grid; /* Mantém nome e jogo em linhas distintas. */
+  flex: 1 1 auto; /* Ocupa o espaço restante ao lado do avatar. */
+  min-width: 0; /* Permite cortar nomes de jogos extensos. */
+  gap: 0.1rem; /* Mantém as duas linhas próximas. */
+}
+
+/* Define o estilo do nome do canal no menu lateral. */
+.sidebar__channel-copy strong {
+  overflow: hidden; /* Impede nomes longos de expandirem o menu. */
+  color: var(--text); /* Destaca o nome do canal. */
+  font-size: 0.78rem; /* Adapta o nome à largura da barra lateral. */
+  text-overflow: ellipsis; /* Indica texto cortado com reticências. */
+  white-space: nowrap; /* Mantém cada nome em uma só linha. */
+}
+
+/* Define o estilo do jogo transmitido por cada canal. */
+.sidebar__channel-copy small {
+  overflow: hidden; /* Evita que o jogo expanda a largura do menu. */
+  color: var(--text-secondary); /* Mantém a categoria em nível secundário. */
+  font-size: 0.68rem; /* Ajusta a categoria ao espaço disponível. */
+  text-overflow: ellipsis; /* Indica nomes de jogo truncados. */
+  white-space: nowrap; /* Mantém a categoria em uma só linha. */
+}
+
+/* Sinaliza visualmente que o canal está transmitindo. */
+.sidebar__live-dot {
+  flex: 0 0 8px; /* Mantém o indicador em tamanho compacto. */
+  width: 8px; /* Define a largura do ponto de transmissão. */
+  height: 8px; /* Define a altura do ponto de transmissão. */
+  background: var(--live); /* Usa o vermelho da identidade para o estado ao vivo. */
+  border-radius: 50%; /* Desenha o indicador como um ponto. */
+  box-shadow: 0 0 12px rgb(255 59 92 / 65%); /* Dá brilho ao estado de transmissão. */
+}
+
+/* Destaca o atalho para acessar a lista completa de canais. */
+.sidebar__all-channels {
+  display: inline-block; /* Mantém o link abaixo da lista. */
+  margin: 0.75rem 0.5rem 0; /* Alinha o link com os itens de canal. */
+  color: var(--primary); /* Reaproveita a cor principal nos atalhos. */
+  font-size: 0.78rem; /* Mantém o atalho compacto. */
+}
+
+/* Mantém os alvos de navegação visíveis abaixo das barras fixas. */
+#canais,
+#lista-lives,
+#jogos {
+  scroll-margin-top: 6rem; /* Evita que o cabeçalho cubra a seção vinculada. */
+}
+
+/* Adapta a lista de canais e as setas a telas estreitas. */
+@media (max-width: 700px) {
+  .sidebar__live {
+    margin-top: 0.85rem; /* Reduz o intervalo no menu empilhado do celular. */
+    padding-top: 0.75rem; /* Compacta a lista de canais em telas pequenas. */
+  }
+
+  .sidebar__live-list {
+    grid-auto-columns: minmax(155px, 1fr); /* Dá largura mínima útil a cada canal. */
+    grid-auto-flow: column; /* Exibe os canais lado a lado no menu estreito. */
+    overflow-x: auto; /* Permite percorrer a lista de canais em celular. */
+    padding-bottom: 0.25rem; /* Evita cortar os cantos das fotos na rolagem. */
+    scrollbar-width: none; /* Mantém a lista compacta no Firefox. */
+  }
+
+  .sidebar__live-list::-webkit-scrollbar {
+    display: none; /* Esconde a barra horizontal no menu em navegadores WebKit. */
+  }
+
+  .carousel-track {
+    padding-inline: 2.5rem; /* Mantém os cards afastados das setas no celular. */
+    scroll-padding-inline: 2.5rem; /* Alinha os slides longe dos controles laterais. */
+  }
+
+  .carousel-control {
+    width: 2.5rem; /* Mantém os botões confortáveis sem ocupar muito espaço. */
+    height: 2.5rem; /* Preserva o formato circular no celular. */
+  }
+
+  .carousel-control--previous {
+    left: 0; /* Encosta a seta esquerda no limite do carrossel. */
+  }
+
+  .carousel-control--next {
+    right: 0; /* Encosta a seta direita no limite do carrossel. */
+  }
+}
+
+/* Preserva a transparência legível quando o dispositivo reduz os efeitos visuais. */
+@media (prefers-reduced-transparency: reduce) {
+  .sidebar,
+  .topbar,
+  .hero,
+  .live-card,
+  .category-card,
+  .carousel-control {
+    background-color: var(--surface); /* Reforça o fundo quando a transparência é reduzida. */
+    -webkit-backdrop-filter: none; /* Desliga o desfoque em dispositivos com essa preferência. */
+    backdrop-filter: none; /* Mantém o conteúdo legível sem vidro translúcido. */
+  }
+}
+
+/* Esconde visualmente os rótulos que continuam disponíveis para leitores de tela. */
+.visually-hidden {
+  position: absolute; /* Retira o rótulo do fluxo normal do formulário. */
+  width: 1px; /* Reduz o rótulo a um ponto visualmente imperceptível. */
+  height: 1px; /* Mantém a técnica de ocultação em uma área mínima. */
+  padding: 0; /* Remove espaço interno que poderia tornar o rótulo visível. */
+  overflow: hidden; /* Oculta o texto fora da área mínima. */
+  clip: rect(0, 0, 0, 0); /* Esconde o rótulo em navegadores que usam recorte clássico. */
+  white-space: nowrap; /* Impede que o texto ocupe mais de uma linha. */
+  border: 0; /* Remove qualquer borda da área de acessibilidade. */
+  clip-path: inset(50%); /* Oculta o rótulo em navegadores modernos. */
+}
+
+/* Organiza o campo e o botão de pesquisa dentro da barra superior. */
+.channel-search {
+  display: flex; /* Mantém o campo e a lupa na mesma linha. */
+  align-items: center; /* Centraliza os controles verticalmente. */
+  width: min(100%, 360px); /* Limita o tamanho da busca em telas largas. */
+  min-width: min(250px, 48vw); /* Mantém o campo utilizável em telas médias. */
+  padding: 0.25rem; /* Cria uma moldura interna para a busca de vidro. */
+  background: rgb(255 255 255 / 5%); /* Deixa a superfície da busca translúcida. */
+  border: 1px solid rgb(255 255 255 / 12%); /* Delimita o campo sem pesar visualmente. */
+  border-radius: 12px; /* Arredonda a moldura para combinar com o glassmorphism. */
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%); /* Adiciona reflexo sutil na parte superior. */
+  -webkit-backdrop-filter: blur(14px); /* Desfoca o fundo da busca em navegadores WebKit. */
+  backdrop-filter: blur(14px); /* Cria a superfície de vidro fosco da busca. */
+}
+
+/* Divide o topo em áreas simétricas para centralizar a busca no desktop. */
+.topbar {
+  display: grid; /* Reserva colunas equilibradas ao título, busca e ações. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(360px, 34vw)) minmax(0, 1fr); /* Centraliza a busca sem deslocá-la pelos controles laterais. */
+  column-gap: 1rem; /* Evita que a busca encoste no título ou nos botões. */
+}
+
+/* Mantém a busca preenchendo a coluna central do cabeçalho. */
+.topbar > .channel-search {
+  width: 100%; /* Usa toda a largura reservada à busca central. */
+  min-width: 0; /* Permite que a busca se adapte a telas intermediárias. */
+  justify-self: center; /* Alinha o formulário exatamente ao centro da barra. */
+}
+
+/* Alinha o título e os botões às extremidades do cabeçalho em grade. */
+.topbar > .topbar__title {
+  grid-column: 1; /* Mantém o título na coluna esquerda. */
+}
+
+.topbar > .topbar__actions {
+  grid-column: 3; /* Mantém as ações na coluna direita. */
+  justify-self: end; /* Encosta as ações no limite direito do cabeçalho. */
+}
+
+/* Oculta a marca compacta fora do cabeçalho móvel. */
+.topbar__mobile-brand {
+  display: none; /* Evita exibir uma segunda marca no desktop. */
+}
+
+/* Compacta os controles para manter a busca central sem sobreposição em notebooks estreitos. */
+@media (min-width: 701px) and (max-width: 900px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 150px) minmax(0, 1fr); /* Reserva centro fixo e áreas laterais simétricas. */
+    column-gap: 8px; /* Reduz o intervalo entre a busca e os controles laterais. */
+    padding-inline: 16px; /* Libera espaço útil no cabeçalho estreito. */
+  }
+
+  .topbar > .topbar__actions {
+    gap: 4px; /* Diminui o espaço entre entrar e cadastrar. */
+  }
+
+  .topbar .topbar__auth-link {
+    min-height: 38px; /* Mantém uma área de toque adequada em telas menores. */
+    padding: 0.25rem 0.25rem; /* Reduz a largura dos botões do cabeçalho. */
+    font-size: 0.7rem; /* Ajusta os rótulos sem escondê-los. */
+  }
+}
+
+/* Equilibra busca e ações em desktops compactos, mantendo a busca no centro exato. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 200px) minmax(0, 1fr); /* Evita que a busca encoste nos botões laterais. */
+    column-gap: 12px; /* Reserva espaço entre o campo e as outras áreas. */
+    padding-inline: 20px; /* Aproveita melhor a largura da barra. */
+  }
+
+  .topbar > .topbar__actions {
+    gap: 6px; /* Compacta a distância entre as ações da conta. */
+  }
+
+  .topbar .topbar__auth-link {
+    min-height: 38px; /* Preserva um alvo de interação adequado. */
+    padding: 0.35rem 0.45rem; /* Ajusta a largura dos botões a telas menores. */
+    font-size: 0.75rem; /* Mantém os dois rótulos legíveis. */
+  }
+}
+
+/* Permite que o campo ocupe o espaço disponível ao lado do botão. */
+.channel-search__input {
+  flex: 1 1 auto; /* Expande o campo dentro do formulário. */
+  width: 100%; /* Preenche a largura restante do formulário. */
+  min-width: 0; /* Impede que o texto expanda a barra superior. */
+  padding: 0.65rem 0.8rem; /* Cria uma área confortável para digitar. */
+  color: var(--text); /* Mantém o texto digitado legível. */
+  background: transparent; /* Deixa aparecer o fundo translúcido do formulário. */
+  border: 0; /* Remove a borda padrão do navegador. */
+  outline: 0; /* Usa o contorno de foco customizado do formulário. */
+  font: inherit; /* Mantém a tipografia consistente com o site. */
+}
+
+/* Mantém o texto auxiliar do campo com contraste adequado. */
+.channel-search__input::placeholder {
+  color: var(--text-secondary); /* Diferencia a dica do texto pesquisado. */
+  opacity: 1; /* Evita que o navegador deixe a dica clara demais. */
+}
+
+/* Realça toda a busca quando o campo ou botão recebe foco. */
+.channel-search:focus-within {
+  border-color: rgb(163 255 18 / 70%); /* Indica que a busca está ativa. */
+  box-shadow: 0 0 0 3px rgb(163 255 18 / 12%); /* Destaca o foco sem esconder o campo. */
+}
+
+/* Define o botão da lupa como um alvo simples e acessível. */
+.channel-search__button {
+  display: inline-flex; /* Centraliza a lupa no botão. */
+  flex: 0 0 40px; /* Mantém um alvo de toque estável. */
+  align-items: center; /* Centraliza verticalmente a lupa. */
+  justify-content: center; /* Centraliza horizontalmente a lupa. */
+  width: 40px; /* Define a largura do botão de busca. */
+  height: 40px; /* Define a altura do botão de busca. */
+  color: var(--primary); /* Destaca a lupa com a cor da marca. */
+  background: rgb(163 255 18 / 10%); /* Aplica uma película verde translúcida. */
+  border: 1px solid rgb(163 255 18 / 18%); /* Delimita o botão sem interromper o visual de vidro. */
+  border-radius: 9px; /* Arredonda os cantos do botão. */
+  font: inherit; /* Mantém o botão integrado à tipografia existente. */
+  font-size: 1.65rem; /* Deixa o ícone reconhecível sem imagem externa. */
+  line-height: 1; /* Centraliza a lupa no botão. */
+  cursor: pointer; /* Indica que o botão executa a busca. */
+  transition: color 160ms ease, background-color 160ms ease; /* Suaviza o estado de interação. */
+}
+
+/* Realça a lupa quando o usuário aponta para o botão. */
+.channel-search__button:hover {
+  color: var(--background); /* Aumenta o contraste do ícone ativo. */
+  background: var(--primary); /* Preenche o botão com a cor principal. */
+}
+
+/* Mantém os links de autenticação alinhados com a busca na barra superior. */
+.topbar__auth-link {
+  flex: 0 0 auto; /* Evita que os botões sejam comprimidos junto ao campo. */
+  min-height: 42px; /* Alinha os links à altura do campo de pesquisa. */
+  padding: 0.65rem 1rem; /* Cria uma área confortável para clique ou toque. */
+  white-space: nowrap; /* Mantém cada rótulo em uma única linha. */
+}
+
+/* Dá mais destaque à ação principal de criar uma conta. */
+.topbar__auth-link--signup {
+  display: inline-flex; /* Centraliza o texto do botão verde. */
+  align-items: center; /* Centraliza verticalmente o rótulo. */
+  justify-content: center; /* Centraliza horizontalmente o rótulo. */
+  border: 1px solid var(--primary); /* Delimita o botão sem perder o destaque. */
+}
+
+/* Alinha o contador de resultados ao lado do título da seção de canais. */
+.channel-search__results {
+  min-height: 1.25rem; /* Evita que o cabeçalho mude de altura após pesquisar. */
+  color: var(--text-secondary); /* Apresenta a contagem como informação auxiliar. */
+  font-size: 0.82rem; /* Mantém a contagem menor que o título. */
+  text-align: right; /* Mantém o resultado alinhado ao canto do cabeçalho. */
+}
+
+/* Apresenta uma mensagem explícita quando a busca não encontra canais. */
+.channel-search__empty {
+  margin-top: 1rem; /* Separa a mensagem da grade de resultados. */
+  padding: 1rem; /* Cria respiro em torno da mensagem. */
+  color: var(--text-secondary); /* Mantém a mensagem informativa em nível secundário. */
+  background: rgb(255 255 255 / 4%); /* Mantém o estado vazio integrado ao vidro. */
+  border: 1px solid rgb(255 255 255 / 10%); /* Delimita a mensagem de estado vazio. */
+  border-radius: 12px; /* Arredonda a mensagem como os demais cards. */
+}
+
+/* Faz os perfis de canais parecerem uma coleção compacta e uniforme. */
+#canais .channel-card {
+  min-height: 142px; /* Evita áreas vazias exageradas dentro dos perfis. */
+  border-radius: 16px; /* Dá aos cartões um contorno mais refinado. */
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; /* Suaviza o destaque do perfil. */
+}
+
+/* Realça o perfil sem deslocá-lo demais da grade. */
+#canais .channel-card:hover {
+  transform: translateY(-3px); /* Dá profundidade sutil ao perfil em foco. */
+  border-color: rgb(163 255 18 / 35%); /* Marca o perfil ativo com o verde da marca. */
+  box-shadow: 0 18px 42px rgb(0 0 0 / 28%), 0 0 22px rgb(163 255 18 / 7%); /* Reforça a superfície de vidro ao interagir. */
+}
+
+/* Alinha a foto, o nome e os detalhes em duas colunas compactas. */
+#canais .channel-card .live-card__info {
+  display: grid; /* Organiza a foto ao lado das informações do streamer. */
+  grid-template-columns: 58px minmax(0, 1fr); /* Reserva uma coluna fixa para o avatar. */
+  align-content: center; /* Centraliza o conteúdo dentro do cartão. */
+  column-gap: 0.9rem; /* Separa a foto das informações textuais. */
+  min-height: 142px; /* Mantém o conteúdo centralizado em todos os perfis. */
+  padding: 1rem; /* Remove o espaço vazio antigo e organiza o cartão. */
+}
+
+/* Faz a foto de perfil ocupar as linhas de texto do cartão. */
+#canais .channel-card .live-card__info img {
+  grid-column: 1; /* Mantém o avatar na coluna esquerda. */
+  grid-row: 1 / span 3; /* Alinha o avatar com nome, resumo e categoria. */
+  align-self: center; /* Centraliza a foto verticalmente. */
+  width: 58px; /* Dá ao avatar um tamanho proporcional à grade refinada. */
+  height: 58px; /* Mantém o avatar perfeitamente circular. */
+  margin: 0; /* Remove o espaço inferior da regra geral de avatar. */
+  border: 2px solid rgb(255 255 255 / 18%); /* Separa a foto do fundo de vidro. */
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 4%); /* Cria um aro discreto ao redor da foto. */
+}
+
+/* Posiciona o nome do canal ao lado da foto e destaca seu link. */
+#canais .channel-card .live-card__info h3 {
+  grid-column: 2; /* Mantém o nome na coluna de texto. */
+  align-self: end; /* Alinha o título com a parte superior do avatar. */
+  margin: 0 0 0.2rem; /* Aproxima o nome da descrição. */
+  font-size: 1.1rem; /* Destaca o nome sem fazê-lo dominar o cartão. */
+}
+
+/* Posiciona a descrição do canal na segunda linha do cartão. */
+#canais .channel-card .live-card__info .live-card__streamer {
+  grid-column: 2; /* Alinha a descrição com o nome do canal. */
+  align-self: center; /* Centraliza a descrição entre título e categoria. */
+  font-size: 0.78rem; /* Mantém a descrição compacta. */
+}
+
+/* Apresenta o jogo como uma etiqueta logo abaixo da descrição. */
+#canais .channel-card .live-card__info .live-card__category {
+  grid-column: 2; /* Mantém o jogo alinhado com os outros textos. */
+  justify-self: start; /* Evita que a etiqueta ocupe toda a largura do perfil. */
+  margin-top: 0.35rem; /* Separa a etiqueta da descrição. */
+  padding: 0.2rem 0.55rem; /* Cria espaço interno de etiqueta. */
+  color: var(--primary); /* Associa o jogo ao destaque da marca. */
+  background: rgb(163 255 18 / 8%); /* Mantém a etiqueta translúcida. */
+  border: 1px solid rgb(163 255 18 / 14%); /* Delimita a etiqueta sem pesar no cartão. */
+  border-radius: 999px; /* Apresenta a categoria como um chip. */
+  font-size: 0.68rem; /* Ajusta o chip ao texto de categoria. */
+}
+
+/* Remove os cards de canais que não correspondem à busca ativa. */
+.channel-card[hidden] {
+  display: none; /* Garante que a grade não reserve espaço para resultados ocultos. */
+}
+
+/* Ajusta a busca e a grade de perfis em telas estreitas. */
+@media (max-width: 700px) {
+  .channel-search {
+    width: min(100%, 560px); /* Centraliza a busca e limita sua largura em telas grandes. */
+    min-width: 0; /* Evita ultrapassar a largura do cabeçalho. */
+    margin-inline: auto; /* Mantém a caixa de busca alinhada ao centro. */
+  }
+
+  .topbar__actions {
+    display: none; /* Oculta o contêiner de ações de desktop no cabeçalho móvel. */
+  }
+
+  .channel-search {
+    grid-column: 1 / -1; /* Usa toda a linha abaixo do título e do hambúrguer. */
+    grid-row: 2; /* Mantém a busca na segunda linha do topo móvel. */
+  }
+
+  .topbar__auth-link {
+    display: none; /* Move as ações de conta para dentro do menu hambúrguer no celular. */
+  }
+
+  .section-heading {
+    flex-wrap: wrap; /* Permite que a contagem passe para a linha seguinte. */
+  }
+
+  .channel-search__results {
+    width: 100%; /* Dá uma linha própria à contagem em telas estreitas. */
+    text-align: left; /* Alinha a contagem com o título da seção. */
+  }
+}
+
+/* Esconde o controle de menu em telas que já exibem a navegação lateral. */
+.menu-toggle,
+.sidebar__close {
+  display: none; /* Mantém os controles móveis fora do layout desktop. */
+}
+
+/* Mantém os atalhos de conta apenas no painel móvel da navegação. */
+.sidebar__account-actions {
+  display: none; /* Evita duplicar os botões que já aparecem no cabeçalho desktop. */
+}
+
+/* Prepara a camada escura que acompanha a abertura do menu lateral. */
+.menu-backdrop {
+  position: fixed; /* Mantém o fundo cobrindo a tela durante a rolagem. */
+  inset: 0; /* Estende o fundo por toda a janela. */
+  z-index: 30; /* Posiciona o fundo entre o conteúdo e o menu. */
+  display: block; /* Permite que o botão ocupe toda a tela ao ser exibido. */
+  padding: 0; /* Evita espaços internos no fundo clicável. */
+  background: rgb(4 6 10 / 68%); /* Escurece o conteúdo atrás do menu. */
+  border: 0; /* Remove a borda padrão do botão. */
+  cursor: pointer; /* Indica que tocar fora do painel fecha o menu. */
+  opacity: 1; /* Deixa o fundo totalmente visível quando aberto. */
+  backdrop-filter: blur(5px); /* Suaviza o conteúdo sob a camada translúcida. */
+  transition: opacity 220ms ease; /* Suaviza a entrada e saída do fundo. */
+}
+
+/* Impede que o atributo hidden seja sobrescrito pelo display do backdrop. */
+.menu-backdrop[hidden] {
+  display: none; /* Retira a camada do layout e da interação quando fechada. */
+}
+
+/* Converte o menu e a barra superior em um painel deslizante no celular. */
+@media (max-width: 700px) {
+  .sidebar {
+    position: fixed; /* Retira o menu do fluxo e fixa o painel na janela. */
+    inset: 0 auto 0 0; /* Ancora o painel nas bordas esquerda, superior e inferior. */
+    z-index: 40; /* Mantém o painel acima do fundo escurecido. */
+    width: min(84vw, 320px); /* Limita a largura e preserva espaço para o fundo. */
+    height: 100vh; /* Oferece fallback para navegadores sem unidades dinâmicas. */
+    height: 100dvh; /* Acompanha a altura visível em celulares com barras móveis. */
+    padding: 24px 16px; /* Mantém espaço para os links e os canais no painel. */
+    overflow-y: auto; /* Permite acessar todos os canais em telas baixas. */
+    background: rgb(17 21 29 / 94%); /* Aplica uma superfície escura translúcida. */
+    border-right: 1px solid rgb(255 255 255 / 12%); /* Define o limite do painel. */
+    border-bottom: 0; /* Remove a borda da antiga navegação em linha. */
+    box-shadow: 20px 0 60px rgb(0 0 0 / 35%); /* Separa visualmente o painel do fundo. */
+    backdrop-filter: blur(18px); /* Completa o efeito de vidro fosco do menu. */
+    transform: translateX(-105%); /* Mantém o painel fora da tela quando fechado. */
+    visibility: hidden; /* Retira links ocultos da navegação por teclado e leitores de tela. */
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 260ms; /* Anima o painel e oculta sua acessibilidade ao terminar. */
+    will-change: transform; /* Prepara o navegador para animar o painel. */
+  }
+
+  /* Desliza o menu para dentro da tela quando o script ativa o estado aberto. */
+  body.menu-open .sidebar {
+    transform: translateX(0); /* Mostra o painel sem alterar sua posição fixa. */
+    visibility: visible; /* Permite acessar os links assim que o painel começa a abrir. */
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s; /* Torna os links visíveis durante a animação de entrada. */
+  }
+
+  /* Mantém o nome da plataforma com espaçamento apropriado no painel móvel. */
+  .sidebar__brand {
+    margin: 0 44px 24px 8px; /* Reserva espaço para o botão de fechar. */
+  }
+
+  /* Oferece um controle visível para fechar o painel além do botão hambúrguer. */
+  .sidebar__close {
+    position: absolute; /* Fixa o controle no canto superior do painel. */
+    top: 20px; /* Afasta o controle da borda superior. */
+    right: 16px; /* Afasta o controle da borda direita. */
+    display: inline-flex; /* Centraliza o símbolo dentro do botão. */
+    align-items: center; /* Centraliza verticalmente o símbolo. */
+    justify-content: center; /* Centraliza horizontalmente o símbolo. */
+    width: 40px; /* Define uma área de toque confortável. */
+    height: 40px; /* Mantém o botão quadrado. */
+    color: var(--text); /* Mantém o símbolo legível no painel escuro. */
+    background: rgb(255 255 255 / 7%); /* Integra o botão à superfície de vidro. */
+    border: 1px solid rgb(255 255 255 / 12%); /* Delimita o botão sem alto contraste. */
+    border-radius: 12px; /* Harmoniza o botão com os cartões da página. */
+    font: inherit; /* Mantém a tipografia consistente com o projeto. */
+    font-size: 1.6rem; /* Deixa o símbolo de fechar fácil de identificar. */
+    cursor: pointer; /* Indica que o botão é interativo. */
+  }
+
+  /* Empilha os links para facilitar a navegação por toque. */
+  .sidebar__nav {
+    flex-direction: column; /* Restaura a lista vertical no painel móvel. */
+    gap: 6px; /* Mantém separação entre as opções do menu. */
+    overflow: visible; /* Evita uma segunda rolagem dentro do painel. */
+  }
+
+  /* Exibe entrar e cadastrar no menu lateral apenas em telas móveis. */
+  .sidebar__account-actions {
+    display: grid; /* Organiza as ações da conta lado a lado no painel. */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Divide a largura igualmente entre as ações. */
+    gap: 0.55rem; /* Separa os botões sem ocupar espaço excessivo. */
+    margin: 0.85rem 0 0.25rem; /* Afasta as ações da navegação principal. */
+  }
+
+  /* Mantém as duas ações com alvos de toque confortáveis. */
+  .sidebar__account-link {
+    display: inline-flex; /* Centraliza o rótulo dentro do botão. */
+    align-items: center; /* Centraliza o texto verticalmente. */
+    justify-content: center; /* Centraliza o texto horizontalmente. */
+    min-width: 0; /* Permite que os botões se ajustem a painéis estreitos. */
+    min-height: 44px; /* Mantém uma área de toque acessível. */
+    padding: 0.55rem 0.4rem; /* Deixa respiro ao redor do texto. */
+    font-size: 0.82rem; /* Ajusta o texto ao espaço do menu móvel. */
+    text-align: center; /* Centraliza rótulos que eventualmente quebrem linha. */
+  }
+
+  /* Realça a ação de cadastro como botão principal dentro do menu. */
+  .sidebar__account-link--signup {
+    border: 1px solid var(--primary); /* Mantém o destaque verde da ação principal. */
+  }
+
+  /* Permite que cada link ocupe a largura útil do painel lateral. */
+  .sidebar__link {
+    flex: 0 0 auto; /* Evita comprimir o texto dos links. */
+    min-height: 46px; /* Amplia a área de toque no celular. */
+    padding: 10px 12px; /* Mantém o texto afastado das bordas. */
+    font-size: 0.95rem; /* Restaura o tamanho confortável de leitura. */
+  }
+
+  /* Posiciona o fundo escurecido acima da página e abaixo do painel. */
+  .menu-backdrop {
+    z-index: 30; /* Mantém a camada atrás da navegação deslizante. */
+  }
+
+  /* Organiza o botão de menu e o título na primeira linha do cabeçalho móvel. */
+  .topbar {
+    position: sticky; /* Mantém os controles acessíveis durante a rolagem. */
+    top: 0; /* Define explicitamente o limite superior da barra fixa. */
+    inset-inline: 0; /* Remove o deslocamento lateral reservado ao menu desktop. */
+    display: grid; /* Cria linhas próprias para título e ações. */
+    grid-template-columns: 42px minmax(0, 1fr) 48px; /* Reserva o menu à esquerda, busca no meio e marca à direita. */
+    gap: 8px; /* Separa a busca dos controles laterais. */
+    min-height: 0; /* Permite que a barra cresça conforme suas linhas. */
+    padding: 10px 16px 12px; /* Mantém os controles dentro da área segura. */
+    transform: translateY(0); /* Mantém o cabeçalho visível no início da página. */
+    transition: transform 220ms ease; /* Anima a saída e o retorno ao rolar. */
+    will-change: transform; /* Prepara a animação do cabeçalho durante a rolagem. */
+  }
+
+  /* Esconde o cabeçalho ao rolar para baixo e revela-o ao rolar para cima. */
+  .topbar.is-hidden {
+    transform: translateY(calc(-100% - 2px)); /* Move menu e busca para fora da área visível. */
+  }
+
+  /* Exibe o botão hambúrguer como acionador do painel móvel. */
+  .menu-toggle {
+    display: inline-flex; /* Mostra o botão apenas dentro deste breakpoint. */
+    grid-column: 1; /* Mantém o botão do menu à esquerda da busca. */
+    grid-row: 1; /* Alinha o botão com a busca e a marca. */
+    flex-direction: column; /* Empilha as três linhas do ícone. */
+    align-items: center; /* Centraliza as linhas horizontalmente. */
+    justify-content: center; /* Centraliza as linhas verticalmente. */
+    gap: 5px; /* Separa as linhas para formar o ícone hambúrguer. */
+    width: 42px; /* Define uma área de toque acessível. */
+    height: 42px; /* Mantém o botão quadrado. */
+    padding: 0; /* Evita deslocar o ícone dentro do botão. */
+    color: var(--text); /* Herda o tom claro usado no cabeçalho. */
+    background: rgb(255 255 255 / 6%); /* Integra o botão ao visual de vidro. */
+    border: 1px solid var(--border); /* Delimita o acionador no fundo escuro. */
+    border-radius: 12px; /* Harmoniza o botão com os cartões da página. */
+    cursor: pointer; /* Indica que o acionador pode ser clicado. */
+  }
+
+  /* Desenha cada linha do símbolo do menu com dimensões consistentes. */
+  .menu-toggle span {
+    display: block; /* Faz cada linha ocupar sua própria faixa. */
+    width: 18px; /* Mantém o ícone compacto e centralizado. */
+    height: 2px; /* Define a espessura das linhas do ícone. */
+    background: currentColor; /* Usa a cor de texto definida no botão. */
+    border-radius: 999px; /* Arredonda as extremidades do ícone. */
+  }
+
+  /* Destaca o controle acionado para quem navega com teclado. */
+  .menu-toggle:focus-visible,
+  .sidebar__close:focus-visible {
+    outline: 2px solid var(--primary); /* Exibe um indicador de foco bem visível. */
+    outline-offset: 3px; /* Afasta o foco da borda do botão. */
+  }
+
+  /* Coloca o título ao lado do acionador de menu. */
+  .topbar__title {
+    display: none; /* Remove o título redundante para dar espaço à busca no celular. */
+  }
+
+  /* Centraliza o campo entre o menu e a marca sem causar rolagem horizontal. */
+  .channel-search {
+    width: min(100%, 560px); /* Deixa a busca larga no celular e limitada em tablets. */
+    min-width: 0; /* Impede o formulário de ultrapassar a janela estreita. */
+    margin: 0; /* Mantém a busca alinhada à primeira coluna. */
+    grid-column: 2; /* Ocupa o espaço flexível entre menu e marca. */
+    grid-row: 1; /* Alinha busca e botão hambúrguer na mesma linha. */
+  }
+
+  /* Exibe a marca IRLTV à direita da busca no cabeçalho móvel. */
+  .topbar__mobile-brand {
+    display: inline-flex; /* Alinha os segmentos do logotipo dentro do espaço compacto. */
+    grid-column: 3; /* Posiciona a marca à direita do campo de pesquisa. */
+    grid-row: 1; /* Mantém marca, busca e menu na mesma linha. */
+    align-items: center; /* Centraliza verticalmente os caracteres da marca. */
+    justify-content: center; /* Centraliza a marca na coluna reservada. */
+    min-width: 0; /* Evita que a marca force a largura do cabeçalho. */
+    color: var(--text); /* Mantém a parte principal da marca legível. */
+    font-family: var(--font-heading); /* Reaproveita a tipografia visual da marca. */
+    font-size: 0.9rem; /* Ajusta o logotipo ao tamanho do cabeçalho móvel. */
+    font-weight: 800; /* Dá à marca o peso de um ícone de identidade. */
+    letter-spacing: -0.06em; /* Mantém o conjunto compacto junto à busca. */
+    white-space: nowrap; /* Impede que o logotipo quebre em duas linhas. */
+  }
+
+  /* Destaca a sigla TV com a cor principal da plataforma. */
+  .topbar__mobile-brand strong {
+    color: var(--primary); /* Reutiliza o verde da identidade IRLTV. */
+    font-weight: 900; /* Dá ênfase à parte final do logotipo. */
+  }
+
+  /* Indica foco de teclado na marca usada como atalho para o início. */
+  .topbar__mobile-brand:focus-visible {
+    outline: 2px solid var(--primary); /* Mantém visível o foco de navegação. */
+    outline-offset: 3px; /* Afasta o foco da marca. */
+    border-radius: 4px; /* Arredonda o contorno sem alterar o layout. */
+  }
+}
+
+/* Remove os controles móveis da acessibilidade visual em telas desktop. */
+@media (min-width: 701px) {
+  .menu-backdrop[hidden] {
+    display: none; /* Garante que o fundo não interfira na navegação desktop. */
+  }
+}
+
+/* Evita animações do painel para pessoas que preferem movimento reduzido. */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar {
+    transition: none; /* Abre e fecha o painel sem movimento animado. */
+  }
+
+  .topbar {
+    transition: none; /* Esconde e revela o cabeçalho sem animação. */
+  }
+
+  .menu-backdrop {
+    transition: none; /* Remove a transição visual do fundo escurecido. */
+  }
+}

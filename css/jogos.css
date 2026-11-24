@@ -1,0 +1,150 @@
+/* Organiza o conteúdo exclusivo da página de jogos. */
+.games-hero {
+  display: flex;
+  align-items: center;
+  min-height: 270px;
+  margin-bottom: 2rem;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  background-color: var(--card);
+  background-image:
+    linear-gradient(90deg, rgb(11 13 18 / 94%) 0%, rgb(11 13 18 / 72%) 52%, rgb(11 13 18 / 20%) 100%),
+    url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/library_hero.jpg");
+  background-position: center, right center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Mantém a chamada do banner legível sobre a imagem de fundo. */
+.games-hero__content {
+  max-width: 620px;
+}
+
+.games-hero h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.games-hero__content > p:not(.hero__eyebrow) {
+  max-width: 540px;
+  margin-bottom: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Separa a grade do banner e dos controles de busca. */
+.games-section {
+  margin: 2rem 0 3rem;
+}
+
+.games-total {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Alinha a contagem de resultados antes da grade. */
+.games-toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.games-results {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Exibe as dez capas em uma grade que se adapta à largura da tela. */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 1rem;
+}
+
+.game-card {
+  min-width: 0;
+  overflow: hidden;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.game-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.game-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background: var(--surface);
+}
+
+.game-card__info {
+  padding: 0.85rem 1rem 1rem;
+}
+
+.game-card__info h3 {
+  margin-bottom: 0.35rem;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.game-card__info p {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.game-card__info p span {
+  padding-inline: 0.2rem;
+}
+
+.games-empty {
+  padding: 1.5rem 0;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.game-card[hidden] {
+  display: none;
+}
+
+/* Ajusta o banner e os controles para telas pequenas. */
+@media (max-width: 700px) {
+  .games-hero {
+    min-height: 280px;
+    margin-bottom: 1.5rem;
+    background-position: center, 65% center;
+  }
+
+  .games-section {
+    margin: 1.5rem 0 2.25rem;
+  }
+
+  .games-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .game-card__info {
+    padding: 0.75rem;
+  }
+
+  .game-card__info h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Evita animações quando a pessoa prefere movimento reduzido. */
+@media (prefers-reduced-motion: reduce) {
+  .game-card {
+    transition: none;
+  }
+}
