@@ -7,22 +7,105 @@
   <title>IRLTV | Início</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-  <aside class="sidebar" aria-label="Menu principal">
+  <aside class="sidebar" id="mobile-menu" aria-label="Menu principal">
     <a class="sidebar__brand" href="#inicio" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
 
     <nav class="sidebar__nav" aria-label="Navegação principal">
       <a class="sidebar__link is-active" href="#inicio" aria-current="page">Início</a>
       <a class="sidebar__link" href="#lista-lives">Explorar lives</a>
+      <a class="sidebar__link" href="#canais">Canais</a>
+      <a class="sidebar__link" href="#jogos">Games</a>
       <a class="sidebar__link" href="#categorias">Categorias</a>
     </nav>
+
+    <div class="sidebar__account-actions" aria-label="Acesso à conta">
+      <a class="topbar__action sidebar__account-link" href="#entrar">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="#cadastro">Cadastrar</a>
+    </div>
+
+    <section class="sidebar__live" aria-labelledby="sidebar-live-title">
+      <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
+      <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="BRKsEDU">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>BRKsEDU</strong><small>GTA VI</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="LunaCraft">
+            <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="ByteNinja">
+            <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="PixelMila">
+            <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="NekoRush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="sidebar__all-channels" href="#canais">Ver todos os canais</a>
+    </section>
   </aside>
 
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
+
   <header class="topbar">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <h1 class="topbar__title">Início</h1>
+    <form class="channel-search" role="search">
+      <label class="visually-hidden" for="channel-search-input">Buscar canais por nome</label>
+      <input
+        class="channel-search__input"
+        id="channel-search-input"
+        name="channel"
+        type="search"
+        placeholder="Buscar canais..."
+        autocomplete="off"
+        aria-controls="canais"
+      >
+      <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+    <a class="topbar__mobile-brand" href="#inicio" aria-label="IRLTV - página inicial">
+      <span aria-hidden="true">IRL</span><strong aria-hidden="true">TV</strong>
+    </a>
     <div class="topbar__actions">
-      <a class="topbar__action" href="#lista-lives">Encontrar uma live</a>
+      <a class="topbar__action topbar__auth-link" href="#entrar">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="#cadastro">Cadastrar</a>
     </div>
   </header>
 
@@ -35,7 +118,7 @@
           Descubra transmissões de jogos, acompanhe seus criadores favoritos
           e faça parte da comunidade.
         </p>
-        <a class="btn-primary" href="#lista-lives">Explorar transmissõess</a>
+        <a class="btn-primary" href="#lista-lives">Explorar transmissões</a>
       </div>
     </section>
 
@@ -48,22 +131,51 @@
         <a href="#categorias">Ver categorias</a>
       </div>
 
-      <div class="lives-grid">
+      <div class="lives-grid carousel-track" id="lives-carousel" role="region" aria-label="Carrossel de transmissões" tabindex="0">
+        <article class="card live-card" id="live-brksedu">
+          <a class="live-card__link" href="live.html" aria-label="Assistir à live Correndo sem limites em Los Santos">
+            <img
+              class="live-card__image"
+              src="https://i.ytimg.com/vi/BG_y4qpQA-g/hqdefault.jpg"
+              alt="Live de BRKsEDU jogando GTA VI"
+              width="900"
+              height="506"
+              loading="eager"
+            >
+            <span class="live-card__status">AO VIVO</span>
+          </a>
+          <div class="live-card__info">
+            <h3><a href="live.html">Correndo sem limites em Los Santos</a></h3>
+            <p class="live-card__streamer"><a href="live.html">BRKsEDU</a></p>
+            <p class="live-card__category">Grand Theft Auto VI <span>•</span> 1.284 espectadores</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-viviturbo" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-valorant" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+
         <article class="card live-card" id="live-valorant">
           <div class="live-card__link">
             <img
               class="live-card__image"
               src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80"
               alt="Arena de e-sports durante uma competição"
+              width="900"
+              height="506"
               loading="lazy"
             >
             <span class="live-card__status">AO VIVO</span>
           </div>
           <div class="live-card__info">
-            <h3>Ranqueada até o Imortal</h3>
-            <p class="live-card__streamer">Canal de exemplo</p>
+            <h3><a href="live.html">Ranqueada até o Imortal</a></h3>
+            <p class="live-card__streamer"><a href="live.html">NekoRush</a></p>
             <p class="live-card__category">Valorant <span>•</span> 1,2 mil espectadores</p>
           </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-viviturbo" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-minecraft" aria-label="Próxima transmissão">›</a>
+          </nav>
         </article>
 
         <article class="card live-card" id="live-minecraft">
@@ -72,15 +184,21 @@
               class="live-card__image"
               src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=80"
               alt="Setup de computador para jogos"
+              width="900"
+              height="506"
               loading="lazy"
             >
             <span class="live-card__status">AO VIVO</span>
           </div>
           <div class="live-card__info">
-            <h3>Construindo uma cidade do zero</h3>
-            <p class="live-card__streamer">Canal de exemplo</p>
+            <h3><a href="live.html">Construindo uma cidade do zero</a></h3>
+            <p class="live-card__streamer"><a href="live.html">LunaCraft</a></p>
             <p class="live-card__category">Minecraft <span>•</span> 846 espectadores</p>
           </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-valorant" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-just-chatting" aria-label="Próxima transmissão">›</a>
+          </nav>
         </article>
 
         <article class="card live-card" id="live-just-chatting">
@@ -89,15 +207,307 @@
               class="live-card__image"
               src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=900&q=80"
               alt="Pessoa jogando em frente ao computador"
+              width="900"
+              height="506"
               loading="lazy"
             >
             <span class="live-card__status">AO VIVO</span>
           </div>
           <div class="live-card__info">
-            <h3>Papo aberto com a comunidade</h3>
-            <p class="live-card__streamer">Canal de exemplo</p>
+            <h3><a href="live.html">Papo aberto com a comunidade</a></h3>
+            <p class="live-card__streamer"><a href="live.html">DudaPlay</a></p>
             <p class="live-card__category">Só na conversa <span>•</span> 512 espectadores</p>
           </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-minecraft" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-lunacraft" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+
+        <article class="card live-card" id="live-lunacraft">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Controle de videogame em uma mesa" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Desafio de sobrevivência em equipe</a></h3>
+            <p class="live-card__streamer"><a href="live.html">LunaCraft</a></p>
+            <p class="live-card__category">Minecraft <span>•</span> Aventura</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-just-chatting" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-byteninja" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-byteninja">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Controles e acessórios de videogame" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Subindo de elo com a comunidade</a></h3>
+            <p class="live-card__streamer"><a href="live.html">ByteNinja</a></p>
+            <p class="live-card__category">League of Legends <span>•</span> MOBA</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-lunacraft" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-pixelmila" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-pixelmila">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Jogador usando um computador durante uma partida" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Construções criativas em modo livre</a></h3>
+            <p class="live-card__streamer"><a href="live.html">PixelMila</a></p>
+            <p class="live-card__category">The Sims 4 <span>•</span> Criatividade</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-byteninja" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-nekorush" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-nekorush">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Arena de e-sports iluminada" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Rumo à vitória no battle royale</a></h3>
+            <p class="live-card__streamer"><a href="live.html">NekoRush</a></p>
+            <p class="live-card__category">Fortnite <span>•</span> Battle Royale</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-pixelmila" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-rafaarcano" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-rafaarcano">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Computador preparado para jogar" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Explorando masmorras e histórias</a></h3>
+            <p class="live-card__streamer"><a href="live.html">RafaArcano</a></p>
+            <p class="live-card__category">Genshin Impact <span>•</span> RPG</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-nekorush" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-dudaplay" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-dudaplay">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Pessoa jogando em frente ao computador" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Clássicos e partidas inesquecíveis</a></h3>
+            <p class="live-card__streamer"><a href="live.html">DudaPlay</a></p>
+            <p class="live-card__category">Just Chatting <span>•</span> Comunidade</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-rafaarcano" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-ticotactics" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-ticotactics">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Acessórios de computador e jogos" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Estratégia para dominar o mapa</a></h3>
+            <p class="live-card__streamer"><a href="live.html">TicoTactics</a></p>
+            <p class="live-card__category">Counter-Strike 2 <span>•</span> FPS</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-dudaplay" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-viviturbo" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="live-viviturbo">
+          <div class="live-card__link">
+            <img class="live-card__image" src="https://images.pexels.com/photos/7915437/pexels-photo-7915437.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Jogador em uma sessão de videogame" width="900" height="506" loading="lazy">
+            <span class="live-card__status">AO VIVO</span>
+          </div>
+          <div class="live-card__info">
+            <h3><a href="live.html">Corrida valendo tudo</a></h3>
+            <p class="live-card__streamer"><a href="live.html">ViviTurbo</a></p>
+            <p class="live-card__category">Rocket League <span>•</span> Esportes</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação das transmissões">
+            <a class="carousel-arrow" href="#live-ticotactics" aria-label="Transmissão anterior">‹</a>
+            <a class="carousel-arrow" href="#live-valorant" aria-label="Próxima transmissão">›</a>
+          </nav>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section" id="canais" aria-labelledby="streamers-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-heading__eyebrow">CONHEÇA A COMUNIDADE</p>
+          <h2 id="streamers-title" tabindex="-1">Canais ao vivo</h2>
+        </div>
+        <p class="channel-search__results" id="channel-search-results" aria-live="polite"></p>
+      </div>
+      <div class="lives-grid">
+        <article class="card live-card channel-card" data-channel-name="BRKsEDU">
+          <div class="live-card__info">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="Foto de perfil de BRKsEDU" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">BRKsEDU</a></h3>
+            <p class="live-card__streamer">Roleplay e ação</p>
+            <p class="live-card__category">Grand Theft Auto VI</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="LunaCraft">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=12" alt="Foto de perfil de LunaCraft" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">LunaCraft</a></h3>
+            <p class="live-card__streamer">Construções e aventuras</p>
+            <p class="live-card__category">Minecraft</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="ByteNinja">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=32" alt="Foto de perfil de ByteNinja" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">ByteNinja</a></h3>
+            <p class="live-card__streamer">Partidas competitivas</p>
+            <p class="live-card__category">League of Legends</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="PixelMila">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=47" alt="Foto de perfil de PixelMila" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">PixelMila</a></h3>
+            <p class="live-card__streamer">Games e criatividade</p>
+            <p class="live-card__category">The Sims 4</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="NekoRush">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=5" alt="Foto de perfil de NekoRush" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">NekoRush</a></h3>
+            <p class="live-card__streamer">Desafios com a comunidade</p>
+            <p class="live-card__category">Fortnite</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="RafaArcano">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=7" alt="Foto de perfil de RafaArcano" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">RafaArcano</a></h3>
+            <p class="live-card__streamer">Exploração e RPG</p>
+            <p class="live-card__category">Genshin Impact</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="DudaPlay">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=11" alt="Foto de perfil de DudaPlay" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">DudaPlay</a></h3>
+            <p class="live-card__streamer">Papo leve e jogos variados</p>
+            <p class="live-card__category">Só na conversa</p>
+          </div>
+        </article>
+        <article class="card live-card channel-card" data-channel-name="TicoTactics">
+          <div class="live-card__info">
+            <img src="https://i.pravatar.cc/160?img=20" alt="Foto de perfil de TicoTactics" width="72" height="72" style="width: 72px; height: 72px; object-fit: cover; border-radius: 50%;" loading="lazy">
+            <h3><a href="live.html">TicoTactics</a></h3>
+            <p class="live-card__streamer">Tática e competição</p>
+            <p class="live-card__category">Counter-Strike 2</p>
+          </div>
+        </article>
+      </div>
+      <p class="channel-search__empty" id="channel-search-empty" hidden>Nenhum canal encontrado com esse nome.</p>
+    </section>
+
+    <section class="home-section" id="jogos" aria-labelledby="games-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-heading__eyebrow">O QUE ESTÁ EM ALTA</p>
+          <h2 id="games-title">Games populares</h2>
+        </div>
+      </div>
+      <div class="lives-grid carousel-track" id="games-carousel" role="region" aria-label="Carrossel de games" tabindex="0">
+        <article class="card live-card" id="game-league-of-legends">
+          <img class="live-card__image game-cover" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" alt="Arte oficial de League of Legends com a campeã Ahri" width="1215" height="717" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">League of Legends</a></h3>
+            <p class="live-card__category">MOBA <span>•</span> Estratégia em equipe</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-apex-legends" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-the-sims-4" aria-label="Próximo game">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="game-the-sims-4">
+          <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/1222670/header.jpg" alt="Capa oficial de The Sims 4" width="460" height="215" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">The Sims 4</a></h3>
+            <p class="live-card__category">Simulação <span>•</span> Criatividade</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-league-of-legends" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-fortnite" aria-label="Próximo game">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="game-fortnite">
+          <img class="live-card__image game-cover" src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmvpko1451jk407ogh9sqvg8k" alt="Arte oficial de Fortnite publicada no site do jogo" width="1920" height="1080" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">Fortnite</a></h3>
+            <p class="live-card__category">Battle Royale <span>•</span> Ação</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-the-sims-4" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-genshin-impact" aria-label="Próximo game">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="game-genshin-impact">
+          <img class="live-card__image game-cover" src="https://act-webstatic.hoyoverse.com/puzzle/hk4e/pz_c6XZYm0GKS/resource/puzzle/2026/10/19/d138d1ad3bf6f5240eb726ed2ac3d4b0_1292059728731863742.mp4?x-oss-process=video/snapshot,t_1,f_jpg,m_fast" alt="Arte oficial de Genshin Impact com personagens do jogo" width="2500" height="1080" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">Genshin Impact</a></h3>
+            <p class="live-card__category">RPG <span>•</span> Aventura</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-fortnite" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-counter-strike-2" aria-label="Próximo game">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="game-counter-strike-2">
+          <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg" alt="Capa oficial de Counter-Strike 2" width="460" height="215" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">Counter-Strike 2</a></h3>
+            <p class="live-card__category">FPS <span>•</span> Competitivo</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-genshin-impact" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-rocket-league" aria-label="Próximo game">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="game-rocket-league">
+          <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg" alt="Capa oficial de Rocket League" width="460" height="215" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">Rocket League</a></h3>
+            <p class="live-card__category">Esportes <span>•</span> Corrida e futebol</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-counter-strike-2" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-apex-legends" aria-label="Próximo game">›</a>
+          </nav>
+        </article>
+        <article class="card live-card" id="game-apex-legends">
+          <img class="live-card__image game-cover" src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Capa oficial de Apex Legends" width="460" height="215" loading="lazy">
+          <div class="live-card__info">
+            <h3><a href="#jogos">Apex Legends</a></h3>
+            <p class="live-card__category">Battle Royale <span>•</span> FPS</p>
+          </div>
+          <nav class="carousel-arrows" aria-label="Navegação dos games">
+            <a class="carousel-arrow" href="#game-rocket-league" aria-label="Game anterior">‹</a>
+            <a class="carousel-arrow" href="#game-league-of-legends" aria-label="Próximo game">›</a>
+          </nav>
         </article>
       </div>
     </section>
@@ -113,8 +523,19 @@
         <a class="card category-card" href="#live-valorant">Valorant</a>
         <a class="card category-card" href="#live-minecraft">Minecraft</a>
         <a class="card category-card" href="#live-just-chatting">Só na conversa</a>
+        <a class="card category-card" href="#jogos">MOBA</a>
+        <a class="card category-card" href="#jogos">Simulação</a>
+        <a class="card category-card" href="#jogos">Battle Royale</a>
+        <a class="card category-card" href="#jogos">RPG e aventura</a>
+        <a class="card category-card" href="#jogos">FPS competitivo</a>
+        <a class="card category-card" href="#jogos">Esportes</a>
+        <a class="card category-card" href="#jogos">Ação</a>
+        <a class="card category-card" href="#live-minecraft">Sandbox</a>
       </div>
     </section>
   </main>
+  <script src="js/home.js" defer></script>
+  <script src="js/menu.js" defer></script>
+  <script src="js/global.js" defer></script>
 </body>
 </html>
