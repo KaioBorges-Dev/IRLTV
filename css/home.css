@@ -8,6 +8,13 @@
   margin: 2rem 0 3rem; /* Separa visualmente as seções. */
 }
 
+/* Organiza o link de todos os games ao lado do carrossel em telas largas. */
+.games-showcase__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Dá destaque visual ao banner principal da página. */
 .hero {
   display: flex; /* Organiza o conteúdo do banner. */
@@ -462,6 +469,19 @@
 @media (min-width: 1100px) {
   .carousel-track .live-card {
     flex-basis: calc((100% - 3rem) / 3); /* Reserva espaço para três slides e os intervalos entre eles. */
+  }
+}
+
+@media (min-width: 1100px) {
+  .games-showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .games-showcase .carousel-track .live-card {
+    flex-basis: calc((100% - 1rem) / 2);
   }
 }
 
