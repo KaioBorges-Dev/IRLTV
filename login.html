@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entre na IRLTV e acompanhe suas comunidades favoritas.">
+  <title>Entrar | IRLTV</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page" data-auth-page="login">
+  <main class="auth-layout">
+    <section class="auth-showcase" aria-label="Conheça a comunidade IRLTV">
+      <a class="auth-brand" href="index.html" aria-label="IRLTV - página inicial"><span>IRL</span><strong>TV</strong></a>
+
+      <div class="auth-showcase__content">
+        <div class="auth-slider" data-auth-slider>
+          <article class="auth-slide" data-auth-slide>
+            <div class="auth-art auth-art--live" aria-hidden="true">
+              <div class="auth-art__window">
+                <div class="auth-art__topbar"><span></span><span></span><span></span></div>
+                <div class="auth-art__scene">
+                  <span class="auth-art__sun"></span>
+                  <span class="auth-art__mountain auth-art__mountain--back"></span>
+                  <span class="auth-art__mountain auth-art__mountain--front"></span>
+                  <span class="auth-art__person"></span>
+                </div>
+                <div class="auth-art__caption"><span>BRKsEDU</span><strong>AO VIVO</strong></div>
+              </div>
+              <span class="auth-art__bubble auth-art__bubble--top">+1,2 mil assistindo</span>
+              <span class="auth-art__bubble auth-art__bubble--bottom">A comunidade está aqui</span>
+            </div>
+            <p class="auth-eyebrow">JOGUE JUNTO</p>
+            <h1>Seu lugar é ao vivo.</h1>
+            <p>Encontre quem joga como você e faça parte de conversas que continuam depois da partida.</p>
+          </article>
+
+          <article class="auth-slide" data-auth-slide hidden>
+            <div class="auth-art auth-art--games" aria-hidden="true">
+              <div class="auth-game-tile auth-game-tile--one"><span>LOL</span></div>
+              <div class="auth-game-tile auth-game-tile--two"><span>SIMS</span></div>
+              <div class="auth-game-tile auth-game-tile--three"><span>PLAY</span></div>
+              <span class="auth-art__bubble auth-art__bubble--top">Descubra algo novo</span>
+            </div>
+            <p class="auth-eyebrow">SEMPRE TEM UM PRÓXIMO JOGO</p>
+            <h1>Uma partida pode virar uma história.</h1>
+            <p>Explore jogos, criadores e comunidades que combinam com o seu jeito de jogar.</p>
+          </article>
+
+          <article class="auth-slide" data-auth-slide hidden>
+            <div class="auth-art auth-art--community" aria-hidden="true">
+              <div class="auth-chat-card">
+                <span class="auth-chat-card__avatar">L</span>
+                <span class="auth-chat-card__line"></span>
+                <span class="auth-chat-card__line auth-chat-card__line--short"></span>
+                <span class="auth-chat-card__heart">♥</span>
+              </div>
+              <div class="auth-chat-card auth-chat-card--second">
+                <span class="auth-chat-card__avatar">K</span>
+                <span class="auth-chat-card__line"></span>
+                <span class="auth-chat-card__line auth-chat-card__line--short"></span>
+                <span class="auth-chat-card__heart">✦</span>
+              </div>
+              <span class="auth-art__bubble auth-art__bubble--bottom">Gente de verdade, ao vivo</span>
+            </div>
+            <p class="auth-eyebrow">MAIS PERTO DE QUEM VOCÊ CURTE</p>
+            <h1>Chegue junto. A conversa é sua também.</h1>
+            <p>Torça, descubra e compartilhe bons momentos com a comunidade IRLTV.</p>
+          </article>
+        </div>
+
+        <div class="auth-slider__controls" role="group" aria-label="Slides de apresentação">
+          <button class="auth-slider__dot is-active" type="button" data-auth-slide-to="0" aria-label="Mostrar slide 1" aria-pressed="true"></button>
+          <button class="auth-slider__dot" type="button" data-auth-slide-to="1" aria-label="Mostrar slide 2" aria-pressed="false"></button>
+          <button class="auth-slider__dot" type="button" data-auth-slide-to="2" aria-label="Mostrar slide 3" aria-pressed="false"></button>
+        </div>
+      </div>
+
+      <p class="auth-showcase__footer"><span aria-hidden="true">●</span> Sua comunidade, no seu ritmo.</p>
+    </section>
+
+    <section class="auth-form-panel" aria-labelledby="login-title">
+      <div class="auth-form-card">
+        <a class="auth-brand auth-brand--mobile" href="index.html" aria-label="IRLTV - página inicial"><span>IRL</span><strong>TV</strong></a>
+        <p class="auth-eyebrow">BEM-VINDO DE VOLTA</p>
+        <h2 id="login-title">Entre na sua conta</h2>
+        <p class="auth-form-intro">Continue de onde a diversão começou.</p>
+
+        <p class="auth-feedback" data-auth-feedback role="status" aria-live="polite" hidden></p>
+
+        <form class="auth-form" data-auth-form="login">
+          <label for="login-username">Usuário</label>
+          <input
+            id="login-username"
+            name="username"
+            type="text"
+            placeholder="Seu nome de usuário"
+            autocomplete="username"
+            required
+          >
+
+          <label for="login-password">Senha</label>
+          <input
+            id="login-password"
+            name="password"
+            type="password"
+            placeholder="Sua senha"
+            autocomplete="current-password"
+            required
+          >
+
+          <button class="auth-submit" type="submit">Entrar</button>
+        </form>
+
+        <p class="auth-form-switch">Ainda não tem uma conta? <a href="register.html">Cadastre-se</a></p>
+        <p class="auth-demo-note">Acesso demonstrativo: qualquer usuário e senha preenchidos entram. Para o painel, use admin / admin.</p>
+      </div>
+    </section>
+  </main>
+  <script src="js/auth.js" defer></script>
+</body>
+</html>

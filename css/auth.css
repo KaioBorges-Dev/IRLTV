@@ -1,0 +1,570 @@
+/* =========================================================
+   TELAS DE AUTENTICACAO
+   A tipografia e as cores de marca vem de global.css; os
+   tons de verde abaixo complementam as ilustracoes.
+   ========================================================= */
+
+:root {
+  --auth-soft-green: #c8e798;
+  --auth-leaf-green: #68a84e;
+  --auth-brand: var(--primary);
+  --auth-ink: var(--background);
+}
+
+/* Divide a experiência entre apresentação e formulário. */
+.auth-page {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 0.9fr);
+  min-height: 100vh;
+}
+
+/* Cria o painel ilustrado em tons quentes, sem competir com o formulário. */
+.auth-showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: clamp(2rem, 5vw, 4.5rem);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 18% 18%, rgb(163 255 18 / 12%), transparent 34%),
+    radial-gradient(ellipse at 84% 78%, rgb(104 168 78 / 18%), transparent 38%),
+    linear-gradient(145deg, #1a251b 0%, #141b15 50%, var(--background) 100%);
+}
+
+.auth-showcase::before,
+.auth-showcase::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  border: 1px solid rgb(163 255 18 / 12%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.auth-showcase::before {
+  top: 10%;
+  right: -15rem;
+  width: 31rem;
+  aspect-ratio: 1;
+}
+
+.auth-showcase::after {
+  right: -9rem;
+  bottom: -17rem;
+  width: 36rem;
+  aspect-ratio: 1;
+}
+
+/* Mantem a marca simples e legivel nos dois lados da tela. */
+.auth-brand {
+  display: inline-flex;
+  width: fit-content;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.auth-brand span {
+  color: var(--text);
+}
+
+.auth-brand strong {
+  color: var(--primary);
+}
+
+.auth-showcase__content {
+  width: min(100%, 560px);
+  margin: 3rem auto;
+}
+
+.auth-slide[hidden] {
+  display: none;
+}
+
+.auth-slide h1 {
+  max-width: 11ch;
+  margin-bottom: 0.85rem;
+  font-size: clamp(2.4rem, 4.5vw, 4.3rem);
+  line-height: 0.98;
+}
+
+.auth-slide > p:last-child {
+  max-width: 42ch;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.auth-eyebrow {
+  margin-bottom: 0.65rem;
+  color: var(--auth-brand);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+/* Desenha uma cena original com CSS para nao depender de imagens remotas. */
+.auth-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(205px, 28vh, 280px);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 75% 22%, rgb(163 255 18 / 30%), transparent 22%),
+    linear-gradient(135deg, #738f4b 0%, #4c6639 52%, #2d3a2a 100%);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 25%);
+}
+
+.auth-art--games {
+  background:
+    radial-gradient(circle at 48% 55%, rgb(163 255 18 / 24%), transparent 35%),
+    linear-gradient(135deg, #384c32, #1b231a 76%);
+}
+
+.auth-art--community {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(104 168 78 / 30%), transparent 30%),
+    linear-gradient(135deg, #435a35, #1b211a 75%);
+}
+
+/* Miniatura de transmissao, com luzes e selo de live. */
+.auth-art__window {
+  position: relative;
+  width: min(68%, 340px);
+  padding: 0.55rem;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 14px;
+  background: rgb(25 22 24 / 88%);
+  box-shadow: 0 18px 38px rgb(0 0 0 / 35%);
+  transform: rotate(-3deg);
+}
+
+.auth-art__topbar {
+  display: flex;
+  gap: 0.25rem;
+  height: 0.7rem;
+  padding-left: 0.2rem;
+}
+
+.auth-art__topbar span {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--auth-brand);
+}
+
+.auth-art__scene {
+  position: relative;
+  height: 118px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: linear-gradient(155deg, #c8e798, #78aa52 58%, #46663d);
+}
+
+.auth-art__sun {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  width: 42px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e4f7bd;
+  box-shadow: 0 0 35px rgb(163 255 18 / 35%);
+}
+
+.auth-art__mountain {
+  position: absolute;
+  bottom: -34px;
+  width: 75%;
+  height: 100px;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-12deg);
+}
+
+.auth-art__mountain--back {
+  right: -15%;
+  background: #607b47;
+}
+
+.auth-art__mountain--front {
+  left: -18%;
+  bottom: -52px;
+  background: #374e32;
+  transform: rotate(12deg);
+}
+
+.auth-art__person {
+  position: absolute;
+  bottom: 8px;
+  left: 48%;
+  width: 29px;
+  height: 54px;
+  border-radius: 18px 18px 8px 8px;
+  background: #272329;
+  box-shadow: 0 -18px 0 -5px #272329;
+}
+
+.auth-art__caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.15rem 0.05rem;
+  color: var(--text);
+  font-size: 0.68rem;
+}
+
+.auth-art__caption strong {
+  color: var(--auth-brand);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.auth-art__bubble {
+  position: absolute;
+  z-index: 1;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 999px;
+  background: rgb(32 27 28 / 82%);
+  color: var(--text);
+  font-size: 0.72rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
+}
+
+.auth-art__bubble--top {
+  top: 18%;
+  right: 7%;
+  transform: rotate(4deg);
+}
+
+.auth-art__bubble--bottom {
+  bottom: 13%;
+  left: 6%;
+  transform: rotate(-4deg);
+}
+
+/* Cards inclinados transformam a segunda arte em um mosaico de jogos. */
+.auth-game-tile {
+  position: absolute;
+  display: grid;
+  place-items: end start;
+  width: 31%;
+  height: 68%;
+  padding: 1rem;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 16px;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  box-shadow: 0 18px 35px rgb(0 0 0 / 28%);
+}
+
+.auth-game-tile--one {
+  left: 18%;
+  background: linear-gradient(145deg, #a4ca72, #527943);
+  transform: rotate(-12deg) translateY(8px);
+}
+
+.auth-game-tile--two {
+  z-index: 1;
+  left: 35%;
+  background: linear-gradient(145deg, #d3eba1, #75a94c);
+  transform: translateY(-10px);
+}
+
+.auth-game-tile--three {
+  right: 17%;
+  background: linear-gradient(145deg, #6f9c50, #344b30);
+  transform: rotate(12deg) translateY(8px);
+}
+
+/* Balões de conversa dão movimento ao terceiro slide sem animacao obrigatoria. */
+.auth-chat-card {
+  position: absolute;
+  top: 27%;
+  left: 18%;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(3rem, 1fr) auto;
+  align-items: center;
+  gap: 0.45rem;
+  width: min(64%, 340px);
+  padding: 1rem;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 16px;
+  background: rgb(35 29 31 / 88%);
+  box-shadow: 0 18px 38px rgb(0 0 0 / 25%);
+  transform: rotate(-5deg);
+}
+
+.auth-chat-card--second {
+  top: 46%;
+  left: 26%;
+  background: rgb(54 41 39 / 94%);
+  transform: rotate(4deg);
+}
+
+.auth-chat-card__avatar {
+  display: grid;
+  grid-row: span 2;
+  place-items: center;
+  width: 2.3rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--auth-soft-green), var(--auth-leaf-green));
+  color: var(--auth-ink);
+  font-weight: 800;
+}
+
+.auth-chat-card__line {
+  height: 0.42rem;
+  border-radius: 99px;
+  background: rgb(255 255 255 / 68%);
+}
+
+.auth-chat-card__line--short {
+  width: 68%;
+  background: rgb(255 255 255 / 34%);
+}
+
+.auth-chat-card__heart {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  color: var(--auth-brand);
+}
+
+/* Indicadores de slide grandes o bastante para toque e teclado. */
+.auth-slider__controls {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 1.6rem;
+}
+
+.auth-slider__dot {
+  width: 1.8rem;
+  height: 0.45rem;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: rgb(255 255 255 / 32%);
+  transition: width 180ms ease, background-color 180ms ease;
+}
+
+.auth-slider__dot.is-active {
+  width: 3rem;
+  background: var(--auth-brand);
+}
+
+.auth-showcase__footer {
+  color: rgb(255 255 255 / 66%);
+  font-size: 0.8rem;
+}
+
+.auth-showcase__footer span {
+  margin-right: 0.45rem;
+  color: var(--auth-brand);
+  font-size: 0.65rem;
+}
+
+/* Mantem o formulario centralizado e com respiro em qualquer altura. */
+.auth-form-panel {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: clamp(2rem, 6vw, 5rem);
+  background:
+    radial-gradient(ellipse at 70% 5%, rgb(255 255 255 / 3%), transparent 35%),
+    var(--background);
+}
+
+.auth-form-card {
+  width: min(100%, 440px);
+}
+
+.auth-brand--mobile {
+  display: none;
+}
+
+.auth-form-card h2 {
+  margin-bottom: 0.45rem;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  line-height: 1.05;
+}
+
+.auth-form-intro {
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.auth-form label {
+  margin-top: 0.55rem;
+  color: var(--text);
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  min-height: 3.15rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.auth-form input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.75;
+}
+
+.auth-form input:focus-visible {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(163 255 18 / 15%);
+}
+
+.auth-submit {
+  min-height: 3.2rem;
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--background);
+  font: inherit;
+  font-weight: 800;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.auth-submit:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.auth-submit:focus-visible,
+.auth-slider__dot:focus-visible,
+.auth-brand:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.auth-feedback {
+  margin-bottom: 1.25rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgb(163 255 18 / 24%);
+  border-radius: 10px;
+  background: rgb(163 255 18 / 8%);
+  color: var(--text);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.auth-feedback[hidden] {
+  display: none;
+}
+
+.auth-form-switch {
+  margin-top: 1.4rem;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  text-align: center;
+}
+
+.auth-form-switch a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.auth-form-switch a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.auth-demo-note {
+  margin-top: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Mostra a saudacao em vez das acoes de login nas paginas principais. */
+.auth-user-greeting {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Ajusta proporcoes do painel antes de reduzir a apresentacao no celular. */
+@media (max-width: 980px) {
+  .auth-layout {
+    grid-template-columns: minmax(0, 0.85fr) minmax(400px, 1.15fr);
+  }
+
+  .auth-showcase {
+    padding: 2rem;
+  }
+
+  .auth-form-panel {
+    padding: 2rem;
+  }
+}
+
+/* Em telas estreitas, preserva o formulário e simplifica a página. */
+@media (max-width: 760px) {
+  .auth-layout {
+    display: block;
+  }
+
+  .auth-showcase {
+    display: none;
+  }
+
+  .auth-form-panel {
+    min-height: 100vh;
+    padding: 2rem 1.25rem;
+  }
+
+  .auth-form-card {
+    max-width: 460px;
+  }
+
+  .auth-brand--mobile {
+    display: inline-flex;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-slider__dot,
+  .auth-form input,
+  .auth-submit {
+    transition: none;
+  }
+}

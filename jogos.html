@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/menu.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/jogos.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
   <aside class="sidebar" id="main-sidebar" aria-label="Menu principal">
@@ -25,6 +26,13 @@
     <section class="sidebar__live" aria-labelledby="sidebar-live-title">
       <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
       <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="BRKsEDU">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>BRKsEDU</strong><small>GTA VI</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
         <li>
           <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="LunaCraft">
             <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
@@ -57,8 +65,8 @@
       <a class="sidebar__all-channels" href="index.html#canais">Ver todos os canais</a>
     </section>
     <div class="sidebar__account-actions">
-      <a class="topbar__action sidebar__account-link" href="index.html#entrar">Entrar</a>
-      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="index.html#cadastro">Cadastrar</a>
+      <a class="topbar__action sidebar__account-link" href="login.html">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="register.html">Cadastrar</a>
     </div>
   </aside>
 
@@ -94,8 +102,8 @@
       IRL<strong>TV</strong>
     </a>
     <div class="topbar__actions">
-      <a class="topbar__action topbar__auth-link" href="index.html#entrar">Entrar</a>
-      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="index.html#cadastro">Cadastrar</a>
+      <a class="topbar__action topbar__auth-link" href="login.html">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="register.html">Cadastrar</a>
     </div>
   </header>
   <button class="menu-backdrop" type="button" aria-label="Fechar menu" hidden></button>
@@ -263,5 +271,6 @@
   <script src="js/menu.js"></script>
   <script src="js/home.js"></script>
   <script src="js/jogos.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>
