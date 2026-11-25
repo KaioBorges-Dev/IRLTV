@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0D12">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="description" content="Assista ao canal BRKsEDU ao vivo na IRLTV.">
+  <title>IRLTV | BRKsEDU ao vivo</title>
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/live.css">
+</head>
+<body>
+  <aside class="sidebar" id="mobile-menu" aria-label="Menu principal">
+    <a class="sidebar__brand" href="index.html" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
+
+    <nav class="sidebar__nav" aria-label="Navegação principal">
+      <a class="sidebar__link" href="index.html">Início</a>
+      <a class="sidebar__link" href="index.html#lista-lives">Explorar lives</a>
+      <a class="sidebar__link" href="index.html#canais">Canais</a>
+      <a class="sidebar__link" href="index.html#jogos">Games</a>
+      <a class="sidebar__link" href="index.html#categorias">Categorias</a>
+    </nav>
+
+    <div class="sidebar__account-actions" aria-label="Acesso à conta">
+      <a class="topbar__action sidebar__account-link" href="#entrar">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="#cadastro">Cadastrar</a>
+    </div>
+
+    <section class="sidebar__live" aria-labelledby="sidebar-live-title">
+      <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
+      <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="live.html" data-channel-name="BRKsEDU">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>BRKsEDU</strong><small>GTA VI</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="LunaCraft">
+            <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="ByteNinja">
+            <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="PixelMila">
+            <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="index.html#canais" data-channel-name="NekoRush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="sidebar__all-channels" href="index.html#canais">Ver todos os canais</a>
+    </section>
+  </aside>
+
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
+
+  <header class="topbar">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h1 class="topbar__title">Ao vivo</h1>
+    <form class="channel-search" role="search" action="index.html" method="get">
+      <label class="visually-hidden" for="channel-search-input">Buscar canais por nome</label>
+      <input
+        class="channel-search__input"
+        id="channel-search-input"
+        name="channel"
+        type="search"
+        placeholder="Buscar canais..."
+        autocomplete="off"
+      >
+      <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+    <a class="topbar__mobile-brand" href="index.html" aria-label="IRLTV - página inicial">
+      <span aria-hidden="true">IRL</span><strong aria-hidden="true">TV</strong>
+    </a>
+    <div class="topbar__actions">
+      <a class="topbar__action topbar__auth-link" href="#entrar">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="#cadastro">Cadastrar</a>
+    </div>
+  </header>
+
+  <main class="page-content live-page" id="inicio">
+    <section class="live-layout" aria-label="Transmissão ao vivo">
+      <div class="live-main">
+        <article class="live-player card" aria-label="Player da transmissão">
+          <div class="live-player__stage" id="live-player-stage">
+            <iframe
+              id="live-video"
+              title="Live de GTA VI com BRKsEDU"
+              src="https://www.youtube-nocookie.com/embed/BG_y4qpQA-g?autoplay=1&amp;mute=1&amp;start=1380&amp;loop=1&amp;playlist=BG_y4qpQA-g&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;rel=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;playsinline=1&amp;enablejsapi=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+
+            <span class="live-player__badge"><span aria-hidden="true"></span> AO VIVO</span>
+            <span class="live-player__viewers" id="live-viewers">1.284 espectadores</span>
+            <div class="live-superchats" id="live-superchats" aria-live="polite"></div>
+
+            <div class="live-player__bottom">
+              <div class="live-timeline" aria-label="Linha do tempo da transmissão">
+                <span class="live-timeline__time" id="live-time">23:00</span>
+                <div class="live-timeline__track" aria-hidden="true">
+                  <span class="live-timeline__progress" id="live-progress"></span>
+                </div>
+                <span class="live-timeline__live"><span aria-hidden="true"></span> LIVE</span>
+              </div>
+
+              <div class="live-player__controls" aria-label="Controles da transmissão">
+                <div class="live-volume-control">
+                  <button class="live-control" id="volume-control" type="button" aria-label="Ajustar volume" aria-expanded="false" aria-controls="volume-popover">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12a9 9 0 0 0-7-8.77ZM3 9v6h4l5 5V4L7 9H3Z"/></svg>
+                    <span>Volume</span>
+                  </button>
+                  <div class="live-volume-popover" id="volume-popover" hidden>
+                    <button class="live-volume-mute" id="mute-popover-control" type="button" aria-label="Silenciar" aria-pressed="false">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1-3.29-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12a9 9 0 0 0-7-8.77ZM3 9v6h4l5 5V4L7 9H3Z"/></svg>
+                    </button>
+                    <input id="volume-range" type="range" min="0" max="100" value="100" aria-label="Volume da transmissão">
+                    <output id="volume-output" for="volume-range">100%</output>
+                  </div>
+                </div>
+                <button class="live-control" id="fullscreen-control" type="button" aria-label="Ativar tela cheia">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3Zm-2-4h2V7h3V5H5v5Zm12 7h-3v2h5v-5h-2v3ZM14 5v2h3v3h2V5h-5Z"/></svg>
+                  <span>Tela cheia</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <section class="live-details" aria-labelledby="live-title">
+          <div class="live-details__channel">
+            <img class="live-details__avatar" src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="Foto de perfil de BRKsEDU" width="64" height="64">
+            <div>
+              <h2 id="live-title">Correndo sem limites em Los Santos</h2>
+              <a class="live-details__channel-name" href="https://www.youtube.com/@BRKsEDU" target="_blank" rel="noopener noreferrer">BRKsEDU <span aria-label="Canal verificado">✓</span></a>
+              <p>Grand Theft Auto VI <span>•</span> Roleplay</p>
+            </div>
+          </div>
+          <button class="follow-button" id="follow-button" type="button" aria-pressed="false">Assinar canal</button>
+        </section>
+
+        <section class="live-about card" aria-labelledby="live-about-title">
+          <h3 id="live-about-title">Sobre esta live</h3>
+          <p>Domingo de GTA VI na IRLTV: missões, corridas e muita confusão pelas ruas de Los Santos com a comunidade.</p>
+          <div class="live-tags" aria-label="Tags da live">
+            <span>GTA VI</span>
+            <span>Roleplay</span>
+            <span>PT-BR</span>
+          </div>
+        </section>
+
+        <section class="live-support card" aria-labelledby="live-support-title">
+          <div class="live-support__heading">
+            <span class="live-support__icon" aria-hidden="true">★</span>
+            <div>
+              <p class="live-support__eyebrow">APOIE A LIVE</p>
+              <h3 id="live-support-title">Envie um superchat</h3>
+            </div>
+          </div>
+          <form class="live-support__form" id="support-form">
+            <label for="support-message">Sua mensagem</label>
+            <input id="support-message" name="support-message" type="text" maxlength="100" placeholder="Escreva uma mensagem..." required>
+            <div class="live-support__amounts" aria-label="Escolha o valor">
+              <button type="button" class="is-selected" data-support-amount="5" data-support-tier="Apoiador">
+                <span>Apoiador</span><strong>R$ 5</strong>
+              </button>
+              <button type="button" data-support-amount="10" data-support-tier="Premium">
+                <span>Premium</span><strong>R$ 10</strong>
+              </button>
+              <button type="button" data-support-amount="25" data-support-tier="Super fã">
+                <span>Super fã</span><strong>R$ 25</strong>
+              </button>
+              <button type="button" data-support-amount="50" data-support-tier="Lenda">
+                <span>Lenda</span><strong>R$ 50</strong>
+              </button>
+            </div>
+            <input id="support-amount" name="support-amount" type="hidden" value="5">
+            <input id="support-tier" name="support-tier" type="hidden" value="Apoiador">
+            <button class="live-support__submit" type="submit">Enviar apoio</button>
+          </form>
+        </section>
+      </div>
+
+      <aside class="live-chat card" aria-label="Chat ao vivo">
+        <header class="live-chat__header">
+          <h2>Chat ao vivo</h2>
+          <span class="live-chat__status"><span aria-hidden="true"></span> Conectado</span>
+        </header>
+
+        <div class="live-chat__messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+        <form class="live-chat__form" id="chat-form">
+          <label class="visually-hidden" for="chat-input">Enviar mensagem no chat</label>
+          <input id="chat-input" name="message" type="text" maxlength="120" placeholder="Envie uma mensagem..." autocomplete="off">
+          <button type="submit" aria-label="Enviar mensagem">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 21 21-9L2 3v7l15 2-15 2v7Z"/></svg>
+          </button>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <script src="js/menu.js" defer></script>
+  <script src="js/global.js" defer></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/live.js" defer></script>
+</body>
+</html>
