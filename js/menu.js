@@ -1,4 +1,5 @@
 // Controla a abertura acessível do menu lateral em telas móveis.
+// by kaio borges
 (() => {
   const sidebar = document.querySelector(".sidebar");
   const toggleButton = document.querySelector(".menu-toggle");

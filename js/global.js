@@ -1,4 +1,6 @@
 // Sincroniza o item ativo da navegação com a seção visível da página.
+// by kaio borges
+
 (() => {
   const navigationLinks = Array.from(
     document.querySelectorAll(".sidebar__nav .sidebar__link[href^='#']")

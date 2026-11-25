@@ -1,4 +1,5 @@
 // Configura os carrosséis da página inicial quando o HTML estiver pronto.
+// by kaio borges
 document.querySelectorAll(".carousel-track").forEach((track) => {
   // Envolve cada faixa para posicionar seus controles nas laterais.
   const shell = document.createElement("div");
