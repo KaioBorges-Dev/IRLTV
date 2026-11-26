@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0D12">
+  <title>IRLTV | Perfil do Streamer</title>
+
+  <!-- CSS compartilhado da equipe -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <!-- CSS específico do perfil -->
+  <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+  <!-- =====================================================================
+       SIDEBAR COM OS LINKS PERSONALIZADOS PARA CADA STREAMER
+       ===================================================================== -->
+  <aside class="sidebar" id="main-sidebar" aria-label="Menu principal">
+    <a class="sidebar__brand" href="index.html" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
+
+    <nav class="sidebar__nav" aria-label="Navegação principal">
+      <a class="sidebar__link" href="index.html">Início</a>
+      <a class="sidebar__link" href="index.html#lista-lives">Explorar lives</a>
+      <a class="sidebar__link is-active" href="perfil.html?canal=brksedu" aria-current="page">Canais</a>
+      <a class="sidebar__link" href="jogos.html">Games</a>
+      <a class="sidebar__link" href="index.html#categorias">Categorias</a>
+    </nav>
+
+    <div class="sidebar__account-actions" aria-label="Acesso à conta">
+      <a class="topbar__action sidebar__account-link" href="login.html">Entrar</a>
+      <a class="btn-primary sidebar__account-link sidebar__account-link--signup" href="register.html">Cadastrar</a>
+    </div>
+
+    <section class="sidebar__live" aria-labelledby="sidebar-live-title">
+      <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
+      <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=brksedu">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>BRKsEDU</strong><small>GTA VI</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=lunacraft">
+            <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=byteninja">
+            <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=pixelmila">
+            <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=nekorush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="sidebar__all-channels" href="index.html#canais">Ver todos os canais</a>
+    </section>
+  </aside>
+
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
+
+  <!-- =====================================================================
+       BARRA SUPERIOR
+       ===================================================================== -->
+  <header class="topbar">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="main-sidebar"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <h1 class="topbar__title" id="topbar-titulo">Canal • BRKsEDU</h1>
+
+    <form class="channel-search" id="form-busca-perfil" role="search">
+      <label class="visually-hidden" for="input-busca-perfil">Buscar canais por nome</label>
+      <input
+        class="channel-search__input"
+        id="input-busca-perfil"
+        name="channel"
+        type="search"
+        placeholder="Buscar canais..."
+        autocomplete="off"
+      >
+      <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+
+    <a class="topbar__mobile-brand" href="index.html" aria-label="IRLTV - página inicial">
+      <span aria-hidden="true">IRL</span><strong aria-hidden="true">TV</strong>
+    </a>
+
+    <div class="topbar__actions">
+      <a class="topbar__action topbar__auth-link" href="login.html">Entrar</a>
+      <a class="btn-primary topbar__auth-link topbar__auth-link--signup" href="register.html">Cadastrar</a>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       CONTEÚDO PRINCIPAL DO STREAMER
+       ===================================================================== -->
+  <main class="page-content perfil-page">
+    <!-- 1. Capa, Foto, Métricas e Botões Seguir / Assinar -->
+    <section class="card perfil-hero" aria-labelledby="streamer-nome">
+      <div class="perfil-hero__banner" id="perfil-banner">
+        <div class="perfil-hero__overlay"></div>
+      </div>
+
+      <div class="perfil-hero__body">
+        <div class="perfil-hero__identity">
+          <div class="perfil-avatar-box">
+            <img
+              id="streamer-avatar"
+              src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj"
+              alt="Foto de perfil do streamer"
+              width="96"
+              height="96"
+            >
+            <span class="perfil-live-badge" id="badge-ao-vivo">AO VIVO</span>
+          </div>
+
+          <div class="perfil-meta">
+            <div class="perfil-meta__title-row">
+              <h2 id="streamer-nome">BRKsEDU</h2>
+              <span class="perfil-verified" title="Canal Verificado">✓</span>
+              <span class="perfil-category-pill" id="streamer-categoria">GTA VI</span>
+            </div>
+
+            <p class="perfil-meta__stats">
+              <span><strong id="contador-seguidores">142.850</strong> seguidores</span>
+              <span class="dot-sep">•</span>
+              <span><strong>42</strong> seguindo</span>
+              <span class="dot-sep">•</span>
+              <span><strong>1.284</strong> assistindo agora</span>
+            </p>
+
+            <p class="perfil-meta__bio" id="streamer-bio">
+              Domingo de GTA VI na IRLTV: missões, corridas e muita confusão pelas ruas de Los Santos com a comunidade.
+            </p>
+          </div>
+        </div>
+
+        <div class="perfil-hero__actions">
+          <button type="button" class="btn-primary perfil-btn-follow" id="btn-seguir">
+            <span id="texto-seguir">Seguir</span>
+          </button>
+          <button type="button" class="perfil-btn-secondary" id="btn-assinar">Assinar canal</button>
+          <button type="button" class="perfil-btn-icon" id="btn-notificar" aria-label="Ativar notificações" title="Ativar notificações">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Destaque da Transmissão ao Vivo Atual -->
+    <section class="card perfil-live-now" id="secao-live-atual">
+      <div class="perfil-live-now__thumb">
+        <img
+          id="live-capa"
+          src="https://i.ytimg.com/vi/BG_y4qpQA-g/hqdefault.jpg"
+          alt="Capa da transmissão ao vivo"
+        >
+        <span class="perfil-live-now__tag">AO VIVO</span>
+      </div>
+
+      <div class="perfil-live-now__info">
+        <span class="perfil-eyebrow">TRANSMITINDO AGORA</span>
+        <h3 id="live-titulo">Correndo sem limites em Los Santos</h3>
+        <p id="live-subtitulo">Grand Theft Auto VI • Roleplay • PT-BR</p>
+        <a href="live.html" class="btn-primary">Assistir transmissão</a>
+      </div>
+    </section>
+
+    <!-- 3. Abas: Lives já feitas (VODs), Sobre e Setup (PC), Agenda -->
+    <nav class="perfil-tabs" aria-label="Seções do canal">
+      <button type="button" class="perfil-tab is-active" data-tab="painel-videos">Transmissões anteriores</button>
+      <button type="button" class="perfil-tab" data-tab="painel-sobre">Sobre e Setup</button>
+      <button type="button" class="perfil-tab" data-tab="painel-agenda">Agenda semanal</button>
+    </nav>
+
+    <!-- Aba 1: Lives já feitas (VODs) -->
+    <section id="painel-videos" class="perfil-panel is-active">
+      <div class="perfil-vods-grid" id="lista-vods"></div>
+    </section>
+
+    <!-- Aba 2: Sobre o Canal e Setup do PC -->
+    <section id="painel-sobre" class="perfil-panel">
+      <div class="perfil-sobre-grid">
+        <article class="card perfil-info-card">
+          <span class="perfil-eyebrow">SOBRE O CANAL</span>
+          <h3>Comunidade e Conteúdo</h3>
+          <p id="sobre-texto-completo"></p>
+          <div class="perfil-tags"></div>
+        </article>
+
+        <article class="card perfil-info-card">
+          <span class="perfil-eyebrow">HARDWARE & STREAM</span>
+          <h3>Setup do PC</h3>
+          <ul class="perfil-specs"></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Aba 3: Agenda Semanal -->
+    <section id="painel-agenda" class="perfil-panel">
+      <article class="card perfil-info-card">
+        <span class="perfil-eyebrow">CRONOGRAMA OFICIAL</span>
+        <h3>Horários das Lives</h3>
+        <div class="perfil-schedule"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="js/menu.js" defer></script>
+  <script src="js/global.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/perfil.js" defer></script>
+</body>
+</html>

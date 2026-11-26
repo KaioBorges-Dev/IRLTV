@@ -1,0 +1,520 @@
+/* =====================================================================
+   ESTILOS DA PÁGINA DE PERFIL (css/perfil.css)
+   Usa as variáveis do global.css (--primary, --card, --border, etc.)
+   ===================================================================== */
+
+.perfil-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =========================================
+   1. HERO DO PERFIL (BANNER + AVATAR + AÇÕES)
+   ========================================= */
+.perfil-hero {
+  overflow: hidden;
+}
+
+/* Capa superior com imagem dinâmica e degradê escuro */
+.perfil-hero__banner {
+  height: 185px;
+  position: relative;
+  background-color: var(--surface);
+  background-image: url("https://i.ytimg.com/vi/BG_y4qpQA-g/hqdefault.jpg");
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Camada escura com brilho neon sutil sobre a capa para manter leitura */
+.perfil-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(163, 255, 12, 0.22), transparent 50%),
+    linear-gradient(180deg, rgba(11, 13, 18, 0.35) 0%, rgba(11, 13, 18, 0.92) 100%);
+}
+
+/* Faixa com avatar, dados e botões */
+.perfil-hero__body {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.perfil-hero__identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Faz a foto subir levemente sobre o banner */
+.perfil-avatar-box {
+  position: relative;
+  margin-top: -54px;
+  flex-shrink: 0;
+}
+
+.perfil-avatar-box img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+  background-color: var(--surface);
+  box-shadow: 0 0 24px rgba(163, 255, 12, 0.22);
+}
+
+/* Etiqueta vermelha AO VIVO na base do avatar */
+.perfil-live-badge {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--live);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.perfil-meta__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.perfil-meta__title-row h2 {
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+/* Selo de verificado verde neon */
+.perfil-verified {
+  background-color: var(--primary);
+  color: var(--background);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Pílula com o jogo/categoria do streamer */
+.perfil-category-pill {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.perfil-meta__stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.perfil-meta__stats strong {
+  color: var(--text);
+}
+
+.perfil-meta__bio {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 620px;
+  line-height: 1.5;
+}
+
+/* Botões de ação à direita */
+.perfil-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Estado alternativo do botão Seguir quando já está seguindo */
+.perfil-btn-follow.is-following {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.perfil-btn-secondary {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.perfil-btn-secondary:hover,
+.perfil-btn-secondary.is-subscribed {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.perfil-btn-icon {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.perfil-btn-icon.is-active {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* =========================================
+   2. DESTAQUE DA LIVE ATUAL
+   ========================================= */
+.perfil-live-now {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.perfil-live-now__thumb {
+  width: 280px;
+  height: 156px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.perfil-live-now__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-live-now__tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--live);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.perfil-live-now__info {
+  flex: 1;
+  min-width: 240px;
+}
+
+.perfil-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.perfil-live-now__info h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.perfil-live-now__info p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+/* =========================================
+   3. ABAS E PAINÉIS DE CONTEÚDO
+   ========================================= */
+.perfil-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.perfil-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.perfil-tab.is-active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.perfil-panel {
+  display: none;
+}
+
+.perfil-panel.is-active {
+  display: block;
+}
+
+/* Grade de VODs com capas reais dos jogos */
+.perfil-vods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.vod-card {
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.vod-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+}
+
+.vod-card__thumb {
+  height: 165px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--surface);
+}
+
+.vod-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vod-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(11, 13, 18, 0.85);
+  border: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.vod-card__duration {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(11, 13, 18, 0.85);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.vod-card__body {
+  padding: 16px;
+}
+
+.vod-card__body h4 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.vod-card__body p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Grade Sobre e Setup */
+.perfil-sobre-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.perfil-info-card {
+  padding: 22px;
+}
+
+.perfil-info-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.perfil-info-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.perfil-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.perfil-tags span {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.perfil-specs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.perfil-specs strong {
+  color: var(--text);
+}
+
+/* Agenda semanal */
+.perfil-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.perfil-schedule__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+.perfil-day {
+  background-color: rgba(163, 255, 12, 0.14);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 640px) {
+  .perfil-live-now__thumb {
+    width: 100%;
+  }
+}
+/* =========================================
+   4. ESTADO VAZIO (NENHUM VÍDEO PUBLICADO)
+   ========================================= */
+.perfil-empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.perfil-empty-state__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.perfil-empty-state h4 {
+  font-size: 20px;
+}
+
+.perfil-empty-state p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin-bottom: 8px;
+}
+/* =========================================
+   5. SELETOR RÁPIDO DE STREAMERS
+   ========================================= */
+.perfil-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.perfil-switcher__label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-right: 4px;
+}
+
+.switcher-pill {
+  background-color: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.switcher-pill:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.switcher-pill.is-active {
+  background-color: rgba(163, 255, 12, 0.14);
+  border-color: var(--primary);
+  color: var(--primary);
+}

@@ -6,7 +6,7 @@
   // Lê uma vez os parâmetros da URL para saudar o usuário e exibir mensagens.
   const pageParameters = new URLSearchParams(window.location.search);
 
-  // Substitui os links de acesso por uma saudação quando há um usuário identificado.
+  // Substitui os links de acesso por um link clicável para o perfil do usuário logado.
   function showLoggedInUser() {
     // O nome da URL tem prioridade; a sessão mantém a saudação ao navegar no site.
     const nameFromUrl = pageParameters.get("nome")?.trim();
@@ -22,12 +22,12 @@
     if (nameFromUrl) {
       window.sessionStorage.setItem(sessionUserKey, nameFromUrl);
     }
-
-    // Atualiza as ações da barra superior e do menu lateral, se existirem.
+// Atualiza as ações da barra superior e do menu lateral, se existirem.
     document
       .querySelectorAll(".topbar__actions, .sidebar__account-actions")
       .forEach((accountActions) => {
-        const greeting = document.createElement("span");
+        const greeting = document.createElement("a");
+        greeting.href = "usuario.html";
         greeting.className = "auth-user-greeting";
         greeting.textContent = `Oi, ${userName}`;
         accountActions.replaceChildren(greeting);
@@ -184,7 +184,7 @@
     });
   }
 
-  // Valida o cadastro demonstrativo e encaminha o usuário à tela de login.
+ // Valida o cadastro demonstrativo e encaminha o usuário à tela de login.
   function initializeRegisterForm() {
     const registerForm = document.querySelector('[data-auth-form="register"]');
 
@@ -202,7 +202,7 @@
       confirmInput.setCustomValidity("");
     });
 
-    // Impede o envio até a confirmação ser válida e as senhas coincidirem.
+// Impede o envio até a confirmação ser válida e as senhas coincidirem.
     registerForm.addEventListener("submit", (event) => {
       event.preventDefault();
       confirmInput.setCustomValidity(
@@ -213,6 +213,12 @@
 
       if (!registerForm.reportValidity()) {
         return;
+      }
+
+      // Salva o nome digitado no cadastro para aparecer no perfil pessoal
+      const registeredName = registerForm.elements.namedItem("name")?.value.trim();
+      if (registeredName) {
+        window.sessionStorage.setItem(sessionUserKey, registeredName);
       }
 
       // O protótipo não armazena dados: apenas confirma e oferece o próximo passo.

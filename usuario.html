@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0D12">
+  <title>IRLTV | Meu Perfil</title>
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/perfil.css">
+
+  <style>
+    /* Estilos específicos para o estado vazio e cards de transferências (Pix) */
+    .perfil-empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .perfil-empty-state__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .perfil-empty-state h4 {
+      font-size: 20px;
+    }
+
+    .perfil-empty-state p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 420px;
+    }
+
+    /* Lista de transferências / Pix enviados nas lives */
+    .transferencias-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .transferencia-card {
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .transferencia-card__topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .transferencia-card__destino {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .transferencia-card__valor {
+      background-color: rgba(163, 255, 12, 0.14);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .transferencia-card__data {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .transferencia-card__comentario {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Barra lateral esquerda -->
+  <aside class="sidebar" id="main-sidebar" aria-label="Menu principal">
+    <a class="sidebar__brand" href="index.html" aria-label="IRLTV - página inicial">IRLTV</a>
+    <button class="sidebar__close" type="button" aria-label="Fechar menu">×</button>
+
+    <nav class="sidebar__nav" aria-label="Navegação principal">
+      <a class="sidebar__link" href="index.html">Início</a>
+      <a class="sidebar__link" href="index.html#lista-lives">Explorar lives</a>
+      <a class="sidebar__link" href="perfil.html?canal=brksedu">Canais</a>
+      <a class="sidebar__link" href="jogos.html">Games</a>
+      <a class="sidebar__link" href="index.html#categorias">Categorias</a>
+    </nav>
+
+    <!-- Exibe o usuário logado no menu lateral (sem Entrar/Cadastrar) -->
+    <div class="sidebar__account-actions" aria-label="Conta conectada">
+      <a href="usuario.html" class="auth-user-greeting" id="sidebar-saudacao">Oi, Visitante</a>
+    </div>
+
+    <section class="sidebar__live" aria-labelledby="sidebar-live-title">
+      <h2 class="sidebar__live-title" id="sidebar-live-title">Canais ao vivo</h2>
+      <ul class="sidebar__live-list">
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=brksedu">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_lRcGaSpIGYKDAgSNDKOVadxL5tUwqzgx4_Uglmq-s-Dbw=s160-c-k-c0x00ffffff-no-rj" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>BRKsEDU</strong><small>GTA VI</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=lunacraft">
+            <img src="https://i.pravatar.cc/160?img=12" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>LunaCraft</strong><small>Minecraft</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=byteninja">
+            <img src="https://i.pravatar.cc/160?img=32" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>ByteNinja</strong><small>League of Legends</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=pixelmila">
+            <img src="https://i.pravatar.cc/160?img=47" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>PixelMila</strong><small>The Sims 4</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar__channel-link" href="perfil.html?canal=nekorush">
+            <img src="https://i.pravatar.cc/160?img=5" alt="" width="40" height="40" loading="lazy">
+            <span class="sidebar__channel-copy"><strong>NekoRush</strong><small>Fortnite</small></span>
+            <span class="sidebar__live-dot" aria-label="Ao vivo"></span>
+          </a>
+        </li>
+      </ul>
+      <a class="sidebar__all-channels" href="index.html#canais">Ver todos os canais</a>
+    </section>
+  </aside>
+
+  <button class="menu-backdrop" type="button" aria-label="Fechar menu" tabindex="-1" hidden></button>
+
+  <!-- Barra superior -->
+  <header class="topbar">
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-sidebar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <h1 class="topbar__title">Meu Perfil</h1>
+
+    <form class="channel-search" role="search" action="index.html" method="get">
+      <label class="visually-hidden" for="user-search-input">Buscar canais</label>
+      <input class="channel-search__input" id="user-search-input" name="channel" type="search" placeholder="Buscar canais..." autocomplete="off">
+      <button class="channel-search__button" type="submit" aria-label="Buscar canais">
+        <span aria-hidden="true">⌕</span>
+      </button>
+    </form>
+
+    <a class="topbar__mobile-brand" href="index.html" aria-label="IRLTV - página inicial">
+      <span aria-hidden="true">IRL</span><strong aria-hidden="true">TV</strong>
+    </a>
+
+    <!-- Saudação direta no topo (sem botões de Entrar/Cadastrar) -->
+    <div class="topbar__actions">
+      <a href="usuario.html" class="auth-user-greeting" id="topbar-saudacao">Oi, Visitante</a>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal do perfil pessoal -->
+  <main class="page-content perfil-page">
+    <section class="card perfil-hero" aria-labelledby="usuario-nome">
+      <div class="perfil-hero__banner" style="background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg');">
+        <div class="perfil-hero__overlay"></div>
+      </div>
+
+      <div class="perfil-hero__body">
+        <div class="perfil-hero__identity">
+          <div class="perfil-avatar-box">
+            <img id="usuario-avatar" src="https://ui-avatars.com/api/?name=Visitante&background=171B24&color=A3FF12&size=160&bold=true" alt="Minha foto de perfil" width="96" height="96">
+          </div>
+
+          <div class="perfil-meta">
+            <div class="perfil-meta__title-row">
+              <h2 id="usuario-nome">Visitante</h2>
+              <span class="perfil-category-pill">Conta Pessoal</span>
+            </div>
+
+            <p class="perfil-meta__stats">
+              <span><strong>12</strong> seguidores</span>
+              <span class="dot-sep">•</span>
+              <span><strong>8</strong> seguindo</span>
+              <span class="dot-sep">•</span>
+              <span><strong>0</strong> vídeos publicados</span>
+            </p>
+
+            <p class="perfil-meta__bio" id="usuario-bio">
+              Membro da comunidade IRLTV. Acompanhando lives de tecnologia, programação e games competitivos.
+            </p>
+          </div>
+        </div>
+
+        <div class="perfil-hero__actions">
+          <button type="button" class="perfil-btn-secondary" id="btn-editar-bio-pessoal">Editar Bio</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu de Abas clicáveis -->
+    <nav class="perfil-tabs" aria-label="Seções do meu perfil">
+      <button type="button" class="perfil-tab is-active" data-tab="aba-historico">Lives assistidas</button>
+      <button type="button" class="perfil-tab" data-tab="aba-publicados">Vídeos publicados (0)</button>
+      <button type="button" class="perfil-tab" data-tab="aba-transferencias">Transferências</button>
+    </nav>
+
+    <!-- ABA 1: LIVES ASSISTIDAS (HISTÓRICO) -->
+    <section id="aba-historico" class="perfil-panel is-active">
+      <div class="perfil-vods-grid">
+        <a href="perfil.html?canal=brksedu" class="card vod-card">
+          <div class="vod-card__thumb">
+            <img src="https://i.ytimg.com/vi/BG_y4qpQA-g/hqdefault.jpg" alt="BRKsEDU" loading="lazy">
+            <span class="vod-card__badge">ASSISTIDO</span>
+            <span class="vod-card__duration">01:12:40</span>
+          </div>
+          <div class="vod-card__body">
+            <h4>Correndo sem limites em Los Santos</h4>
+            <p>BRKsEDU • GTA VI • Hoje</p>
+          </div>
+        </a>
+
+        <a href="perfil.html?canal=nekorush" class="card vod-card">
+          <div class="vod-card__thumb">
+            <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmvpko1451jk407ogh9sqvg8k" alt="NekoRush" loading="lazy">
+            <span class="vod-card__badge">ASSISTIDO</span>
+            <span class="vod-card__duration">00:48:15</span>
+          </div>
+          <div class="vod-card__body">
+            <h4>Ranqueada até o Imortal</h4>
+            <p>NekoRush • Fortnite • Ontem</p>
+          </div>
+        </a>
+
+        <a href="perfil.html?canal=byteninja" class="card vod-card">
+          <div class="vod-card__thumb">
+            <img src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg" alt="ByteNinja" loading="lazy">
+            <span class="vod-card__badge">ASSISTIDO</span>
+            <span class="vod-card__duration">02:05:10</span>
+          </div>
+          <div class="vod-card__body">
+            <h4>Do Diamante ao Mestre hoje sem tiltar</h4>
+            <p>ByteNinja • League of Legends • Há 2 dias</p>
+          </div>
+        </a>
+
+        <a href="perfil.html?canal=lunacraft" class="card vod-card">
+          <div class="vod-card__thumb">
+            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/library_600x900.jpg" alt="LunaCraft" loading="lazy">
+            <span class="vod-card__badge">ASSISTIDO</span>
+            <span class="vod-card__duration">01:30:00</span>
+          </div>
+          <div class="vod-card__body">
+            <h4>Construindo uma cidade do zero</h4>
+            <p>LunaCraft • Minecraft • Há 4 dias</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ABA 2: VÍDEOS PUBLICADOS (0) -->
+    <section id="aba-publicados" class="perfil-panel">
+      <div class="card perfil-empty-state">
+        <div class="perfil-empty-state__icon">▶</div>
+        <h4>Nenhum vídeo publicado ainda</h4>
+        <p>Você ainda não publicou nenhum vídeo ou transmissão gravada na IRLTV.</p>
+      </div>
+    </section>
+
+    <!-- ABA 3: TRANSFERÊNCIAS (PIX / SUPERCHATS ENVIADOS) -->
+    <section id="aba-transferencias" class="perfil-panel">
+      <div class="transferencias-lista">
+        <article class="card transferencia-card">
+          <div class="transferencia-card__topo">
+            <div class="transferencia-card__destino">
+              <span class="transferencia-card__valor">Pix de R$ 5,00</span>
+              <strong>Enviado para BRKsEDU</strong>
+            </div>
+            <span class="transferencia-card__data">Hoje • 21:14</span>
+          </div>
+          <p class="transferencia-card__comentario">
+            "Salve Edu! Essa perseguição em Los Santos tá insana demais 🔥"
+          </p>
+        </article>
+
+        <article class="card transferencia-card">
+          <div class="transferencia-card__topo">
+            <div class="transferencia-card__destino">
+              <span class="transferencia-card__valor">Pix de R$ 10,00</span>
+              <strong>Enviado para NekoRush</strong>
+            </div>
+            <span class="transferencia-card__data">Ontem • 19:42</span>
+          </div>
+          <p class="transferencia-card__comentario">
+            "Joga muito! Rumo ao Imortal hoje sem perder nenhuma."
+          </p>
+        </article>
+
+        <article class="card transferencia-card">
+          <div class="transferencia-card__topo">
+            <div class="transferencia-card__destino">
+              <span class="transferencia-card__valor">Pix de R$ 25,00</span>
+              <strong>Enviado para LunaCraft</strong>
+            </div>
+            <span class="transferencia-card__data">22/11/2026 • 16:08</span>
+          </div>
+          <p class="transferencia-card__comentario">
+            "Apoio para terminar o castelo central da cidade! Ficou incrível."
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/menu.js" defer></script>
+  <script src="js/global.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script>
+    // 1. Lê o nome digitado pelo usuário no login ou cadastro (ou pela URL)
+    const paramsUrl = new URLSearchParams(window.location.search);
+    const nomeUrl = paramsUrl.get("nome")?.trim();
+    const nomeSessao = window.sessionStorage.getItem("irltv.auth.user");
+    const nomeUsuario = nomeUrl || nomeSessao || "Usuario_IRLTV";
+
+    if (nomeUrl) {
+      window.sessionStorage.setItem("irltv.auth.user", nomeUrl);
+    }
+
+    // 2. Atualiza o nome no perfil, no avatar e na saudação do topo/sidebar
+    document.getElementById("usuario-nome").textContent = nomeUsuario;
+    document.getElementById("topbar-saudacao").textContent = `Oi, ${nomeUsuario}`;
+    document.getElementById("sidebar-saudacao").textContent = `Oi, ${nomeUsuario}`;
+    document.getElementById("usuario-avatar").src =
+      `https://ui-avatars.com/api/?name=${encodeURIComponent(nomeUsuario)}&background=171B24&color=A3FF12&size=160&bold=true`;
+
+    // 3. Botão Editar Bio
+    document.getElementById("btn-editar-bio-pessoal").addEventListener("click", () => {
+      const bioEl = document.getElementById("usuario-bio");
+      const novaBio = prompt("Digite a nova descrição do seu perfil:", bioEl.textContent.trim());
+      if (novaBio && novaBio.trim() !== "") {
+        bioEl.textContent = novaBio.trim();
+      }
+    });
+
+    // 4. Troca de abas (Lives assistidas, Vídeos publicados e Transferências)
+    const abas = document.querySelectorAll(".perfil-tab");
+    const paineis = document.querySelectorAll(".perfil-panel");
+
+    abas.forEach((aba) => {
+      aba.addEventListener("click", () => {
+        abas.forEach((b) => b.classList.remove("is-active"));
+        paineis.forEach((p) => p.classList.remove("is-active"));
+
+        aba.classList.add("is-active");
+        document.getElementById(aba.dataset.tab).classList.add("is-active");
+      });
+    });
+  </script>
+</body>
+</html>
