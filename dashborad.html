@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRLTV - Dashboard do Criador</title>
+
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">IRL<span>TV</span> <small>| Creator Studio</small></div>
+    <div class="status-area">
+      <span id="status-badge" class="badge offline">OFFLINE</span>
+      <button id="btn-toggle-live" class="btn-primary" onclick="alternarLive()">Iniciar Transmissão</button>
+    </div>
+  </header>
+
+  <main class="container dashboard-layout">
+
+    <aside class="sidebar card">
+      <nav>
+        <ul>
+          <li><a href="#" class="nav-link active" data-tab="painel" onclick="mudarAba(event, 'painel')">📊 Painel da Live</a></li>
+          <li><a href="#" class="nav-link" data-tab="moderacao" onclick="mudarAba(event, 'moderacao')">💬 Chat & Moderação</a></li>
+          <li><a href="#" class="nav-link" data-tab="estatisticas" onclick="mudarAba(event, 'estatisticas')">📈 Estatísticas</a></li>
+          <li><a href="#" class="nav-link" data-tab="configuracoes" onclick="mudarAba(event, 'configuracoes')">⚙️ Configurações</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section id="tab-painel" class="main-content tab-section">
+      
+      <div class="stats-grid">
+        <div class="card stat-box">
+          <span class="label">Espectadores</span>
+          <h2 id="viewers-count">0</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Seguidores</span>
+          <h2 id="followers-count">1.240</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Tempo de Live</span>
+          <h2 id="stream-time">00:00:00</h2>
+        </div>
+      </div>
+
+      <div class="stream-grid">
+        
+        <div class="card panel">
+          <h3>Pré-visualização da Transmissão</h3>
+          <div class="video-preview" id="video-box">
+            <p id="video-text">A transmissão está offline no momento.</p>
+          </div>
+
+          <form class="stream-form" onsubmit="salvarInfo(event)">
+            <label for="stream-title">Título da Live</label>
+            <input type="text" id="stream-title" value="Conversando com o chat e programando!" required>
+
+            <label for="stream-category">Categoria</label>
+            <select id="stream-category">
+              <option value="Just Chatting">Just Chatting (Só na Conversa)</option>
+              <option value="IRL">IRL (Vida Real)</option>
+              <option value="Games">Games</option>
+              <option value="Tecnologia">Tecnologia</option>
+            </select>
+
+            <button type="submit" class="btn-primary">Atualizar Informações</button>
+          </form>
+        </div>
+
+        <div class="card panel chat-panel">
+          <div class="panel-header-row">
+            <h3>Chat da Transmissão</h3>
+            <span id="chat-mode-tag" class="mini-tag">Chat Aberto</span>
+          </div>
+          <div class="chat-messages" id="chat-box">
+            <p><strong style="color: var(--primary);">Sistema:</strong> Bem-vindo ao seu painel de controle!</p>
+          </div>
+          <form class="chat-input-area" onsubmit="enviarMensagem(event)">
+            <input type="text" id="chat-input" placeholder="Enviar mensagem como streamer...">
+            <button type="submit" class="btn-primary">Enviar</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="tab-moderacao" class="main-content tab-section hidden">
+      
+      <div class="card panel">
+        <h3>Regras Rápidas do Chat</h3>
+        <div class="mod-controls-grid">
+          <label class="toggle-card">
+            <div>
+              <strong>Modo Lento (10s)</strong>
+              <p>Limita o envio de mensagens por usuário</p>
+            </div>
+            <input type="checkbox" id="mod-slow" onchange="atualizarRegrasChat()">
+          </label>
+
+          <label class="toggle-card">
+            <div>
+              <strong>Apenas Seguidores</strong>
+              <p>Somente seguidores podem enviar mensagens</p>
+            </div>
+            <input type="checkbox" id="mod-followers" onchange="atualizarRegrasChat()">
+          </label>
+
+          <label class="toggle-card">
+            <div>
+              <strong>Filtro de Palavras Ofensivas</strong>
+              <p>Bloqueia termos proibidos automaticamente</p>
+            </div>
+            <input type="checkbox" id="mod-filter" checked onchange="atualizarRegrasChat()">
+          </label>
+        </div>
+
+        <div class="mod-actions-bar">
+          <button type="button" class="btn-secondary" onclick="limparChat()">🧹 Limpar Histórico do Chat</button>
+          <span id="mod-feedback" class="feedback-text"></span>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <h3>Espectadores Ativos & Ações</h3>
+        <div class="user-list" id="mod-user-list">
+          <div class="user-item" id="user-lucas">
+            <div>
+              <strong>Lucas_DevBR</strong>
+              <span class="user-role">Seguidor • Enviou 4 msgs</span>
+            </div>
+            <div class="user-btns">
+              <button class="btn-secondary" onclick="punirUsuario('Lucas_DevBR', 'Timeout de 10 min')">Timeout</button>
+              <button class="btn-danger" onclick="punirUsuario('Lucas_DevBR', 'Banido')">Banir</button>
+            </div>
+          </div>
+
+          <div class="user-item" id="user-mari">
+            <div>
+              <strong>MarianaGames</strong>
+              <span class="user-role">VIP • Enviou 12 msgs</span>
+            </div>
+            <div class="user-btns">
+              <button class="btn-secondary" onclick="punirUsuario('MarianaGames', 'Timeout de 10 min')">Timeout</button>
+              <button class="btn-danger" onclick="punirUsuario('MarianaGames', 'Banido')">Banir</button>
+            </div>
+          </div>
+
+          <div class="user-item" id="user-troll">
+            <div>
+              <strong>User9982_Spam</strong>
+              <span class="user-role">Visitante • Mensagem suspeita</span>
+            </div>
+            <div class="user-btns">
+              <button class="btn-secondary" onclick="punirUsuario('User9982_Spam', 'Timeout de 10 min')">Timeout</button>
+              <button class="btn-danger" onclick="punirUsuario('User9982_Spam', 'Banido')">Banir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="tab-estatisticas" class="main-content tab-section hidden">
+      
+      <div class="stats-grid">
+        <div class="card stat-box">
+          <span class="label">Pico de Espectadores</span>
+          <h2 id="stat-peak">184</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Novos Seguidores (7d)</span>
+          <h2>+96</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Horas Transmitidas</span>
+          <h2>18h 40m</h2>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <div class="panel-header-row">
+          <h3>Média de Espectadores (Últimos 7 dias)</h3>
+          <select id="stats-period" onchange="atualizarGrafico()">
+            <option value="semana">Últimos 7 dias</option>
+            <option value="mes">Últimos 30 dias</option>
+          </select>
+        </div>
+
+        <div class="chart-container" id="stats-chart"></div>
+      </div>
+
+    </section>
+
+    <section id="tab-configuracoes" class="main-content tab-section hidden">
+      
+      <div class="card panel">
+        <h3>Chave de Transmissão (OBS / Streamlabs)</h3>
+        <p class="desc-text">Cole esta chave no seu software de transmissão. Nunca compartilhe ao vivo.</p>
+        
+        <div class="key-box">
+          <input type="password" id="stream-key-input" value="irltv_live_98a7f6d5e4c3b2a1_secret" readonly>
+          <button type="button" class="btn-secondary" onclick="alternarVisibilidadeChave()" id="btn-show-key">Mostrar</button>
+          <button type="button" class="btn-primary" onclick="copiarChave()">Copiar</button>
+        </div>
+        <span id="key-feedback" class="feedback-text"></span>
+      </div>
+
+      <div class="card panel">
+        <h3>Preferências da Transmissão</h3>
+        <form class="stream-form" onsubmit="salvarConfiguracoes(event)">
+          <label for="cfg-quality">Qualidade Máxima de Saída</label>
+          <select id="cfg-quality">
+            <option value="1080p60" selected>1080p 60fps (Full HD)</option>
+            <option value="720p60">720p 60fps (HD)</option>
+            <option value="480p30">480p 30fps (Economia de Dados)</option>
+          </select>
+
+          <label for="cfg-latency">Modo de Latência</label>
+          <select id="cfg-latency">
+            <option value="ultra">Latência Ultrabaixa (Interação em tempo real)</option>
+            <option value="normal">Latência Normal (Maior estabilidade)</option>
+          </select>
+
+          <label class="toggle-card">
+            <div>
+              <strong>Salvar VOD Automaticamente</strong>
+              <p>Grava a transmissão no canal após encerrar</p>
+            </div>
+            <input type="checkbox" id="cfg-vod" checked>
+          </label>
+
+          <button type="submit" class="btn-primary">Salvar Configurações</button>
+        </form>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
