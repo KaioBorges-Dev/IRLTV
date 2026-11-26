@@ -6,7 +6,6 @@
   <title>IRLTV - Dashboard do Criador</title>
 
   <link rel="stylesheet" href="global.css">
-
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -24,15 +23,15 @@
     <aside class="sidebar card">
       <nav>
         <ul>
-          <li><a href="#" class="active">📊 Painel da Live</a></li>
-          <li><a href="#">💬 Chat & Moderação</a></li>
-          <li><a href="#">📈 Estatísticas</a></li>
-          <li><a href="#">⚙️ Configurações</a></li>
+          <li><a href="#" class="nav-link active" data-tab="painel" onclick="mudarAba(event, 'painel')">📊 Painel da Live</a></li>
+          <li><a href="#" class="nav-link" data-tab="moderacao" onclick="mudarAba(event, 'moderacao')">💬 Chat & Moderação</a></li>
+          <li><a href="#" class="nav-link" data-tab="estatisticas" onclick="mudarAba(event, 'estatisticas')">📈 Estatísticas</a></li>
+          <li><a href="#" class="nav-link" data-tab="configuracoes" onclick="mudarAba(event, 'configuracoes')">⚙️ Configurações</a></li>
         </ul>
       </nav>
     </aside>
 
-    <section class="main-content">
+    <section id="tab-painel" class="main-content tab-section">
       
       <div class="stats-grid">
         <div class="card stat-box">
@@ -41,7 +40,7 @@
         </div>
         <div class="card stat-box">
           <span class="label">Seguidores</span>
-          <h2>1.240</h2>
+          <h2 id="followers-count">1.240</h2>
         </div>
         <div class="card stat-box">
           <span class="label">Tempo de Live</span>
@@ -74,7 +73,10 @@
         </div>
 
         <div class="card panel chat-panel">
-          <h3>Chat da Transmissão</h3>
+          <div class="panel-header-row">
+            <h3>Chat da Transmissão</h3>
+            <span id="chat-mode-tag" class="mini-tag">Chat Aberto</span>
+          </div>
           <div class="chat-messages" id="chat-box">
             <p><strong style="color: var(--primary);">Sistema:</strong> Bem-vindo ao seu painel de controle!</p>
           </div>
@@ -87,18 +89,201 @@
       </div>
     </section>
 
+    <section id="tab-moderacao" class="main-content tab-section hidden">
+      
+      <div class="card panel">
+        <h3>Regras Rápidas do Chat</h3>
+        <div class="mod-controls-grid">
+          <label class="toggle-card">
+            <div>
+              <strong>Modo Lento (10s)</strong>
+              <p>Limita o envio de mensagens por usuário</p>
+            </div>
+            <input type="checkbox" id="mod-slow" onchange="atualizarRegrasChat()">
+          </label>
+
+          <label class="toggle-card">
+            <div>
+              <strong>Apenas Seguidores</strong>
+              <p>Somente seguidores podem enviar mensagens</p>
+            </div>
+            <input type="checkbox" id="mod-followers" onchange="atualizarRegrasChat()">
+          </label>
+
+          <label class="toggle-card">
+            <div>
+              <strong>Filtro de Palavras Ofensivas</strong>
+              <p>Bloqueia termos proibidos automaticamente</p>
+            </div>
+            <input type="checkbox" id="mod-filter" checked onchange="atualizarRegrasChat()">
+          </label>
+        </div>
+
+        <div class="mod-actions-bar">
+          <button type="button" class="btn-secondary" onclick="limparChat()">🧹 Limpar Histórico do Chat</button>
+          <span id="mod-feedback" class="feedback-text"></span>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <h3>Espectadores Ativos & Ações</h3>
+        <div class="user-list" id="mod-user-list">
+          <div class="user-item" id="user-lucas">
+            <div>
+              <strong>Lucas_DevBR</strong>
+              <span class="user-role">Seguidor • Enviou 4 msgs</span>
+            </div>
+            <div class="user-btns">
+              <button class="btn-secondary" onclick="punirUsuario('Lucas_DevBR', 'Timeout de 10 min')">Timeout</button>
+              <button class="btn-danger" onclick="punirUsuario('Lucas_DevBR', 'Banido')">Banir</button>
+            </div>
+          </div>
+
+          <div class="user-item" id="user-mari">
+            <div>
+              <strong>MarianaGames</strong>
+              <span class="user-role">VIP • Enviou 12 msgs</span>
+            </div>
+            <div class="user-btns">
+              <button class="btn-secondary" onclick="punirUsuario('MarianaGames', 'Timeout de 10 min')">Timeout</button>
+              <button class="btn-danger" onclick="punirUsuario('MarianaGames', 'Banido')">Banir</button>
+            </div>
+          </div>
+
+          <div class="user-item" id="user-troll">
+            <div>
+              <strong>User9982_Spam</strong>
+              <span class="user-role">Visitante • Mensagem suspeita</span>
+            </div>
+            <div class="user-btns">
+              <button class="btn-secondary" onclick="punirUsuario('User9982_Spam', 'Timeout de 10 min')">Timeout</button>
+              <button class="btn-danger" onclick="punirUsuario('User9982_Spam', 'Banido')">Banir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="tab-estatisticas" class="main-content tab-section hidden">
+      
+      <div class="stats-grid">
+        <div class="card stat-box">
+          <span class="label">Pico de Espectadores</span>
+          <h2 id="stat-peak">184</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Novos Seguidores (7d)</span>
+          <h2>+96</h2>
+        </div>
+        <div class="card stat-box">
+          <span class="label">Horas Transmitidas</span>
+          <h2>18h 40m</h2>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <div class="panel-header-row">
+          <h3>Média de Espectadores (Últimos 7 dias)</h3>
+          <select id="stats-period" onchange="atualizarGrafico()">
+            <option value="semana">Últimos 7 dias</option>
+            <option value="mes">Últimos 30 dias</option>
+          </select>
+        </div>
+
+        <div class="chart-container" id="stats-chart"></div>
+      </div>
+
+    </section>
+
+    <section id="tab-configuracoes" class="main-content tab-section hidden">
+      
+      <div class="card panel">
+        <h3>Chave de Transmissão (OBS / Streamlabs)</h3>
+        <p class="desc-text">Cole esta chave no seu software de transmissão. Nunca compartilhe ao vivo.</p>
+        
+        <div class="key-box">
+          <input type="password" id="stream-key-input" value="irltv_live_98a7f6d5e4c3b2a1_secret" readonly>
+          <button type="button" class="btn-secondary" onclick="alternarVisibilidadeChave()" id="btn-show-key">Mostrar</button>
+          <button type="button" class="btn-primary" onclick="copiarChave()">Copiar</button>
+        </div>
+        <span id="key-feedback" class="feedback-text"></span>
+      </div>
+
+      <div class="card panel">
+        <h3>Preferências da Transmissão</h3>
+        <form class="stream-form" onsubmit="salvarConfiguracoes(event)">
+          <label for="cfg-quality">Qualidade Máxima de Saída</label>
+          <select id="cfg-quality">
+            <option value="1080p60" selected>1080p 60fps (Full HD)</option>
+            <option value="720p60">720p 60fps (HD)</option>
+            <option value="480p30">480p 30fps (Economia de Dados)</option>
+          </select>
+
+          <label for="cfg-latency">Modo de Latência</label>
+          <select id="cfg-latency">
+            <option value="ultra">Latência Ultrabaixa (Interação em tempo real)</option>
+            <option value="normal">Latência Normal (Maior estabilidade)</option>
+          </select>
+
+          <label class="toggle-card">
+            <div>
+              <strong>Salvar VOD Automaticamente</strong>
+              <p>Grava a transmissão no canal após encerrar</p>
+            </div>
+            <input type="checkbox" id="cfg-vod" checked>
+          </label>
+
+          <button type="submit" class="btn-primary">Salvar Configurações</button>
+        </form>
+      </div>
+
+    </section>
+
   </main>
 
   <script>
     let aoVivo = false;
+    let segundosLive = 0;
+    let intervaloCronometro = null;
+    let intervaloChatBot = null;
+
+    const mensagensSimuladas = [
+      { user: 'Lucas_DevBR', texto: 'Salve! Qualidade da live tá impecável hoje 🔥' },
+      { user: 'MarianaGames', texto: 'Essa interface da IRLTV ficou muito clean!' },
+      { user: 'DevParaiba', texto: 'Bora codar! O que vai sair hoje?' },
+      { user: 'AnaTech', texto: 'Cheguei agora, já deixei o follow!' }
+    ];
+
+    function mudarAba(event, abaId) {
+      event.preventDefault();
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+
+      document.querySelectorAll('.tab-section').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+      document.getElementById('tab-' + abaId).classList.remove('hidden');
+    }
+    function formatarTempo(totalSegundos) {
+      const h = String(Math.floor(totalSegundos / 3600)).padStart(2, '0');
+      const m = String(Math.floor((totalSegundos % 3600) / 60)).padStart(2, '0');
+      const s = String(totalSegundos % 60).padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
 
     function alternarLive() {
       aoVivo = !aoVivo;
       const badge = document.getElementById('status-badge');
       const btn = document.getElementById('btn-toggle-live');
       const videoText = document.getElementById('video-text');
+      const videoBox = document.getElementById('video-box');
       const viewers = document.getElementById('viewers-count');
       const time = document.getElementById('stream-time');
+      const qualidade = document.getElementById('cfg-quality').value;
 
       if (aoVivo) {
         badge.textContent = 'AO VIVO';
@@ -106,39 +291,160 @@
         btn.textContent = 'Encerrar Transmissão';
         btn.style.background = 'var(--live)';
         btn.style.color = 'var(--text)';
-        videoText.textContent = '🔴 Sinal de vídeo conectado (1080p 60fps)';
+        videoBox.classList.add('live-active');
+        videoText.textContent = `🔴 Sinal de vídeo conectado (${qualidade})`;
         viewers.textContent = '48';
-        time.textContent = '00:01:15';
+
+        segundosLive = 0;
+        intervaloCronometro = setInterval(() => {
+          segundosLive++;
+          time.textContent = formatarTempo(segundosLive);
+          // Oscila espectadores levemente para parecer real
+          const variacao = Math.floor(Math.random() * 5) - 2;
+          const atual = Math.max(12, parseInt(viewers.textContent) + variacao);
+          viewers.textContent = atual;
+        }, 1000);
+
+        // Simula espectadores mandando mensagem a cada 5s
+        let idx = 0;
+        intervaloChatBot = setInterval(() => {
+          const msg = mensagensSimuladas[idx % mensagensSimuladas.length];
+          adicionarMensagemChat(msg.user, msg.texto, '#A1A1AA');
+          idx++;
+        }, 5000);
+
       } else {
         badge.textContent = 'OFFLINE';
         badge.className = 'badge offline';
         btn.textContent = 'Iniciar Transmissão';
         btn.style.background = 'var(--primary)';
         btn.style.color = 'var(--background)';
+        videoBox.classList.remove('live-active');
         videoText.textContent = 'A transmissão está offline no momento.';
         viewers.textContent = '0';
         time.textContent = '00:00:00';
+
+        clearInterval(intervaloCronometro);
+        clearInterval(intervaloChatBot);
       }
     }
+
     function salvarInfo(event) {
-      event.preventDefault(); 
+      event.preventDefault();
       const titulo = document.getElementById('stream-title').value;
       const categoria = document.getElementById('stream-category').value;
+      adicionarMensagemChat('Sistema', `Live atualizada: "${titulo}" [${categoria}]`, 'var(--primary)');
       alert(`Informações atualizadas!\nTítulo: ${titulo}\nCategoria: ${categoria}`);
     }
+
+    function adicionarMensagemChat(autor, texto, cor) {
+      const chatBox = document.getElementById('chat-box');
+      const novaMsg = document.createElement('p');
+      novaMsg.innerHTML = `<strong style="color: ${cor};">${autor}:</strong> ${texto}`;
+      chatBox.appendChild(novaMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
     function enviarMensagem(event) {
       event.preventDefault();
       const input = document.getElementById('chat-input');
-      const chatBox = document.getElementById('chat-box');
-
       if (input.value.trim() !== '') {
-        const novaMsg = document.createElement('p');
-        novaMsg.innerHTML = `<strong style="color: var(--primary);">Você:</strong> ${input.value}`;
-        chatBox.appendChild(novaMsg);
+        adicionarMensagemChat('Você (Streamer)', input.value, 'var(--primary)');
         input.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight; 
       }
     }
+    function atualizarRegrasChat() {
+      const slow = document.getElementById('mod-slow').checked;
+      const followers = document.getElementById('mod-followers').checked;
+      const tag = document.getElementById('chat-mode-tag');
+      const feedback = document.getElementById('mod-feedback');
+
+      let modos = [];
+      if (slow) modos.push('Modo Lento');
+      if (followers) modos.push('Só Seguidores');
+
+      tag.textContent = modos.length > 0 ? modos.join(' • ') : 'Chat Aberto';
+      feedback.textContent = 'Regras do chat atualizadas!';
+      setTimeout(() => feedback.textContent = '', 3000);
+    }
+
+    function limparChat() {
+      const chatBox = document.getElementById('chat-box');
+      chatBox.innerHTML = `<p><strong style="color: var(--primary);">Sistema:</strong> O chat foi limpo pela moderação.</p>`;
+      const feedback = document.getElementById('mod-feedback');
+      feedback.textContent = 'Histórico do chat limpo com sucesso!';
+      setTimeout(() => feedback.textContent = '', 3000);
+    }
+
+    function punirUsuario(usuario, acao) {
+      adicionarMensagemChat('Moderação', `${usuario} recebeu: ${acao}.`, 'var(--live)');
+      const feedback = document.getElementById('mod-feedback');
+      feedback.textContent = `Ação aplicada em ${usuario}: ${acao}`;
+      setTimeout(() => feedback.textContent = '', 3500);
+    }
+
+    function atualizarGrafico() {
+      const periodo = document.getElementById('stats-period').value;
+      const chart = document.getElementById('stats-chart');
+
+      const dados = periodo === 'semana'
+        ? [
+            { dia: 'Seg', valor: 65 },
+            { dia: 'Ter', valor: 90 },
+            { dia: 'Qua', valor: 75 },
+            { dia: 'Qui', valor: 120 },
+            { dia: 'Sex', valor: 155 },
+            { dia: 'Sáb', valor: 184 },
+            { dia: 'Dom', valor: 140 }
+          ]
+        : [
+            { dia: 'Sem 1', valor: 82 },
+            { dia: 'Sem 2', valor: 110 },
+            { dia: 'Sem 3', valor: 145 },
+            { dia: 'Sem 4', valor: 184 }
+          ];
+
+      const maxValor = Math.max(...dados.map(d => d.valor));
+      chart.innerHTML = '';
+
+      dados.forEach(item => {
+        const alturaPercent = Math.round((item.valor / maxValor) * 100);
+        const col = document.createElement('div');
+        col.className = 'chart-bar-wrapper';
+        col.innerHTML = `
+          <span class="chart-value">${item.valor}</span>
+          <div class="chart-bar" style="height: ${alturaPercent}%;"></div>
+          <span class="chart-label">${item.dia}</span>
+        `;
+        chart.appendChild(col);
+      });
+    }
+
+    function alternarVisibilidadeChave() {
+      const input = document.getElementById('stream-key-input');
+      const btn = document.getElementById('btn-show-key');
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = 'Ocultar';
+      } else {
+        input.type = 'password';
+        btn.textContent = 'Mostrar';
+      }
+    }
+
+    function copiarChave() {
+      const input = document.getElementById('stream-key-input');
+      navigator.clipboard.writeText(input.value);
+      const feedback = document.getElementById('key-feedback');
+      feedback.textContent = 'Chave de transmissão copiada para a área de transferência!';
+      setTimeout(() => feedback.textContent = '', 3000);
+    }
+
+    function salvarConfiguracoes(event) {
+      event.preventDefault();
+      alert('Preferências de transmissão salvas com sucesso!');
+    }
+    atualizarGrafico();
   </script>
 
 </body>
