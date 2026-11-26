@@ -87,6 +87,7 @@ O projeto atual é uma aplicação web estática. Não possui backend próprio, 
 - `register.html`: cadastro demonstrativo.
 - `perfil.html`: perfil público do streamer.
 - `usuario.html`: perfil pessoal do usuário.
+- `dashboard.html`: painel demonstrativo do criador.
 - `css/`: folhas de estilo separadas por estrutura global, menus, páginas e perfis.
 - `js/`: scripts separados por autenticação, navegação, conteúdo, jogos e live.
 
@@ -106,6 +107,7 @@ O projeto atual é uma aplicação web estática. Não possui backend próprio, 
 - **Página de jogos:** hero, toolbar, grid de cards, estado vazio e busca.
 - **Autenticação:** slider informativo, formulário de login, cadastro e feedback.
 - **Perfis:** capa, avatar, estatísticas, abas, conteúdo publicado e agenda.
+- **Dashboard:** painel da live, moderação, estatísticas e configurações do criador.
 
 ## Persistência de dados
 
@@ -122,11 +124,18 @@ Nesta versão, não existe banco de dados nem persistência permanente pelo serv
 
 ## Dashboard e indicadores
 
-Não há painel administrativo funcional nem dashboard financeiro nesta versão estática. A interface demonstra indicadores visuais em perfis e lives, como seguidores, pessoas assistindo, espectadores e contagens de conteúdo. Esses valores são ilustrativos e não são calculados por uma API ou banco de dados.
+A aplicação possui um dashboard do criador acessível pela combinação demonstrativa `admin / admin` na tela de login. A página `dashboard.html` contém:
+
+- **Painel da Live:** espectadores, seguidores, tempo da transmissão, pré-visualização, título, categoria e chat do streamer.
+- **Chat & Moderação:** modo lento, chat exclusivo para seguidores, filtro de palavras ofensivas, limpeza do histórico e ações de timeout/banimento.
+- **Estatísticas:** pico de espectadores, novos seguidores, horas transmitidas e gráfico de média de espectadores por semana ou mês.
+- **Configurações:** chave de transmissão simulada, qualidade de saída, modo de latência e opção de salvar VOD.
+
+Os valores, gráficos, usuários, mensagens e ações do dashboard são demonstrativos. Não há painel administrativo protegido, API, banco de dados ou integração com OBS, Streamlabs, YouTube ou outra plataforma de transmissão.
 
 ## Segurança e autenticação
 
-A segurança real não foi implementada porque o projeto não possui backend. O login aceita usuários demonstrativos e não cria nem valida uma conta. A combinação `admin / admin` redireciona para uma página de painel que não existe no repositório atual. Portanto, não deve ser apresentada como autenticação segura ou área administrativa protegida.
+A segurança real não foi implementada porque o projeto não possui backend. O login aceita usuários demonstrativos e não cria nem valida uma conta. A combinação `admin / admin` redireciona para o dashboard demonstrativo. Portanto, não deve ser apresentada como autenticação segura ou área administrativa protegida.
 
 ## Deploy da aplicação
 
@@ -137,7 +146,7 @@ O projeto utiliza arquivos estáticos de HTML, CSS e JavaScript e pode ser publi
 ## Testes realizados
 
 - Execução das páginas em servidor local.
-- Verificação da navegação entre início, jogos, live, login, cadastro e perfis.
+- Verificação da navegação entre início, jogos, live, login, cadastro, perfis e dashboard.
 - Captura de telas em tamanho desktop e celular.
 - Verificação visual da responsividade da página inicial.
 - Teste manual da busca de jogos pelo nome ou gênero.
@@ -149,7 +158,7 @@ O projeto utiliza arquivos estáticos de HTML, CSS e JavaScript e pode ser publi
 - Sem backend próprio.
 - Sem banco de dados.
 - Sem autenticação ou autorização reais.
-- Sem painel administrativo funcional.
+- Sem painel administrativo protegido ou integrado ao servidor.
 - Sem persistência permanente de chat, cadastro ou conteúdo.
 - Sem métricas reais de audiência e engajamento.
 
@@ -202,4 +211,8 @@ Como não foram implementados backend, API, banco de dados e autenticação segu
 ### Perfil pessoal
 
 ![Perfil pessoal](prints/07-perfil-usuario-desktop.png)
+
+### Dashboard do criador
+
+![Dashboard do criador](prints/09-dashboard-desktop.png)
 
